@@ -223,6 +223,20 @@ body{
   .intro-text .headline{ margin-left: -20px; }
   .intro-text #typing-text{ margin-left: -12px; }
 }
+/* Stop clipping the first letter on large screens */
+@media (min-width: 900px){
+  .intro-text #typing-text{
+    margin-left: 0 !important;   /* kill the negative nudge */
+  }
+}
+
+/* Optional: tiny left pad to avoid subpixel clipping across browsers */
+.typing-line{
+  text-indent: 0;
+  padding-left: 0.1ch;           /* subtle, prevents edge clipping */
+  overflow: hidden;              /* keep, to prevent layout shift */
+}
+
 @media (max-width: 899px){
   .intro-text .headline,
   .intro-text #typing-text{ margin-left: 0; }
