@@ -1883,3 +1883,135 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
 
 /* Optional micro-pad so no edge clipping across browsers */
 .typing-line{ padding-left: 0.1ch; }
+
+/* ===== About "laptop screen" mobile tune ===== */
+@media (max-width: 680px){
+
+  /* 1) Lower the overlay a bit and widen it slightly on phones */
+  .about-hero{
+    --screen-left: 10%;
+    --screen-top:  16%;   /* was ~12–13%; this drops the whole white screen */
+    --screen-width: 80%;
+  }
+
+  /* 2) Inside the white screen: more top padding so text isn't jammed up */
+  .about-hero .screen.screen--flex{
+    --pad-y: clamp(18px, 4.2vh, 28px);
+    padding-top: calc(var(--pad-y) + 6px);
+  }
+
+  /* 3) Make sure tabs are NOT absolutely positioned on mobile */
+  .about-hero .screen.screen--flex > .tab-titles{
+    position: static !important;
+    left: auto !important; right: auto !important; top: auto !important;
+    transform: none !important;
+    margin-bottom: 8px;
+    justify-content: center;
+    gap: clamp(10px, 3.2vw, 18px);
+  }
+
+  /* 4) Give the content a touch of breathing room below the tabs */
+  .about-hero .screen.screen--flex > .screen-content{
+    margin-top: 6px !important;
+  }
+
+  /* (Optional) slightly smaller tab labels so they don’t wrap awkwardly */
+  .about-hero .tab-links{
+    padding: 6px 8px !important;
+    font-size: clamp(12px, 3.6vw, 15px);
+  }
+}
+
+/* ===== Contain About content inside the simulated laptop screen (mobile) ===== */
+@media (max-width: 680px){
+  /* Slight position/size tune for the overlay box */
+  .about-hero{
+    --screen-left: 10%;
+    --screen-top:  17%;   /* nudge down a touch */
+    --screen-width: 80%;
+  }
+
+  /* The white screen: fixed height + hidden overflow */
+  .about-hero .screen.screen--flex{
+    height: clamp(320px, 50vw, 420px);           /* <- adjust this if needed */
+    padding: clamp(16px, 3.8vh, 24px) clamp(18px, 4vw, 26px);
+    box-sizing: border-box;
+    overflow: hidden;                             /* keep everything inside */
+  }
+
+  /* Tabs in normal flow */
+  .about-hero .screen.screen--flex > .tab-titles{
+    position: static !important;
+    left: auto !important; right: auto !important; top: auto !important;
+    transform: none !important;
+    flex: 0 0 auto;
+    margin: 0 0 6px;
+    justify-content: center;
+    gap: clamp(10px, 3.2vw, 18px);
+  }
+
+  /* Content: fills the remainder and scrolls INSIDE the white area */
+  .about-hero .screen.screen--flex > .screen-content{
+    min-height: 0;               /* CRITICAL for flex children */
+    flex: 1 1 auto;
+    overflow: auto;              /* scroll only the inner panel */
+    overscroll-behavior: contain;
+  }
+
+  /* Comfortable text sizing inside the panel */
+  .about-hero .tab-contents{ padding-right: 6px; }
+  .about-hero .tab-contents p{
+    margin: 0;
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.45;
+  }
+}
+
+/* Also keep containment on larger screens */
+.about-hero .screen.screen--flex{ overflow: hidden; }
+.about-hero .screen.screen--flex > .screen-content{ min-height: 0; }
+
+/* ===== About screen sizing (MOBILE) ===== */
+@media (max-width: 680px){
+  /* Narrow the white screen and drop it slightly */
+  .about-hero{
+    --screen-left: 10%;      /* move right edge in a bit */
+    --screen-top:  18%;      /* nudge down if needed */
+    --screen-width: 72%;     /* ↓ width (try 72–78%) */
+  }
+
+  /* Lower panel height to fit inside the bezel */
+  .about-hero .screen.screen--flex{
+    height: clamp(280px, 46vw, 360px);   /* ↓ overall height (try 44–50vw) */
+    padding: clamp(14px, 3.2vh, 20px) clamp(16px, 4vw, 22px);
+    overflow: hidden;
+  }
+
+  /* Keep text comfortably inside the bezel and scroll within */
+  .about-hero .screen.screen--flex > .screen-content{
+    max-width: 92%;               /* ← narrow content a touch */
+    margin: 6px auto 0;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+}
+
+/* ===== About screen sizing (DESKTOP) ===== */
+@media (min-width: 681px){
+  .about-hero{
+    /* trim width slightly so it matches the photo’s inner screen */
+    --screen-left: 20.8%;
+    --screen-top:  25.2%;
+    --screen-width: 29.6%;     /* ↓ a bit from your current value */
+  }
+  .about-hero .screen.screen--flex{
+    height: 44.5%;             /* ↓ from ~46.5% if needed */
+    overflow: hidden;
+  }
+  .about-hero .screen.screen--flex > .screen-content{
+    max-width: 88%;            /* tighter content to avoid touching edges */
+    margin: 8px auto 0;
+  }
+}
+
