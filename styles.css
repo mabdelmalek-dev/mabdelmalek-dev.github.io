@@ -1865,4 +1865,21 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   }
 }
 
+/* Desktop: allow the typing line to wrap, and reserve space for 2 lines */
+@media (min-width: 900px){
+  .typing-line{
+    white-space: normal !important;    /* was nowrap */
+    line-height: 1.35;
+  }
+  .typing-reserve{
+    height: calc(1.35em * 2);  /* ~two lines worth of space */
+  }
+}
 
+/* Safety: don't nudge the first span left (prevents clipping the first letter) */
+@media (min-width: 900px){
+  .intro-text #typing-text{ margin-left: 0 !important; }
+}
+
+/* Optional micro-pad so no edge clipping across browsers */
+.typing-line{ padding-left: 0.1ch; }
