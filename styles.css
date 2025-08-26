@@ -1836,10 +1836,19 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   }
 }
 
-/* If the right edge still feels tight on very small phones, add this extra nudge */
+/* move logo to the right alittle for very small phones*/
 @media (max-width: 420px){
   .intro-section{
     padding-right: max(12vw, 32px, env(safe-area-inset-right));
   }
 }
+
+/* Mobile: nudge the logo to the right a little */
+@media (max-width: 768px){
+  .site-nav .logo{
+    /* add some breathing room; works on iOS/Android */
+    margin-left: calc(env(safe-area-inset-left, 0px) + 14px);
+  }
+}
+
 
