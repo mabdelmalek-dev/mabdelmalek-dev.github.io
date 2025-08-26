@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personal Portfolio — Mohamed</title>
+
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://kit.fontawesome.com/76c72af84b.js" crossorigin="anonymous"></script>
+  <meta name="description" content="Mohamed — entry-level full-stack engineer. Projects: TensorFlow+OCR fraud detection, Spring Boot/Postgres API, PERN app.">
+  <meta property="og:title" content="Mohamed — Full-Stack Engineer">
+  <meta property="og:description" content="Projects in ML, APIs, and web apps. Clean, reliable, well-tested software.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="images/og-cover.png"> <!-- add a 1200x630 image -->
+  <meta name="twitter:card" content="summary_large_image">
+
+
+  <!-- Safety helpers + hero pin/typing no-shift -->
+  
+</head>
+<body>
+
+  <!-- ================= Nav ================= -->
+<nav class="site-nav" role="navigation" aria-label="Primary">
+  <img src="images/logo-new.png" class="logo" alt="Logo" />
+
+  <!-- optional hover trigger can stay -->
+  <div id="hover-trigger" aria-hidden="true"></div>
+
+  <!-- MOBILE TOGGLE (visible under 768px) -->
+  <button class="menu-toggle" aria-label="Open menu"
+          aria-controls="sidemenu" aria-expanded="false"
+          onclick="openmenu()">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <!-- RIGHT MENU (only <li> inside a <ul>) -->
+  <ul id="sidemenu">
+    <li><a href="#header">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Projects</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li class="menu-close">
+      <button aria-label="Close menu" onclick="closemenu()">
+        <i class="fa-solid fa-arrow-right"></i>
+      </button>
+    </li>
+  </ul>
+
+  <!-- CLOCK: keep OUTSIDE the <ul> -->
+  <div class="nav-extras nav-clock">
+    <div id="pill-time" class="pill pill--digital" title="Eastern Time">
+      <i class="fa-solid fa-clock"></i>
+      <span id="time-hours">00</span><span class="colon">:</span><span id="time-mins">00</span>
+      <span id="time-tz">ET</span>
+    </div>
+  </div>
+</nav>
+
+
+  <!-- ================= Header / Hero ================= -->
+  <header id="header" class="reveal-on-scroll">
+    <div class="header-content">
+      <div class="intro-section">
+        <div class="intro-photo">
+          <div class="ring-wrap">
+            <div class="sweep-overlay" aria-hidden="true"></div>
+            <img src="images/me-avatar-512.webp" alt="Mohamed" class="profile-photo" />
+          </div>
+        </div>
+        <div class="intro-text">
+          <h2 class="headline">Software Engineer·Full-Stack Developer</h2>
+          <p class="subheadline">Curious · Collaborative · Reliable</p>
+
+          <!-- Typing: layered + reserved space (no layout shift) -->
+          <div class="typing-wrap" role="status" aria-live="polite">
+            <div class="typing-reserve" aria-hidden="true"></div>
+            <div class="typing-line">
+              <span id="typing-text"
+                data-text="WWelcome to my portfolio&lt;br&gt;&lt;br&gt;I&rsquo;m "></span><span
+                class="name-gradient" data-text="Mohamed"></span><span
+                id="contyping"
+                data-text=" — a passionate Software Engineer &lt;br&gt; who loves turning ideas into real-world solutions &lt;br&gt; through clean code and optimized design."></span>
+            </div>
+          </div>
+
+          <!-- (Removed the duplicate “Three-part typewriter” spans) -->
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= About (bookshelf behind laptop) ================= -->
+<!-- ================= About (laptop scene) ================= -->
+<section id="about" class="about-hero">
+  <!-- Background behind the laptop -->
+  <div class="scene-bg" aria-hidden="true"></div>
+
+  <!-- The photographed screen overlay -->
+  <div class="screen screen--flex">
+    <!-- Tabs row (in normal flow, centered) -->
+    <div class="tab-titles">
+      <p class="tab-links active-link" onclick="opentab('Mission')">Mission</p>
+      <p class="tab-links" onclick="opentab('Skills')">Tech Stack</p>
+      <p class="tab-links" onclick="opentab('Experience')">Experience</p>
+      <p class="tab-links" onclick="opentab('Education')">Education</p>
+    </div>
+
+    <!-- Content area fills the rest of the “screen” -->
+    <div class="screen-content">
+      <!-- Mission (default) -->
+      <div class="tab-contents active-tab" id="Mission">
+        <p id="about-typing"
+            data-text2="Clean, reliable full-stack features built around real user needs.&lt;br&gt; A context-first collaborator who asks sharp questions, learns fast, and leaves every codebase healthier.&lt;br&gt; Solid Java/DS foundation plus PERN, Spring Boot, and applied ML to ship secure, well-tested software.&lt;br&gt;Recent work: TensorFlow + OCR fraud detection · Spring Boot + PostgreSQL API · PERN web app.">      </div>
+
+      <!-- Skills -->
+      <div class="tab-contents" id="Skills">
+        <ul class="screen-list">
+          <li><span>Languages & Frameworks: </span> Java, Python, JavaScript(React, Node.js),HTML, CSS, Spring Boot, Flask</li>
+          <li><span>Databases:</span> SQL, PostgreSQL, NoSQL</li>
+          <li><span>Skill 3</span> description</li>
+          <li><span>Skill 4</span> description</li>
+        </ul>
+      </div>
+
+      <!-- Experience -->
+      <div class="tab-contents" id="Experience">
+        <ul class="screen-list">
+          <li><span>Experience 1</span> description</li>
+          <li><span>Experience 2</span> description</li>
+          <li><span>Experience 3</span> description</li>
+          <li><span>Experience 4</span> description</li>
+        </ul>
+      </div>
+
+      <!-- Education -->
+      <div class="tab-contents" id="Education">
+        <ul class="screen-list">
+          <li><span>Education 1</span> description</li>
+          <li><span>Education 2</span> description</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ================= Projects ================= -->
+  <section id="services" class="projects-dark">
+  <div class="container">
+    <h1 class="sub-title">Projects</h1>
+
+    <div class="proj-grid">
+      <!-- Project 1 -->
+      <article class="proj-card">
+        <div class="accent"></div>
+        <header class="proj-head">
+          <i class="fa-solid fa-brain"></i>
+          <h2>Fraud Detection (CNN + OCR)</h2>
+          <p>TensorFlow + OCR pipeline to flag risky docs with automated scoring and review.</p>
+        </header>
+        <ul class="tech-chips">
+          <li>TensorFlow</li><li>OCR</li><li>Python</li><li>NumPy</li>
+        </ul>
+        <footer class="proj-actions">
+          <a class="btn-ghost" href="#" aria-label="View code for Fraud Detection">View Code</a>
+          <a class="btn-cta" href="#" aria-label="Open case study for Fraud Detection">Case Study</a>
+        </footer>
+      </article>
+
+      <!-- Project 2 -->
+      <article class="proj-card">
+        <div class="accent"></div>
+        <header class="proj-head">
+          <i class="fa-solid fa-server"></i>
+          <h2>Spring Boot API</h2>
+          <p>Secure REST API with JWT, PostgreSQL, and integration tests; tuned queries and indexes.</p>
+        </header>
+        <ul class="tech-chips">
+          <li>Spring Boot</li><li>PostgreSQL</li><li>JWT</li><li>JUnit</li>
+        </ul>
+        <footer class="proj-actions">
+          <a class="btn-ghost" href="#" aria-label="View code for Spring Boot API">View Code</a>
+          <a class="btn-cta" href="#" aria-label="Open API docs for Spring Boot API">API Docs</a>
+        </footer>
+      </article>
+
+      <!-- Project 3 -->
+      <article class="proj-card">
+        <div class="accent"></div>
+        <header class="proj-head">
+          <i class="fa-solid fa-laptop-code"></i>
+          <h2>PERN Web App</h2>
+          <p>React UI + Node/Express backend with Postgres; reusable components and robust validation.</p>
+        </header>
+        <ul class="tech-chips">
+          <li>React</li><li>Node/Express</li><li>PostgreSQL</li><li>Vite</li>
+        </ul>
+        <footer class="proj-actions">
+          <a class="btn-ghost" href="#" aria-label="View code for PERN app">View Code</a>
+          <a class="btn-cta" href="#" aria-label="Open live demo of PERN app">Live Demo</a>
+        </footer>
+      </article>
+    </div>
+  </div>
+</section>
+<!-- Modal: Fraud Detection Case Study -->
+<div class="modal" id="cs-fraud" role="dialog" aria-modal="true" aria-labelledby="cs-fraud-title" hidden>
+  <div class="modal__backdrop" data-close></div>
+  <div class="modal__dialog" role="document">
+    <div class="modal__accent"></div>
+    <header class="modal__header">
+      <h3 id="cs-fraud-title">Fraud Detection (CNN + OCR)</h3>
+      <button class="modal__close" aria-label="Close" data-close>&times;</button>
+    </header>
+    <div class="modal__body">
+      <p><strong>Stack:</strong> TensorFlow, Python, OCR (Tesseract), NumPy</p>
+      <p><strong>What I built:</strong> End-to-end pipeline that extracts text via OCR, applies a CNN-based classifier, and surfaces a risk score with thresholds for auto-review.</p>
+      <ul>
+        <li>Modular preprocessing &amp; augmentation</li>
+        <li>Batch inference and CSV export</li>
+        <li>Clear, documented configs</li>
+      </ul>
+      <p><strong>Outcome:</strong> Accurate risk flags suitable for triage; codebase designed for easy retraining.</p>
+    </div>
+    <footer class="modal__footer">
+      <a class="btn-ghost" href="#" target="_blank" rel="noopener">View Code</a>
+      <button class="btn-cta" data-close>Close</button>
+    </footer>
+  </div>
+</div>
+
+
+
+  <!-- ================= Portfolio ================= -->
+
+<section id="competencies" class="reveal-on-scroll">
+  <div class="container">
+    <h1 class="sub-title">Core Competencies</h1>
+
+    <div class="competency-grid">
+<!-- 1 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-code"></i></div>
+  <h3 class="cc-title">Frontend (React)</h3>
+  <p class="cc-body">
+    React + JSX, modern JS, HTML/CSS, responsive layouts, accessibility (a11y),
+    Tailwind/SCSS, basic state patterns and forms.
+  </p>
+</article>
+
+<!-- 2 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-leaf"></i></div>
+  <h3 class="cc-title">Java &amp; Spring Boot</h3>
+  <p class="cc-body">
+    REST controllers, services, data layers, validation, exception handling,
+    configuration properties, basic testing with JUnit.
+  </p>
+</article>
+
+<!-- 3 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-plug"></i></div>
+  <h3 class="cc-title">APIs &amp; Auth</h3>
+  <p class="cc-body">
+    REST design, JSON contracts, Postman testing, JWT-based auth, role checks,
+    error models, versioning basics.
+  </p>
+</article>
+
+<!-- 4 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-database"></i></div>
+  <h3 class="cc-title">PostgreSQL &amp; SQL</h3>
+  <p class="cc-body">
+    Schema design, relations/indexes, query optimization basics, migrations,
+    seed data, JDBC/JPA integration.
+  </p>
+</article>
+
+<!-- 5 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-server"></i></div>
+  <h3 class="cc-title">Node.js &amp; Express (PERN)</h3>
+  <p class="cc-body">
+    CRUD APIs, middleware, input validation, environment configs, error handling,
+    connecting React frontends to Express APIs.
+  </p>
+</article>
+
+<!-- 6 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-vial"></i></div>
+  <h3 class="cc-title">Testing &amp; Quality</h3>
+  <p class="cc-body">
+    JUnit/Jest basics, integration tests, lint/format (ESLint/Prettier),
+    API test flows in Postman, CI checks for PRs.
+  </p>
+</article>
+
+<!-- 7 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-cubes"></i></div>
+  <h3 class="cc-title">DevOps &amp; Tools</h3>
+  <p class="cc-body">
+    Git/GitHub workflows, Docker for local dev, simple CI pipelines,
+    logs &amp; environment variables, readable README/docs.
+  </p>
+</article>
+
+<!-- 8 -->
+<article class="cc-card" tabindex="0">
+  <div class="cc-icon"><i class="fa-solid fa-brain"></i></div>
+  <h3 class="cc-title">Data &amp; ML (Basics)</h3>
+  <p class="cc-body">
+    TensorFlow + OCR (Tesseract) pipeline patterns, preprocessing, batch inference,
+    simple metrics/reporting for results.
+  </p>
+</article>
+
+    </div>
+  </div>
+</section>
+  <section id="portfolio">
+    <div class="container">
+      <h1 class="sub-title">My Work</h1>
+      <div class="work-list">
+        <div class="work">
+          <img src="images/work1.png" alt="Fraud detection project preview" />
+          <div class="layer">
+            <h3>Fraud Detection (CNN + OCR)</h3>
+            <p>TensorFlow + OCR pipeline for automated document risk scoring.</p>
+            <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="work">
+          <img src="images/work2.png" alt="Spring Boot API preview" />
+          <div class="layer">
+            <h3>Spring Boot API</h3>
+            <p>REST endpoints with JWT, Postgres, and integration tests.</p>
+            <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+          </div>
+        </div>
+        <div class="work">
+          <img src="images/work3.png" alt="PERN app preview" />
+          <div class="layer">
+            <h3>PERN Web App</h3>
+            <p>React UI, Node/Express backend, and Postgres persistence.</p>
+            <a href="#"><i class="fa-solid fa-up-right-from-square"></i></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="btn">See more</a>
+    </div>
+  </section>
+
+
+
+
+  <!-- ================= Contact ================= -->
+  <section id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="contact-left">
+          <h1 class="sub-title">Contact Me</h1>
+          <p><i class="fa-solid fa-paper-plane"></i> mabdelmalek.dev@gmail.com</p>
+          <p><i class="fa-solid fa-mobile-screen"></i> +1 (727) 203-1575</p>
+          <div class="social-icons">
+            <a href="https://www.linkedin.com/in/mabdalmalek/"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://www.facebook.com/mohamed.abdelmalek.729111/"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://github.com/mabdelmalek-dev/" aria-label="GitHub" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.youtube.com/@yourhandle" aria-label="YouTube" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i>
+</a>
+            <a href="https://app.slack.com/client/T09BK7FKRA7/C09BTSHLRU4?entry_point=redirect_flow/" aria-label="Slack" target="_blank" rel="noopener"><i class="fa-brands fa-slack"></i></a>
+          </div>
+          <a href="images/MAbdelmalek_SWE.pdf" download class="btn btn2">Download Resume</a>
+        </div>
+        <div class="contact-right">
+          <form name="submit-to-google-sheet">
+            <input type="text" name="Name" placeholder="Your Name" required />
+            <input type="email" name="Email" placeholder="Your Email" required />
+            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+            <button type="submit" class="btn btn2">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="copyright"><p>Copyright © 2023 by Mohamed</p></div>
+    </div>
+  </section>
+
+  <!-- ================= Scripts ================= -->
+
+  <!-- Mobile side menu -->
+  <script>
+    const sidemenu = document.getElementById("sidemenu");
+    const menuToggleBtn = document.querySelector(".menu-toggle");
+    function openmenu(){sidemenu.classList.add("open");menuToggleBtn?.setAttribute("aria-expanded","true")}
+    function closemenu(){sidemenu.classList.remove("open");menuToggleBtn?.setAttribute("aria-expanded","false")}
+    document.querySelectorAll('#sidemenu a').forEach(a=>a.addEventListener('click',closemenu));
+  </script>
+
+  <!-- Smooth scroll to center sections (no hash changes) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const links = document.querySelectorAll('a[href^="#"]:not([href="#"])');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const id = link.getAttribute('href');
+          const target = document.querySelector(id);
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+        });
+      });
+    });
+  </script>
+
+  <!-- Prevent restoring scroll on reload -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+      if (location.hash) {
+        history.replaceState(null, '', location.pathname + location.search);
+        window.scrollTo(0, 0);
+      }
+    });
+  </script>
+
+  <!-- Promise-based typewriter (sequential & HTML-aware) -->
+ <script>
+(function(){
+  if (window.__typedHeroOnce) return;
+  window.__typedHeroOnce = true;
+
+  function decodeHTML(str=''){
+    const ta = document.createElement('textarea');
+    ta.innerHTML = str;
+    return ta.value;
+  }
+
+  // Read one visible unit at a time (tags, entities, newline, or char)
+  function readUnit(html, idx){
+    const ch = html[idx];
+    if (ch === '<'){ const end = html.indexOf('>', idx); return { unit: html.slice(idx, end + 1), next: end + 1 }; }
+    if (ch === '&'){ const end = html.indexOf(';', idx); return { unit: html.slice(idx, end + 1), next: end + 1 }; }
+    if (ch === '\n'){ return { unit: '<br>', next: idx + 1 }; }
+    return { unit: ch, next: idx + 1 };
+  }
+
+  function typeInto(el, html, startIdx = 0, speed = 28){
+    return new Promise((resolve) => {
+      if (!el) return resolve();
+      let i = startIdx;
+      (function tick(){
+        if (i >= html.length) return resolve();
+        const { unit, next } = readUnit(html, i);
+        el.insertAdjacentHTML('beforeend', unit);
+        i = next;
+        setTimeout(tick, speed);
+      })();
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // HERO elements
+    const part1  = document.getElementById('typing-text');    // "Nice to meet You..."
+    const nameEl = document.querySelector('.name-gradient');  // "Mohamed"
+    const part3  = document.getElementById('contyping');      // trailing sentence
+
+    const typingLine = document.querySelector('.typing-line');     // ADD
+    typingLine?.classList.add('typing-active');                    // ADD
+
+    // ABOUT
+    const aboutEl = document.getElementById('about-typing');
+
+    // Remove any previously injected helper spans
+    document.querySelectorAll('.typed-first-unit').forEach(n => n.remove());
+
+    // Decode inputs
+    const t1 = decodeHTML((part1?.dataset.text  || part1?.textContent  || '').replace(/\\n/g, '\n'));
+    const t2 = decodeHTML((nameEl?.dataset.text || nameEl?.textContent || '').replace(/\\n/g, '\n'));
+    const t3 = decodeHTML((part3?.dataset.text  || part3?.textContent  || '').replace(/\\n/g, '\n'));
+
+    // Seed first visible unit INSIDE the same element, then type the rest
+    if (part1){
+      part1.innerHTML = '';
+      const first = readUnit(t1, 0);              // e.g., "N"
+      part1.insertAdjacentHTML('beforeend', first.unit);
+      await typeInto(part1, t1, first.next, 28);  // continue with "ice..."
+    }
+
+    if (nameEl){
+      nameEl.innerHTML = '';
+      await typeInto(nameEl, t2, 0, 28);
+    }
+    if (part3){
+      part3.innerHTML = '';
+      await typeInto(part3, t3, 0, 28);
+    }
+
+    if (aboutEl){
+      const a1 = decodeHTML((aboutEl.dataset.text2 || aboutEl.textContent || '').replace(/\\n/g, '\n'));
+      aboutEl.innerHTML = '';
+      typeInto(aboutEl, a1, 0, 26);
+    }
+  });
+})();
+</script>
+
+
+
+  <!-- Parallax for About background -->
+  <script>
+  (function () {
+    const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    const sec = document.querySelector('.about-hero');
+    if (!sec) return;
+
+    const MAX_SHIFT = 24, MULTIPLIER = -0.06;
+    let active = false, ticking = false;
+
+    function update() {
+      const r = sec.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const centerOffset = (r.top + r.height / 2) - (vh / 2);
+      let amt = MULTIPLIER * centerOffset;
+      amt = Math.max(-MAX_SHIFT, Math.min(MAX_SHIFT, amt));
+      sec.style.setProperty('--aboutParallax', amt.toFixed(2));
+      ticking = false;
+    }
+    function onScroll() {
+      if (!active || ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            active = true; update();
+            window.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', onScroll, { passive: true });
+          } else {
+            active = false;
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+            sec.style.removeProperty('--aboutParallax');
+          }
+        });
+      }, { root: null, rootMargin: '15% 0px 15% 0px', threshold: 0 });
+      io.observe(sec);
+    } else {
+      active = true; update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+    }
+  })();
+  </script>
+
+  <!-- Crossfade header → about (CSS vars) -->
+  <script>
+  (function () {
+    const header = document.getElementById('header');
+    const about  = document.getElementById('about');
+    if (!header || !about) return;
+
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.style.setProperty('--heroOpacity', 1);
+      document.documentElement.style.setProperty('--aboutOpacity', 1);
+      return;
+    }
+
+    const clamp01 = v => Math.max(0, Math.min(1, v));
+    const easeOutCubic = x => 1 - Math.pow(1 - x, 3);
+
+    function update() {
+      const r  = about.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+
+      const startY = vh * 0.90;
+      const endY   = vh * 0.50;
+
+      let t = (startY - r.top) / (startY - endY);
+      t = easeOutCubic(clamp01(t));
+
+      document.documentElement.style.setProperty('--aboutOpacity', t.toFixed(3));
+      document.documentElement.style.setProperty('--heroOpacity',  (1 - t).toFixed(3));
+    }
+
+    let active = false, ticking = false;
+    function onScroll(){
+      if (!active || ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { update(); ticking = false; });
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        const e = entries[0];
+        if (!e) return;
+        if (e.isIntersecting) {
+          active = true; update();
+          window.addEventListener('scroll', onScroll, { passive: true });
+          window.addEventListener('resize', onScroll, { passive: true });
+        } else {
+          active = false;
+          window.removeEventListener('scroll', onScroll);
+          window.removeEventListener('resize', onScroll);
+          document.documentElement.style.removeProperty('--aboutOpacity');
+          document.documentElement.style.removeProperty('--heroOpacity');
+        }
+      }, { rootMargin: '20% 0px 20% 0px', threshold: 0 });
+      io.observe(about);
+    } else {
+      active = true; update();
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+    }
+  })();
+  </script>
+
+  <!-- Tabs -->
+  <script>
+    var tablinks = document.getElementsByClassName("tab-links");
+    var tabcontents = document.getElementsByClassName("tab-contents");
+    function opentab(tabname){
+      for(const tablink of tablinks){ tablink.classList.remove("active-link"); }
+      for(const tabcontent of tabcontents){ tabcontent.classList.remove("active-tab"); }
+      event.currentTarget.classList.add("active-link");
+      document.getElementById(tabname).classList.add("active-tab");
+    }
+  </script>
+
+<script>
+(function(){
+  const sec = document.querySelector('.about-hero');
+  if (!sec) return;
+
+  // helpers to read/write vw-based custom props
+  const read  = k => parseFloat(getComputedStyle(sec).getPropertyValue(k)) || 0;
+  const write = (k, v) => sec.style.setProperty(k, v + 'vw');
+
+  const step = 0.20; // nudge size per keypress (vw)
+
+  // Build a copyable CSS block
+  function cssText(){
+    const vW = read('--screen-w').toFixed(2);
+    const vH = read('--screen-h').toFixed(2);
+    const vX = read('--screen-x').toFixed(2);
+    const vY = read('--screen-y').toFixed(2);
+    return `.about-hero{
+  --screen-w: ${vW}vw;
+  --screen-h: ${vH}vw;
+  --screen-x: ${vX}vw;
+  --screen-y: ${vY}vw;
+}`;
+  }
+
+  async function copyCSS(){
+    const text = cssText();
+    console.log('Copy into styles.css:\n' + text);
+    try { await navigator.clipboard.writeText(text); toast('Overlay CSS copied'); }
+    catch { toast('Printed CSS to console'); }
+  }
+
+  function toast(msg){
+    let t = document.getElementById('overlay-toast');
+    if (!t){
+      t = document.createElement('div');
+      t.id='overlay-toast';
+      Object.assign(t.style,{
+        position:'fixed',right:'12px',top:'12px',zIndex:99999,
+        background:'rgba(0,0,0,.78)',color:'#fff',padding:'8px 12px',
+        borderRadius:'8px',font:'14px system-ui, sans-serif',
+        boxShadow:'0 6px 18px rgba(0,0,0,.35)',transition:'opacity .2s',
+        opacity:'0'
+      });
+      document.body.appendChild(t);
+    }
+    t.textContent = msg; t.style.opacity='1';
+    clearTimeout(t._h); t._h=setTimeout(()=>{t.style.opacity='0'},1200);
+  }
+
+
+
+  // Keyboard controls
+  window.addEventListener('keydown', (e) => {
+    // Toggle debug outline with backtick `
+    if (e.key === '`'){ sec.classList.toggle('debug'); return; }
+
+    if (!e.altKey) return; // only when Alt/Option is held
+
+    // prevent scroll while nudging
+    const codes = ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown',
+                   'BracketLeft','BracketRight','Semicolon','Quote','KeyP'];
+    if (codes.includes(e.code)) e.preventDefault();
+
+    // Alt + ←/→ : move X
+    if (e.code === 'ArrowLeft')  write('--screen-x', read('--screen-x') - step);
+    if (e.code === 'ArrowRight') write('--screen-x', read('--screen-x') + step);
+
+    // Alt + ↑/↓ : move Y
+    if (e.code === 'ArrowUp')    write('--screen-y', read('--screen-y') - step);
+    if (e.code === 'ArrowDown')  write('--screen-y', read('--screen-y') + step);
+
+    // Alt + [ / ] : width -/+
+    if (e.code === 'BracketLeft')  write('--screen-w', read('--screen-w') - step);
+    if (e.code === 'BracketRight') write('--screen-w', read('--screen-w') + step);
+
+    // Alt + ; / ' : height -/+
+    if (e.code === 'Semicolon') write('--screen-h', read('--screen-h') - step);
+    if (e.code === 'Quote')     write('--screen-h', read('--screen-h') + step);
+
+    // Alt + P : copy current CSS (also logs to console)
+    if (e.code === 'KeyP') copyCSS();
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===== Scroll reveal ===== */
+  const els = document.querySelectorAll('.reveal-on-scroll');
+  if ('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting){
+          e.target.classList.add('is-visible');
+          // Optional: stagger children with .reveal-child
+          const kids = e.target.querySelectorAll(':scope .reveal-child');
+          kids.forEach((k, i) => {
+            k.style.transitionDelay = (0.06 * i) + 's';
+          });
+          io.unobserve(e.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.1 });
+    els.forEach(el => io.observe(el));
+  } else {
+    els.forEach(el => el.classList.add('is-visible'));
+  }
+
+  /* ===== 3D Tilt on .proj-card ===== */
+  if (!reduce){
+    const cards = document.querySelectorAll('.proj-card');
+    const maxTilt = 9;      // degrees
+    const damp    = 14;     // lower = more reactive
+    const persp   = 800;    // px
+
+    function setTilt(card, e){
+      const rect = card.getBoundingClientRect();
+      const cx = rect.left + rect.width/2;
+      const cy = rect.top + rect.height/2;
+      const dx = (e.clientX - cx) / (rect.width/2);
+      const dy = (e.clientY - cy) / (rect.height/2);
+      const rx = (+dy * maxTilt);
+      const ry = (-dx * maxTilt);
+      card.style.transform = `perspective(${persp}px) rotateX(${rx}deg) rotateY(${ry}deg) translateZ(0)`;
+    }
+    function resetTilt(card){
+      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateZ(0)';
+    }
+
+    cards.forEach(card => {
+      let raf = null;
+      function onMove(e){
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => setTilt(card, e));
+      }
+      card.addEventListener('mousemove', onMove, { passive: true });
+      card.addEventListener('mouseleave', () => resetTilt(card), { passive: true });
+      card.addEventListener('blur', () => resetTilt(card), true);
+      card.addEventListener('touchstart', () => card.classList.add('touching'), { passive: true });
+      card.addEventListener('touchend', () => { card.classList.remove('touching'); resetTilt(card); }, { passive: true });
+    });
+  }
+
+  /* ===== Perf niceties: lazy-load images if not already ===== */
+  document.querySelectorAll('img').forEach(img => {
+    if (!img.hasAttribute('loading')) img.setAttribute('loading','lazy');
+    if (!img.hasAttribute('decoding')) img.setAttribute('decoding','async');
+  });
+
+  /* ===== Prefetch on hover (links to other pages) ===== */
+  const isSameOrigin = (u) => {
+    try { const x = new URL(u, location.href); return x.origin === location.origin && x.pathname !== location.pathname; }
+    catch { return false; }
+  };
+  document.querySelectorAll('a[href]').forEach(a => {
+    const href = a.getAttribute('href');
+    if (!href || href.startsWith('#') || !isSameOrigin(href)) return;
+    a.addEventListener('mouseenter', () => {
+      if (a._prefetched) return;
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = href;
+      document.head.appendChild(link);
+      a._prefetched = true;
+    }, { passive: true });
+  });
+})();
+</script>
+
+<script>
+(function(){
+  const openers = document.querySelectorAll('[data-modal]');
+  const KEY = { ESC: 27, TAB: 9 };
+
+  function getFocusable(root){
+    return [...root.querySelectorAll(
+      'a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'
+    )].filter(el => el.offsetParent !== null || el === document.activeElement);
+  }
+
+  function trapFocus(modal, enable){
+    function onKey(e){
+      if (e.keyCode !== KEY.TAB) return;
+      const f = getFocusable(modal);
+      if (!f.length) return;
+      const first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first){ last.focus(); e.preventDefault(); }
+      else if (!e.shiftKey && document.activeElement === last){ first.focus(); e.preventDefault(); }
+    }
+    if (enable){
+      modal._trap = onKey;
+      modal.addEventListener('keydown', onKey);
+    } else {
+      modal.removeEventListener('keydown', modal._trap);
+      modal._trap = null;
+    }
+  }
+
+  function openModal(sel){
+    const modal = document.querySelector(sel);
+    if (!modal) return;
+    modal.hidden = false;
+    modal.dataset.open = '1';
+    const f = getFocusable(modal);
+    (f[0] || modal).focus({ preventScroll:true });
+    trapFocus(modal, true);
+
+    function onEsc(e){ if (e.keyCode === KEY.ESC) closeModal(modal); }
+    modal._esc = onEsc;
+    window.addEventListener('keydown', onEsc);
+  }
+
+  function closeModal(modal){
+    if (!modal || modal.hidden) return;
+    modal.hidden = true;
+    trapFocus(modal, false);
+    window.removeEventListener('keydown', modal._esc);
+    modal._esc = null;
+
+    // restore focus to opener if we have it
+    const opener = document.querySelector(`[data-modal="#${modal.id}"]`);
+    opener && opener.focus({ preventScroll:true });
+  }
+
+  // click handlers
+  openers.forEach(opener => {
+    opener.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(opener.getAttribute('data-modal'));
+    });
+  });
+  document.addEventListener('click', (e) => {
+    const t = e.target;
+    if (t.hasAttribute('data-close')) {
+      const modal = t.closest('.modal');
+      closeModal(modal);
+    }
+  });
+})();
+</script>
+
+<script>
+/* Eastern Time in techno-mono with EST/EDT */
+(function () {
+  const el = document.getElementById("time-text");
+  if (!el) return;
+
+  function render(){
+    const now = new Date();
+
+    const parts = new Intl.DateTimeFormat("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "America/New_York",
+      timeZoneName: "short"   // often gives EST/EDT (fallback handled below)
+    }).formatToParts(now);
+
+    const hh = parts.find(p => p.type === "hour")?.value ?? "00";
+    const mm = parts.find(p => p.type === "minute")?.value ?? "00";
+    let tz   = (parts.find(p => p.type === "timeZoneName")?.value || "ET").toUpperCase();
+
+    /* Normalize browsers that return GMT-4/GMT-5 instead of EDT/EST */
+    if (/GMT[-+]?4\b/.test(tz)) tz = "EDT";
+    if (/GMT[-+]?5\b/.test(tz)) tz = "EST";
+    if (tz === "ET") {
+      // last-ditch guess: ET → EST/EDT by month (approximation)
+      const m = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", month: "numeric" }).format(now);
+      tz = (+m >= 3 && +m <= 11) ? "EDT" : "EST";
+    }
+
+    el.textContent = `${hh}:${mm} ${tz}`;
+  }
+
+  render();
+  setInterval(render, 30_000);
+})();
+</script>
+
+<script>
+/* -------- Private Visitor Counter (no UI) --------
+   Modes:
+     'pageview'  – count every page load
+     'session'   – count once per browser tab session
+     'unique'    – count once per browser (localStorage)
+     'daily'     – count once per browser per day
+--------------------------------------------------- */
+(function () {
+  const NS   = "mabdelmalek-portfolio"; // change to your domain/namespace
+  const KEY  = "visits";                // bucket name
+  const MODE = "unique";                // 'pageview' | 'session' | 'unique' | 'daily'
+
+  const ss = window.sessionStorage;
+  const ls = window.localStorage;
+
+  function todayISO(){ return new Date().toISOString().slice(0,10); } // YYYY-MM-DD
+
+  let shouldHit = true;
+  if (MODE === "session") {
+    shouldHit = !ss.getItem("visitRecorded");
+  } else if (MODE === "unique") {
+    shouldHit = !ls.getItem("visitRecorded");
+  } else if (MODE === "daily") {
+    shouldHit = ls.getItem("visitRecordedDay") !== todayISO();
+  } // pageview: always true
+
+  if (shouldHit) {
+    fetch(`https://api.countapi.xyz/hit/${encodeURIComponent(NS)}/${encodeURIComponent(KEY)}`)
+      .then(r => r.json())
+      .then(() => {
+        if (MODE === "session") ss.setItem("visitRecorded", "1");
+        if (MODE === "unique")  ls.setItem("visitRecorded", "1");
+        if (MODE === "daily")   ls.setItem("visitRecordedDay", todayISO());
+      })
+      .catch(() => { /* stay silent */ });
+  }
+
+  // Console-only helpers (nothing is rendered in the UI)
+  window.checkVisitors = async function(){
+    try {
+      const r = await fetch(`https://api.countapi.xyz/get/${encodeURIComponent(NS)}/${encodeURIComponent(KEY)}`);
+      const j = await r.json();
+      console.log(`Visitors total (${MODE} mode):`, j.value);
+    } catch (e) {
+      console.warn("Visitor gauge unavailable:", e);
+    }
+  };
+
+  window.resetVisitFlag = function(){
+    ss.removeItem("visitRecorded");
+    ls.removeItem("visitRecorded");
+    ls.removeItem("visitRecordedDay");
+    console.log("Visit flags cleared for testing.");
+  };
+})();
+</script>
+
+<script>
+/* Eastern Time with EST/EDT label; updates every 30s */
+(function () {
+  const h = document.getElementById("time-hours");
+  const m = document.getElementById("time-mins");
+  const tzEl = document.getElementById("time-tz");
+  if (!h || !m || !tzEl) return;
+
+  function normalizeTZ(tz){           // normalize GMT-4/5 to EDT/EST if needed
+    if (/GMT[-+]?4\b/i.test(tz)) return "EDT";
+    if (/GMT[-+]?5\b/i.test(tz)) return "EST";
+    return tz.toUpperCase();
+  }
+
+  function render(){
+    const now = new Date();
+    const parts = new Intl.DateTimeFormat("en-US",{
+      hour:"2-digit", minute:"2-digit", hour12:false,
+      timeZone:"America/New_York", timeZoneName:"short"
+    }).formatToParts(now);
+
+    const hh = parts.find(p=>p.type==="hour")?.value ?? "00";
+    const mm = parts.find(p=>p.type==="minute")?.value ?? "00";
+    let tz   = parts.find(p=>p.type==="timeZoneName")?.value || "ET";
+    tz = normalizeTZ(tz);
+
+    h.textContent = hh;
+    m.textContent = mm;
+    tzEl.textContent = tz;
+  }
+
+  render();
+  setInterval(render, 30_000); // minutes tick
+})();
+</script>
+
+
+</body>
+</html>
