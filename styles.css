@@ -1847,7 +1847,7 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
 @media (max-width: 768px){
   .site-nav .logo{
     /* add some breathing room; works on iOS/Android */
-    margin-left: calc(env(safe-area-inset-left, 0px) + 14px);
+    margin-left: calc(env(safe-area-inset-left, 0px) + 10px);
   }
 }
 
