@@ -95,61 +95,48 @@
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
 <!-- About (SVG-based, perfectly responsive overlay) -->
-<section id="about" class="about-hero-svg">
-  <!--
-    TODO 1: Replace WIDTH and HEIGHT with your photo’s native pixel size
-            (right-click the image file -> Properties, or log img.naturalWidth/Height).
-    Example: viewBox="0 0 2048 1365"
-  -->
-  <svg class="about-svg" viewBox="0 0 WIDTH HEIGHT" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Laptop with About content on screen">
-    <!-- Photo -->
-    <!-- TODO 2: point href to your actual image -->
-    <image href="images/about-laptop1.jpg" x="0" y="0" width="100%" height="100%"/>
+<section id="about" class="about-hero">
+  <svg viewBox="0 0 612 408" xmlns="http://www.w3.org/2000/svg" class="about-svg" preserveAspectRatio="xMidYMid meet">
+    <!-- Laptop photo -->
+    <image href="images/about-laptop1.jpg" width="612" height="408" />
 
-    <!--
-      Screen overlay: position this rectangle ONCE using pixel coords
-      from the native image. SVG will keep it aligned on all sizes.
+    <!-- TEMP: alignment rectangle (keyboard-adjustable) -->
+    <rect id="align-rect" x="190" y="110" width="240" height="160"
+          fill="rgba(0, 255, 242, 0.15)" stroke="#00fff2" stroke-width="2" />
 
-      TODO 3: Replace X,Y,W,H with the laptop-screen rectangle you measure
-              in the original image (pixels).
-              Example: x="635" y="355" width="780" height="500"
-    -->
-    <foreignObject x="X" y="Y" width="W" height="H">
-      <!-- HTML lives inside; it will be clipped to the rect -->
-      <div xmlns="http://www.w3.org/1999/xhtml" class="screen-html">
-        <h2 class="screen-title">About me</h2>
-
-        <!-- Tabs row -->
+    <!-- This foreignObject will mirror the rect values automatically -->
+    <foreignObject id="screen-fo" x="190" y="110" width="240" height="160">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="screen-content">
         <div class="tab-titles">
-          <button class="tab-links active-link" onclick="opentab('Skills', this)">Skills</button>
-          <button class="tab-links" onclick="opentab('Experience', this)">Experience</button>
-          <button class="tab-links" onclick="opentab('Education', this)">Education</button>
-          <button class="tab-links" onclick="opentab('Bio', this)">Bio</button>
+          <button class="tab-links active-link" onclick="opentab('skills', this)">Skills</button>
+          <button class="tab-links" onclick="opentab('experience', this)">Experience</button>
+          <button class="tab-links" onclick="opentab('education', this)">Education</button>
+          <button class="tab-links" onclick="opentab('projects', this)">Projects</button>
         </div>
-
-        <!-- Panels (scroll inside the laptop) -->
-        <div class="screen-content">
-          <div id="Skills" class="tab-contents active-tab">
-            <ul class="screen-list">
-              <li><span>Languages</span> Java, Python, JS/TS</li>
-              <li><span>Frameworks</span> React, Node/Express, Spring Boot, Flask</li>
-              <li><span>DB</span> PostgreSQL, SQL, basic NoSQL</li>
-            </ul>
-          </div>
-          <div id="Experience" class="tab-contents">
-            <p class="type-target">Peer mentor… troubleshooting… etc.</p>
-          </div>
-          <div id="Education" class="tab-contents">
-            <p>B.S. in Computer Engineering…</p>
-          </div>
-          <div id="Bio" class="tab-contents">
-            <p>I enjoy building things…</p>
-          </div>
+        <div class="tab-contents active-tab" id="skills">
+          <ul>
+            <li><span>Java</span> · OOP, Spring Boot, REST APIs</li>
+            <li><span>PostgreSQL</span> · schema design, queries</li>
+            <li><span>DSA</span> · arrays, trees, graphs, DP</li>
+          </ul>
+        </div>
+        <div class="tab-contents" id="experience">
+          <p>Geek Squad – Advanced Repair Agent, solved 1,000+ issues/yr, mentored new hires.</p>
+        </div>
+        <div class="tab-contents" id="education">
+          <p>University of South Florida – B.S. Computer Engineering (Dec 2023)</p>
+        </div>
+        <div class="tab-contents" id="projects">
+          <p>Retail Match · Fraud Detection (CNN+OCR) · PERN web apps</p>
         </div>
       </div>
     </foreignObject>
   </svg>
+
+  <!-- HUD with current values (TEMP) -->
+  <div id="align-hud" class="align-hud"></div>
 </section>
+
 
 
 
