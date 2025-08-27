@@ -1126,7 +1126,26 @@
   }, { passive:false });
 })();
 </script>
-  
+
+<script>
+  (function(){
+    const about = document.querySelector('#about .screen-root');
+    if(!about) return;
+
+    const tabs = about.querySelectorAll('.tab-links');
+    const panels = about.querySelectorAll('.tab-contents');
+
+    function showTab(name){
+      tabs.forEach(b => b.classList.toggle('active-link', b.dataset.tab === name));
+      panels.forEach(p => p.classList.toggle('active-tab', p.id === name));
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', () => showTab(btn.dataset.tab));
+    });
+  })();
+</script>
+      
 
 </body>
 </html>
