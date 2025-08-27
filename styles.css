@@ -2091,7 +2091,7 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
     --tabsH: 38px;        /* a touch taller for finger-friendly tabs */
 
     /* TEMP: turn this on to align, then delete it */
-    /* outline: 2px dashed rgba(255,255,255,.45); */
+    outline: 2px dashed rgba(255,255,255,.45);
   }
 
   /* 2) Tabs row: start at left, allow scrolling if tight */
