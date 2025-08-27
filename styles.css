@@ -437,6 +437,90 @@ body{
   display: block;
 }
 
+/* Make the section full-bleed across the page */
+.about-hero-svg{
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+/* SVG scales to full viewport width */
+.about-svg{
+  width: 100vw;         /* full width */
+  height: auto;
+  display: block;
+}
+
+/* Screen content inside foreignObject */
+.svg-screen{
+  font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #fff;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+}
+
+/* Tabs row */
+.svg-tabs{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px 2px;
+  user-select: none;
+}
+
+.svg-link{
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #00fff2;
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  opacity: .95;
+}
+.svg-link:hover{ opacity: 1; }
+
+.svg-link.svg-active{
+  position: relative;
+}
+.svg-link.svg-active::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  transform: translateX(-50%);
+  bottom:-4px;
+  width: 60%;
+  height: 2px;
+  background: linear-gradient(90deg,#00fff2,#8a2be2);
+  border-radius: 2px;
+}
+
+/* Content area below tabs */
+.svg-content{
+  flex: 1;
+  overflow: auto;
+  padding: 8px 4px 6px;
+  text-align: left;
+  color:#101418;
+  line-height: 1.45;
+  font-size: 13px;
+  /* soft anti-glare on bright screen */
+  text-shadow: 0 0 6px rgba(0,0,0,.18);
+}
+
+/* Panels */
+.svg-panel{ display: none; }
+.svg-panel.svg-show{ display: block; }
+
+/* Optional: lighter scrollbar just inside the screen */
+.svg-content{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
+.svg-content::-webkit-scrollbar{ width:6px; }
+.svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
+
 /* About — Laptop scene         */
 
 
