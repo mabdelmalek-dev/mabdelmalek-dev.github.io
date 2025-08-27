@@ -379,6 +379,91 @@ body{
 @keyframes photo-zoom{ to{ transform: scale(1); } }
 
 /* ============================ */
+.about-hero-svg{
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 0;                 /* the SVG handles sizing */
+  overflow: hidden;
+}
+.about-hero-svg .about-svg{
+  width: min(1200px, 95vw);   /* responsive width */
+  height: auto;               /* keep aspect ratio */
+  display: block;
+}
+
+/* HTML inside foreignObject */
+.screen-html{
+  /* inner padding and layout inside the photographed screen */
+  --pad: 14px;
+  --tabsH: 36px;
+  height: 100%;
+  width: 100%;
+  padding: var(--pad);
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  color: #0b0d10;            /* dark text to match screen look */
+  background: transparent;   /* no box */
+  overflow: hidden;          /* hard clip to the screen rect */
+}
+
+.screen-title{
+  margin: 0 0 6px 0;
+  text-align: center;
+  font-weight: 800;
+  font-size: clamp(14px, 2.2vw, 20px);
+  color: #fff;
+  text-shadow: 0 0 8px rgba(0,0,0,.6);
+}
+
+/* Tabs */
+.tab-titles{
+  height: var(--tabsH);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tab-titles::-webkit-scrollbar{ display: none; }
+.tab-links{
+  background: transparent; border: 0; padding: 0; margin: 0;
+  font-weight: 600; cursor: pointer; color: #00fff2;
+  position: relative; white-space: nowrap; font-size: 14px;
+}
+.tab-links::after{
+  content:""; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%);
+  width:0; height:2px; background: linear-gradient(90deg,#00fff2,#6bd0ff);
+  transition: width .25s ease;
+}
+.tab-links.active-link::after{ width: 60%; }
+
+/* Content area below tabs */
+.screen-content{
+  position: absolute;
+  left: var(--pad);
+  right: var(--pad);
+  top: calc(var(--pad) + var(--tabsH) + 6px);
+  bottom: var(--pad);
+  overflow: hidden;
+}
+.tab-contents{
+  display: none;
+  height: 100%;
+  overflow: auto;
+  padding-right: 6px;
+}
+.tab-contents.active-tab{ display: block; }
+
+/* Slim scrollbar inside the laptop */
+.tab-contents{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
+.tab-contents::-webkit-scrollbar{ width:6px; }
+.tab-contents::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
+.screen-list{ margin: 8px 0 0; padding-left: 1rem; }
+.screen-list li{ list-style: disc; margin: 8px 0; }
+.screen-list li span{ color: #00fff2; font-weight: 600; }
+
 /* About — Laptop scene         */
 /* ============================ */
 .about-hero{
