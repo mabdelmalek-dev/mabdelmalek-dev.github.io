@@ -94,68 +94,43 @@
 
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
-<!-- <section id="about" class="about-hero">
-  <svg
-    class="about-svg"
-    viewBox="0 0 612 408"
-    preserveAspectRatio="xMidYMid meet"
-    xmlns="http://www.w3.org/2000/svg">
+<section id="about" class="about-hero">
+  <svg viewBox="0 0 612 408" class="about-svg">
+    <!-- Background photo -->
+    <image href="images/about-laptop1.jpg" width="612" height="408" />
 
-    <!-- Background photo (native size 612×408) -->
-    <image href="mabdelmalek-dev.github.io/images
-/about-laptop1.jpg" width="612" height="408" />
-
-
-    <!-- TEMP: alignment box (delete or hide after you’re happy) -->
-    <rect id="align-rect" x="190" y="110" width="240" height="160"
-          fill="rgba(0,255,242,.12)" stroke="#00fff2" stroke-width="2" />
-
-    <!-- The “screen” — everything rendered inside this box stays on the laptop -->
-    <foreignObject x="190" y="110" width="240" height="160">
-      <div xmlns="http://www.w3.org/1999/xhtml" class="screen-root">
-        <!-- Tabs -->
+    <!-- Group that overlays the screen -->
+    <foreignObject x="182" y="102" width="248" height="190">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="screen">
+        
+        <!-- Tabs row -->
         <div class="tab-titles">
-          <button class="tab-links active-link" data-tab="Skills">Mission</button>
-          <button class="tab-links" data-tab="Skills">Skills</button>
-          <button class="tab-links" data-tab="Experience">Experience</button>
-          <button class="tab-links" data-tab="Education">Education</button>
-          <button class="tab-links" data-tab="About">About</button>
+          <button class="tab-links active-link" onclick="openTab('skills')">Skills</button>
+          <button class="tab-links" onclick="openTab('experience')">Experience</button>
+          <button class="tab-links" onclick="openTab('education')">Education</button>
+          <button class="tab-links" onclick="openTab('about')">About</button>
         </div>
 
-        <!-- Scrollable content area -->
+        <!-- Tab content -->
         <div class="screen-content">
-          <div id="Skills" class="tab-contents active-tab">
-            <ul class="screen-list">
-              <li><span>Languages</span> Java, Python, JavaScript/TypeScript</li>
-              <li><span>Frameworks</span> React, Node.js/Express, Spring Boot, Flask</li>
-              <li><span>Databases</span> PostgreSQL, SQL, basic NoSQL</li>
-            </ul>
+          <div id="skills" class="tab-contents active-tab">
+            <p>Java · PostgreSQL · Spring Boot · Flask · React</p>
           </div>
-
-          <div id="Experience" class="tab-contents">
-            <ul class="screen-list">
-              <li><span>Peer Mentor – Best Buy</span> Onboarded new agents; +30% efficiency.</li>
-              <li><span>Support Engineer</span> 1,000+ issues/yr with ~95% SLA.</li>
-            </ul>
+          <div id="experience" class="tab-contents">
+            <p>Software & Systems Support Engineer at Best Buy (Geek Squad)</p>
           </div>
-
-          <div id="Education" class="tab-contents">
-            <ul class="screen-list">
-              <li><span>B.S. Computer Engineering</span> Software systems & ML focus.</li>
-              <li><span>Coursework</span> DSA, OOP (Java), DB, OS, Networks.</li>
-            </ul>
+          <div id="education" class="tab-contents">
+            <p>BS in Computer Engineering — University of South Florida</p>
           </div>
-
-          <div id="About" class="tab-contents">
-            <p class="type-target">
-              I build reliable, well-tested software with a debugging-first mindset and an eye for clean, optimized design.
-            </p>
+          <div id="about" class="tab-contents">
+            <p>Clean code and optimized design — building real-world solutions with performance and reliability in mind.</p>
           </div>
         </div>
       </div>
     </foreignObject>
   </svg>
 </section>
+
 
 
 
@@ -1131,23 +1106,15 @@
 </script>
 
 <script>
-  (function(){
-    const about = document.querySelector('#about .screen-root');
-    if(!about) return;
-
-    const tabs = about.querySelectorAll('.tab-links');
-    const panels = about.querySelectorAll('.tab-contents');
-
-    function showTab(name){
-      tabs.forEach(b => b.classList.toggle('active-link', b.dataset.tab === name));
-      panels.forEach(p => p.classList.toggle('active-tab', p.id === name));
-    }
-
-    tabs.forEach(btn => {
-      btn.addEventListener('click', () => showTab(btn.dataset.tab));
-    });
-  })();
+function openTab(tabName) {
+  document.querySelectorAll('.tab-contents').forEach(tc => tc.classList.remove('active-tab'));
+  document.querySelectorAll('.tab-links').forEach(btn => btn.classList.remove('active-link'));
+  
+  document.getElementById(tabName).classList.add('active-tab');
+  event.currentTarget.classList.add('active-link');
+}
 </script>
+
       
 
 </body>
