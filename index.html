@@ -1047,6 +1047,68 @@
 })();
 </script>
 
+<script>
+(() => {
+  const rect = document.getElementById('align-rect');
+  const fo   = document.getElementById('screen-fo');
+  const hud  = document.getElementById('align-hud');
+
+  // starting values (same as attributes above)
+  let x = Number(rect.getAttribute('x')) || 190;
+  let y = Number(rect.getAttribute('y')) || 110;
+  let w = Number(rect.getAttribute('width')) || 240;
+  let h = Number(rect.getAttribute('height')) || 160;
+
+  function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+  function render(){
+    rect.setAttribute('x', x);  rect.setAttribute('y', y);
+    rect.setAttribute('width', w); rect.setAttribute('height', h);
+    fo.setAttribute('x', x);    fo.setAttribute('y', y);
+    fo.setAttribute('width', w); fo.setAttribute('height', h);
+    hud.textContent = `x:${x}  y:${y}  width:${w}  height:${h}   (Arrows move, Alt resizes, Shift=×5, Enter logs)`;
+  }
+  render();
+
+  window.addEventListener('keydown', (e) => {
+    let step = e.shiftKey ? 5 : 1;
+    let changed = false;
+
+    // Move
+    if (!e.altKey){
+      if (e.key === 'ArrowLeft'){ x -= step; changed = true; }
+      if (e.key === 'ArrowRight'){ x += step; changed = true; }
+      if (e.key === 'ArrowUp'){ y -= step; changed = true; }
+      if (e.key === 'ArrowDown'){ y += step; changed = true; }
+    }
+    // Resize (Alt)
+    else {
+      if (e.key === 'ArrowLeft'){ w -= step; changed = true; }
+      if (e.key === 'ArrowRight'){ w += step; changed = true; }
+      if (e.key === 'ArrowUp'){ h -= step; changed = true; }
+      if (e.key === 'ArrowDown'){ h += step; changed = true; }
+    }
+
+    if (changed){
+      x = clamp(x, 0, 612);
+      y = clamp(y, 0, 408);
+      w = clamp(w, 1, 612 - x);
+      h = clamp(h, 1, 408 - y);
+      render();
+      e.preventDefault();
+    }
+
+    if (e.key.toLowerCase() === 'r'){
+      x=190; y=110; w=240; h=160; render();
+    }
+    if (e.key === 'Enter'){
+      console.log(`foreignObject x="${x}" y="${y}" width="${w}" height="${h}"`);
+      alert(`Copy these into <foreignObject>:\n x="${x}" y="${y}" width="${w}" height="${h}"`);
+    }
+  }, { passive:false });
+})();
+</script>
+  
 
 </body>
 </html>
