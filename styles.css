@@ -2082,7 +2082,7 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   .about-hero{
     /* tweak these until the outline hugs the real screen */
     --screen-left: 11.6%;
-    --screen-top:  13.2%;
+    --screen-top:  12.8%;
     --screen-width: 76.8%;
   }
   .about-hero .screen{
