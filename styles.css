@@ -379,71 +379,63 @@ body{
 @keyframes photo-zoom{ to{ transform: scale(1); } }
 
 /* ---- About container & SVG ---- */
-.about-hero{ position:relative; z-index:1; padding:40px 0; }
-.about-svg{ display:block; width:min(100%, 1100px); height:auto; margin:0 auto; }
-
-/* Hide the temp alignment box when you’re done aligning */
-#align-rect{ pointer-events:none; }
-/* To hide completely later: #align-rect{ display:none; } */
-
-/* ---- Inside the laptop “screen” ---- */
-.screen-root{
-  /* layout knobs used by tabs & content */
-  --pad: 10px;
-  --tabsH: 28px;
-
-  box-sizing:border-box;
-  width:100%; height:100%;
-  padding:var(--pad);
-  font-family:'Poppins',system-ui,-apple-system,sans-serif;
-  color:#0b0d10; background:transparent;
-  position:relative;
+.about-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
 }
 
-/* Tabs row (single line, scrollable if tight) */
-.screen-root .tab-titles{
-  position:absolute; top:var(--pad); left:var(--pad); right:var(--pad);
-  height:var(--tabsH);
-  display:flex; align-items:center; gap:12px;
-  overflow-x:auto; scrollbar-width:none;
-}
-.screen-root .tab-titles::-webkit-scrollbar{ display:none; }
-
-.screen-root .tab-links{
-  background:none; border:0; padding:0 6px; line-height:1;
-  font-weight:700; font-size:12px; color:#00fff2; cursor:pointer; position:relative;
-}
-.screen-root .tab-links::after{
-  content:''; position:absolute; left:50%; transform:translateX(-50%);
-  bottom:-6px; width:0; height:2px; background:linear-gradient(90deg,#00fff2,#6bd0ff);
-  transition:width .25s ease;
-}
-.screen-root .tab-links.active-link::after{ width:60%; }
-
-/* Content area below tabs; scrolls if needed */
-.screen-root .screen-content{
-  position:absolute;
-  left:var(--pad); right:var(--pad);
-  top:calc(var(--pad) + var(--tabsH) + 6px);
-  bottom:var(--pad);
-  overflow:auto; text-align:left;
+.about-svg {
+  width: 100%;
+  max-width: 900px; /* laptop scales up nicely */
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
-/* Panels */
-.screen-root .tab-contents{ display:none; min-height:100%; }
-.screen-root .tab-contents.active-tab{ display:block; }
-
-/* Lists */
-.screen-root .screen-list{ margin:6px 0 0; padding-left:1rem; color:#0b0d10; }
-.screen-root .screen-list li{ list-style:disc; margin:6px 0; }
-.screen-root .screen-list li span{ color:#00fff2; font-weight:700; margin-right:.25rem; }
-
-/* Optional: a subtle caret for About paragraph while you’re typing later */
-.screen-root .type-target.typing::after{
-  content:""; display:inline-block; width:0; height:1em; border-right:2px solid #333;
-  margin-left:2px; animation:aboutCaret .8s steps(1) infinite; vertical-align:-2px;
+.about-hero .screen {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: transparent;
 }
-@keyframes aboutCaret{ 0%,100%{opacity:0} 50%{opacity:1} }
+
+.tab-titles {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.tab-links {
+  background: none;
+  border: none;
+  color: #00fff2;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.tab-links.active-link {
+  border-bottom: 2px solid #00fff2;
+}
+
+.screen-content {
+  flex: 1;
+  overflow: auto;
+  text-align: left;
+}
+
+.tab-contents {
+  display: none;
+}
+
+.tab-contents.active-tab {
+  display: block;
+}
 
 /* About — Laptop scene         */
 
