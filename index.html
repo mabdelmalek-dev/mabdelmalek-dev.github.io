@@ -94,36 +94,38 @@
 
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
-<section id="about" class="about-hero">
-  <svg viewBox="0 0 612 408" class="about-svg">
+<section class="about-hero-svg">
+  <svg class="about-svg" viewBox="0 0 612 408" role="img" aria-label="Laptop with on-screen content">
     <!-- Background photo -->
-    <image href="images/about-laptop1.jpg" width="612" height="408" />
+    <image
+      href="images/about-laptop1.jpg"
+      x="0" y="0" width="612" height="408"
+      preserveAspectRatio="xMidYMid slice"
+    />
 
-    <!-- Group that overlays the screen -->
-    <foreignObject x="182" y="102" width="248" height="190">
-      <div xmlns="http://www.w3.org/1999/xhtml" class="screen">
-        
-        <!-- Tabs row -->
-        <div class="tab-titles">
-          <button class="tab-links active-link" onclick="openTab('skills')">Skills</button>
-          <button class="tab-links" onclick="openTab('experience')">Experience</button>
-          <button class="tab-links" onclick="openTab('education')">Education</button>
-          <button class="tab-links" onclick="openTab('about')">About</button>
+    <!-- On-screen overlay (coordinates are in the 612×408 viewBox) -->
+    <!-- Tweak x/y/width/height a few px if you want pixel-perfect alignment -->
+    <foreignObject x="190" y="138" width="237" height="192">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="svg-screen">
+        <div class="svg-tabs">
+          <button class="svg-link svg-active" onclick="openTabSvg(event,'svg-skills')">Skills</button>
+          <button class="svg-link" onclick="openTabSvg(event,'svg-exp')">Experience</button>
+          <button class="svg-link" onclick="openTabSvg(event,'svg-edu')">Education</button>
+          <button class="svg-link" onclick="openTabSvg(event,'svg-about')">About</button>
         </div>
 
-        <!-- Tab content -->
-        <div class="screen-content">
-          <div id="skills" class="tab-contents active-tab">
-            <p>Java · PostgreSQL · Spring Boot · Flask · React</p>
+        <div class="svg-content">
+          <div id="svg-skills" class="svg-panel svg-show">
+            Java · Spring Boot · PostgreSQL · Flask · Python · React
           </div>
-          <div id="experience" class="tab-contents">
-            <p>Software & Systems Support Engineer at Best Buy (Geek Squad)</p>
+          <div id="svg-exp" class="svg-panel">
+            Software & Systems Support Engineer — Best Buy (Geek Squad)
           </div>
-          <div id="education" class="tab-contents">
-            <p>BS in Computer Engineering — University of South Florida</p>
+          <div id="svg-edu" class="svg-panel">
+            B.S. Computer Engineering — University of South Florida
           </div>
-          <div id="about" class="tab-contents">
-            <p>Clean code and optimized design — building real-world solutions with performance and reliability in mind.</p>
+          <div id="svg-about" class="svg-panel">
+            Clean code and optimized design. I build reliable, performant software.
           </div>
         </div>
       </div>
@@ -1112,6 +1114,19 @@ function openTab(tabName) {
   
   document.getElementById(tabName).classList.add('active-tab');
   event.currentTarget.classList.add('active-link');
+}
+</script>
+
+<script>
+function openTabSvg(e, id){
+  // panels
+  document.querySelectorAll('.svg-panel').forEach(p => p.classList.remove('svg-show'));
+  const panel = document.getElementById(id);
+  if (panel) panel.classList.add('svg-show');
+
+  // tabs
+  document.querySelectorAll('.svg-link').forEach(b => b.classList.remove('svg-active'));
+  if (e && e.currentTarget) e.currentTarget.classList.add('svg-active');
 }
 </script>
 
