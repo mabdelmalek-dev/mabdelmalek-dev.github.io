@@ -2252,3 +2252,8 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   padding: 8px 10px; border-radius: 8px; z-index: 99999;
 }
 
+.about-hero { position: relative; overflow: hidden; z-index: 1; }
+.about-svg { display: block; max-width: 100%; height: auto; }
+.about-hero::after { z-index: 0; } /* vignette stays inside About only */
+
+
