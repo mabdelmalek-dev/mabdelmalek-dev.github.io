@@ -2075,3 +2075,69 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.35) 60%);
 }
 
+/* ------- MOBILE TUNE: keep tabs + content inside laptop screen ------- */
+@media (max-width: 680px){
+
+  /* 1) Reposition & resize the photographed screen area */
+  .about-hero{
+    /* tweak these until the outline hugs the real screen */
+    --screen-left: 11.6%;
+    --screen-top:  13.2%;
+    --screen-width: 76.8%;
+  }
+  .about-hero .screen{
+    height: 49%;          /* mobile screen is a bit shorter */
+    --pad: 10px;          /* less inner padding on small screens */
+    --tabsH: 38px;        /* a touch taller for finger-friendly tabs */
+
+    /* TEMP: turn this on to align, then delete it */
+    /* outline: 2px dashed rgba(255,255,255,.45); */
+  }
+
+  /* 2) Tabs row: start at left, allow scrolling if tight */
+  .about-hero .tab-titles{
+    justify-content: flex-start;     /* start at left, not spaced out */
+    gap: 12px;
+    overflow-x: auto;                /* scrollable if they don’t all fit */
+    scrollbar-width: none;
+  }
+  .about-hero .tab-titles::-webkit-scrollbar{ display: none; }
+
+  .about-hero .tab-links{
+    font-size: 12px;
+    margin-left: 0;
+    margin-right: 0;
+    white-space: nowrap;
+  }
+
+  /* 3) Content area sits fully inside the photographed screen */
+  .about-hero .screen-content{
+    top: calc(var(--pad) + var(--tabsH) + 4px);  /* leave room for tabs */
+    left: var(--pad);
+    right: var(--pad);
+    bottom: var(--pad);
+    overflow: hidden;   /* nothing spills out of the photo screen */
+  }
+
+  /* 4) Panels scroll internally (slim scrollbar) */
+  .about-hero .tab-contents{
+    height: 100%;
+    overflow: auto;
+    padding-right: 4px;               /* avoid scrollbar overlap */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,.25) transparent;
+  }
+  .about-hero .tab-contents::-webkit-scrollbar{ width:6px; }
+  .about-hero .tab-contents::-webkit-scrollbar-track{ background:transparent; }
+  .about-hero .tab-contents::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
+  /* 5) Text sizing inside the screen */
+  .about-hero .type-target,
+  .about-hero .screen-content,
+  .about-hero .screen .tab-contents{
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+
