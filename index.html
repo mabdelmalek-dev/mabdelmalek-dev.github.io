@@ -94,48 +94,66 @@
 
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
-<!-- About (SVG-based, perfectly responsive overlay) -->
-<section id="about" class="about-hero">
-  <svg viewBox="0 0 612 408" xmlns="http://www.w3.org/2000/svg" class="about-svg" preserveAspectRatio="xMidYMid meet">
-    <!-- Laptop photo -->
+<!-- <section id="about" class="about-hero">
+  <svg
+    class="about-svg"
+    viewBox="0 0 612 408"
+    preserveAspectRatio="xMidYMid meet"
+    xmlns="http://www.w3.org/2000/svg">
+
+    <!-- Background photo (native size 612×408) -->
     <image href="images/about-laptop1.jpg" width="612" height="408" />
 
-    <!-- TEMP: alignment rectangle (keyboard-adjustable) -->
+    <!-- TEMP: alignment box (delete or hide after you’re happy) -->
     <rect id="align-rect" x="190" y="110" width="240" height="160"
-          fill="rgba(0, 255, 242, 0.15)" stroke="#00fff2" stroke-width="2" />
+          fill="rgba(0,255,242,.12)" stroke="#00fff2" stroke-width="2" />
 
-    <!-- This foreignObject will mirror the rect values automatically -->
-    <foreignObject id="screen-fo" x="190" y="110" width="240" height="160">
-      <div xmlns="http://www.w3.org/1999/xhtml" class="screen-content">
+    <!-- The “screen” — everything rendered inside this box stays on the laptop -->
+    <foreignObject x="190" y="110" width="240" height="160">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="screen-root">
+        <!-- Tabs -->
         <div class="tab-titles">
-          <button class="tab-links active-link" onclick="opentab('skills', this)">Skills</button>
-          <button class="tab-links" onclick="opentab('experience', this)">Experience</button>
-          <button class="tab-links" onclick="opentab('education', this)">Education</button>
-          <button class="tab-links" onclick="opentab('projects', this)">Projects</button>
+          <button class="tab-links active-link" data-tab="Skills">Skills</button>
+          <button class="tab-links" data-tab="Experience">Experience</button>
+          <button class="tab-links" data-tab="Education">Education</button>
+          <button class="tab-links" data-tab="About">About</button>
         </div>
-        <div class="tab-contents active-tab" id="skills">
-          <ul>
-            <li><span>Java</span> · OOP, Spring Boot, REST APIs</li>
-            <li><span>PostgreSQL</span> · schema design, queries</li>
-            <li><span>DSA</span> · arrays, trees, graphs, DP</li>
-          </ul>
-        </div>
-        <div class="tab-contents" id="experience">
-          <p>Geek Squad – Advanced Repair Agent, solved 1,000+ issues/yr, mentored new hires.</p>
-        </div>
-        <div class="tab-contents" id="education">
-          <p>University of South Florida – B.S. Computer Engineering (Dec 2023)</p>
-        </div>
-        <div class="tab-contents" id="projects">
-          <p>Retail Match · Fraud Detection (CNN+OCR) · PERN web apps</p>
+
+        <!-- Scrollable content area -->
+        <div class="screen-content">
+          <div id="Skills" class="tab-contents active-tab">
+            <ul class="screen-list">
+              <li><span>Languages</span> Java, Python, JavaScript/TypeScript</li>
+              <li><span>Frameworks</span> React, Node.js/Express, Spring Boot, Flask</li>
+              <li><span>Databases</span> PostgreSQL, SQL, basic NoSQL</li>
+            </ul>
+          </div>
+
+          <div id="Experience" class="tab-contents">
+            <ul class="screen-list">
+              <li><span>Peer Mentor – Best Buy</span> Onboarded new agents; +30% efficiency.</li>
+              <li><span>Support Engineer</span> 1,000+ issues/yr with ~95% SLA.</li>
+            </ul>
+          </div>
+
+          <div id="Education" class="tab-contents">
+            <ul class="screen-list">
+              <li><span>B.S. Computer Engineering</span> Software systems & ML focus.</li>
+              <li><span>Coursework</span> DSA, OOP (Java), DB, OS, Networks.</li>
+            </ul>
+          </div>
+
+          <div id="About" class="tab-contents">
+            <p class="type-target">
+              I build reliable, well-tested software with a debugging-first mindset and an eye for clean, optimized design.
+            </p>
+          </div>
         </div>
       </div>
     </foreignObject>
   </svg>
-
-  <!-- HUD with current values (TEMP) -->
-  <div id="align-hud" class="align-hud"></div>
 </section>
+
 
 
 
