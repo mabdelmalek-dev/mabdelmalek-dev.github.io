@@ -454,7 +454,7 @@ body { margin: 0; overflow-x: hidden; }
   position: relative;
   font-size: clamp(12px, 3.2cqw, 15px);  /* container-query sizing */
 }
-.svg-link:hover{ color:(270deg, #00fff2, #8a2be2, #6bd0ff); }
+.svg-link:hover{ color:(270deg, #00fff2, #2ba5e2, #6bd0ff); }
 .svg-link.svg-active::after{
   content:"";
   position:absolute;
