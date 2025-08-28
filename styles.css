@@ -380,51 +380,52 @@ body{
 
 /* ---- About container & SVG ---- */
 
-/* ---- Page baseline (prevents tiny gaps/scrollbars) ---- */
+/* Baseline */
 html, body { height: 100%; }
 body { margin: 0; overflow-x: hidden; }
 
-/* ---- Fullscreen hero & SVG ---- */
-.about-hero {
+/* Fullscreen hero */
+.about-hero,
+.about-hero-svg {
   width: 100vw;
-  height: 100svh;      /* mobile-safe viewport height */
+  height: 100svh;   /* mobile-safe */
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
+/* SVG fills the hero */
 .about-svg {
   width: 100%;
   height: 100%;
-  display: block;      /* remove inline gap */
+  display: block;
 }
 
-/* ---- Screen (HTML inside foreignObject) ---- */
+/* Content inside the laptop screen */
 .svg-screen{
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  padding: 12px 14px;  /* inner padding within the laptop screen */
+  padding: 12px 14px;
   font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: #0b0d10;
-  background: transparent; /* keep the photographed screen visible */
+  background: transparent;
 }
 
-/* ---- Tabs row ---- */
+/* Tabs */
 .svg-tabs{
   display: flex;
   gap: 12px;
-  justify-content: center;   /* center the 4 tabs */
+  justify-content: center;
   align-items: center;
   padding: 6px 4px 8px;
   user-select: none;
 }
 
-/* ---- Buttons ---- */
 .svg-link{
-  all: unset;                /* remove default button chrome */
+  all: unset;
   cursor: pointer;
   font-weight: 700;
   font-size: clamp(11px, 1vw, 14px);
@@ -435,7 +436,6 @@ body { margin: 0; overflow-x: hidden; }
 }
 .svg-link:hover{ color:#8a2be2; }
 
-/* Active underline */
 .svg-link.svg-active::after{
   content:"";
   position:absolute;
@@ -448,7 +448,7 @@ body { margin: 0; overflow-x: hidden; }
   background:linear-gradient(90deg,#00fff2,#8a2be2);
 }
 
-/* ---- Scrollable content area under the tabs ---- */
+/* Content area */
 .svg-content{
   flex: 1;
   overflow: auto;
@@ -456,17 +456,18 @@ body { margin: 0; overflow-x: hidden; }
   line-height: 1.45;
   font-size: clamp(12px, 1.05vw, 15px);
   color:#0b0d10;
-  text-shadow: 0 0 6px rgba(0,0,0,.18);  /* slight anti-glare */
+  text-shadow: 0 0 6px rgba(0,0,0,.18);
 }
 
 /* Panels toggle */
 .svg-panel{ display:none; }
 .svg-panel.svg-show{ display:block; }
 
-/* Optional: slimmer scrollbar only inside the “screen” */
+/* Slim scrollbar within the faux screen */
 .svg-content{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
 .svg-content::-webkit-scrollbar{ width:6px; }
 .svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
 
 
 
