@@ -406,6 +406,7 @@ body{
   width: 100vw;     /* fill the screen width */
   height: 100svh;   /* fill the screen height, mobile-safe */
   display: block;   /* remove inline gap */
+  object-fit: cover; /* fills and crops evenly */
 }
 
 /* optional: remove extra padding if any wrapper adds it */
