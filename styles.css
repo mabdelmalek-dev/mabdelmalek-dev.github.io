@@ -2274,4 +2274,24 @@ body { margin: 0; overflow-x: hidden; }
   #about.about-hero-svg { height: 80dvh !important; min-height: 80dvh !important; }
 }
 
+/* === MOBILE ZOOM-OUT: hard override (place LAST) === */
+@media (max-width: 1024px) { /* catches large phones/tablets in devtools too */
+  /* kill any global min-height rules some themes add to sections */
+  section#about,
+  #about {
+    min-height: 0 !important;
+  }
+
+  /* force the hero’s height to your desired zoom */
+  section#about.about-hero-svg,
+  body #about.about-hero-svg.about-hero-svg {
+    height: 70dvh !important;      /* adjust: 80–90 for taste */
+    min-height: 70dvh !important;
+  }
+
+  /* ensure the SVG stretches to the new height */
+  #about > svg.about-svg {
+    height: 100% !important;
+  }
+}
 
