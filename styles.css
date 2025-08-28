@@ -2232,3 +2232,13 @@ body { margin: 0; overflow-x: hidden; }
 #about .about-svg { height: 100% !important; }
 #about image { width: 100%; height: 100%; }
 
+/* --- Mobile zoom-out knob --- */
+:root { --hero-mobile-h: 88dvh; }   /* try 92dvh, 90dvh, 85dvh, etc. */
+
+@media (max-width: 768px) {
+  #about.about-hero-svg {
+    height: var(--hero-mobile-h) !important;
+    min-height: var(--hero-mobile-h) !important;
+  }
+}
+
