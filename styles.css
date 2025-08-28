@@ -386,41 +386,85 @@ body{
   padding: 2rem;
 }
 
-.about-hero-svg {
+/* Make the section span full width of the viewport */
+.about-hero-svg{
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-.about-svg {
-  width: 100vw;
-  height: auto;          /* keeps aspect ratio */
+/* SVG scales responsively */
+.about-svg{
+  width: 100vw;      /* full-bleed */
+  height: auto;
   display: block;
 }
 
-/* Screen content inside foreignObject */
-.svg-screen { display:flex; flex-direction:column; height:100%; background:transparent; }
+/* Screen (HTML inside foreignObject) */
+.svg-screen{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #0b0d10;
+  background: transparent; /* keep the photographed screen visible */
+}
+
 /* Tabs row */
-.svg-tabs   { display:flex; gap:12px; justify-content:center; align-items:center; margin-bottom:6px; }
-/* Tab buttons */
-.svg-link   { all:unset; cursor:pointer; font-weight:700; font-size:clamp(10px,.9vw,13px); color:#00fff2; padding:2px 6px; position:relative; }
-.svg-link:hover { color:#8a2be2; }
-.svg-link.svg-active::after { content:""; position:absolute; left:50%; bottom:-3px; transform:translateX(-50%); width:60%; height:2px; border-radius:2px; background:linear-gradient(90deg,#00fff2,#8a2be2); }
-.svg-content { flex:1; overflow:auto; padding:4px 6px; font-size:clamp(12px,1vw,14px); line-height:1.4; color:#0b0d10; }
-
-/* Panels */
-.svg-panel { display: none; }
-.svg-panel.svg-show { display: block; }
-
-/* Scrollbar styling */
-.svg-content {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(0,0,0,.25) transparent;
+.svg-tabs{
+  display: flex;
+  gap: 12px;
+  justify-content: center;   /* center the 4 tabs */
+  align-items: center;
+  padding: 6px 4px 2px;
+  user-select: none;
 }
-.svg-content::-webkit-scrollbar { width: 6px; }
-.svg-content::-webkit-scrollbar-thumb {
-  background: rgba(0,0,0,.25);
-  border-radius: 6px;
+
+/* Buttons */
+.svg-link{
+  all: unset;                /* remove default button chrome */
+  cursor: pointer;
+  font-weight: 700;
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: .2px;
+  color: #00fff2;
+  padding: 2px 6px;
+  position: relative;
 }
+.svg-link:hover{ color:#8a2be2; }
+
+/* Active underline */
+.svg-link.svg-active::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-3px;
+  transform:translateX(-50%);
+  width:60%;
+  height:2px;
+  border-radius:2px;
+  background:linear-gradient(90deg,#00fff2,#8a2be2);
+}
+
+/* Scrollable content area under the tabs */
+.svg-content{
+  flex: 1;
+  overflow: auto;
+  padding: 6px 6px 8px;
+  line-height: 1.45;
+  font-size: clamp(12px, 1.05vw, 15px);
+  color:#0b0d10;
+  text-shadow: 0 0 6px rgba(0,0,0,.18);  /* slight anti-glare */
+}
+
+/* Panels toggle */
+.svg-panel{ display:none; }
+.svg-panel.svg-show{ display:block; }
+
+/* Optional: slimmer scrollbar only inside the “screen” */
+.svg-content{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
+.svg-content::-webkit-scrollbar{ width:6px; }
+.svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
 
 
 
