@@ -94,46 +94,27 @@
 
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
-<section id ="about-hero-svg" class="about-hero-svg">
-  <svg class="about-svg" viewBox="0 0 612 408" role="img" aria-label="Laptop with on-screen content">
-    <!-- Background photo -->
-<!-- In your SVG -->
-  <image
-  href="images/about-laptop1.jpg"
-  x="0" y="0" width="100%" height="100%"
-  preserveAspectRatio="xMidYMid slice" 
-  />
+<section id="about" class="about-hero-svg">
+  <svg class="about-svg" viewBox="0 0 612 408" preserveAspectRatio="xMidYMid slice">
+    <!-- Background photo (scaled like CSS background-size:cover) -->
+    <image
+      href="images/about-laptop1.jpg"
+      x="0" y="0" width="612" height="408"
+      preserveAspectRatio="xMidYMid slice" />
 
-
-    <!-- On-screen overlay (coordinates are in the 612×408 viewBox) -->
-    <!-- Tweak x/y/width/height a few px if you want pixel-perfect alignment -->
-    <!-- Use your current values if they look better; these are just a gentle tighten -->
-<foreignObject x="174" y="92" width="300" height="198">
-  <!-- tabs + content -->
-
-
+    <!-- Laptop screen overlay (use % so it adapts as SVG scales) -->
+    <!-- Tweak these 4 percentages to perfectly match your photo -->
+    <foreignObject x="29.8%" y="25%" width="30.8%" height="46.5%">
       <div xmlns="http://www.w3.org/1999/xhtml" class="svg-screen">
         <div class="svg-tabs">
-          <button class="svg-link svg-active" onclick="openTabSvg(event,'svg-skills')">Skills</button>
-          <button class="svg-link" onclick="openTabSvg(event,'svg-exp')">Experience</button>
-          <button class="svg-link" onclick="openTabSvg(event,'svg-edu')">Education</button>
-          <button class="svg-link" onclick="openTabSvg(event,'svg-about')">About</button>
+          <button class="svg-link svg-active">Skills</button>
+          <button class="svg-link">Experience</button>
+          <button class="svg-link">Education</button>
+          <button class="svg-link">About</button>
         </div>
 
         <div class="svg-content">
-          <div id="svg-Mission" class="svg-panel svg-show">
-            Here
-          </div>
-          <div id="svg-skills" class="svg-panel svg-show">
-            Java · Spring Boot · PostgreSQL · Flask · Python · React
-          </div>
-          <div id="svg-exp" class="svg-panel">
-            Software & Systems Support Engineer — Best Buy (Geek Squad)
-          </div>
-          <div id="svg-edu" class="svg-panel">
-            B.S. Computer Engineering — University of South Florida
-          </div>
-          <div id="svg-about" class="svg-panel">
+          <div class="svg-panel svg-show">
             Clean code and optimized design. I build reliable, performant software.
           </div>
         </div>
@@ -141,6 +122,7 @@
     </foreignObject>
   </svg>
 </section>
+
 
 
 
