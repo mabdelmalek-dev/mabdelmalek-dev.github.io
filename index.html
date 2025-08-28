@@ -1139,6 +1139,16 @@ function openTabSvg(e, id){
 }
 </script>
 
+<script>
+  function setSvgScale() {
+    const svg = document.getElementById('aboutSVG'); // your SVG id
+    if (!svg) return;
+    const w = svg.getBoundingClientRect().width;
+    document.documentElement.style.setProperty('--svgW', w);
+  }
+  setSvgScale();
+  addEventListener('resize', setSvgScale);
+</script>
       
 
 </body>
