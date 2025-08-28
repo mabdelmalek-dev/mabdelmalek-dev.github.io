@@ -103,28 +103,35 @@
        preserveAspectRatio="xMidYMid slice"
        xmlns="http://www.w3.org/2000/svg">
 
-    <!-- Background photo -->
-    <image href="images/about-laptop1.jpg"
-           x="0" y="0" width="100%" height="100%"
-           preserveAspectRatio="xMidYMid slice" />
+    <!-- Inline SVG CSS so media query always wins -->
+    <style>
+      /* Keep transforms relative to the image box */
+      .bg-zoom { transform-box: fill-box; transform-origin: 50% 50%; }
+      /* ↓ Zoom OUT a little on mobile (smaller = more zoom-out) */
+      @media (max-width: 768px) {
+        .bg-zoom { transform: scale(0.92); } /* try 0.95 … 0.85 */
+      }
+    </style>
 
-    <!-- Laptop screen area: DESKTOP defaults (JS will swap on mobile) -->
+    <!-- Background photo (now inside a scalable group) -->
+    <g class="bg-zoom">
+      <image href="images/about-laptop1.jpg"
+             x="0" y="0" width="100%" height="100%"
+             preserveAspectRatio="xMidYMid slice" />
+    </g>
+
+    <!-- Laptop screen area (your existing coords) -->
     <foreignObject class="laptop-fo"
                    x="44.83%" y="44.57%" width="34.57%" height="47.68%">
       <div xmlns="http://www.w3.org/1999/xhtml" class="svg-screen">
-        <div>
         <div class="svg-tabs">
-          <button class="svg-link" data-tab="about-tab">About</button>
-          <button class="svg-link svg-active" data-tab="skills">Technical Stack</button>
+          <button class="svg-link svg-active" data-tab="skills">Skills</button>
           <button class="svg-link" data-tab="exp">Experience</button>
           <button class="svg-link" data-tab="edu">Education</button>
+          <button class="svg-link" data-tab="about-tab">About</button>
         </div>
 
         <div class="svg-content">
-
-          <div class="svg-panel" id="about-tab">
-            <p>Passionate about building clean, reliable software solutions.</p>
-          </div>
           <div class="svg-panel svg-show" id="skills">
             <p>Java · Spring Boot · PostgreSQL · Flask · React</p>
           </div>
@@ -134,7 +141,9 @@
           <div class="svg-panel" id="edu">
             <p>B.S. Computer Engineering · University of South Florida</p>
           </div>
-        </div>
+          <div class="svg-panel" id="about-tab">
+            <p>Passionate about building clean, reliable software solutions.</p>
+          </div>
         </div>
       </div>
     </foreignObject>
