@@ -401,37 +401,21 @@ body { margin: 0; overflow-x: hidden; }
   position: relative;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;          /* keep these to go full-bleed */
+  margin-left: -50vw;          /* full-bleed escape */
   margin-right: -50vw;
   width: 100vw;
   height: 100vh;               /* fallback */
   padding: 0;
   overflow: hidden;
 }
+@supports (height: 100dvh) { .about-hero-svg { height: 100dvh; } }
+@supports (height: 100svh) { .about-hero-svg { height: 100svh; } }
 
-/* Prefer dynamic/safe viewport units when available */
-@supports (height: 100dvh) {
-  .about-hero-svg { height: 100dvh; }
-}
-@supports (height: 100svh) {
-  .about-hero-svg { height: 100svh; }
-}
-
-/* If you also use .about-hero elsewhere, it can be simple (don't reset margins on .about-hero-svg) */
-.about-hero {
-  width: 100vw;
-  min-height: 100svh;
-  padding: 0;
-  overflow: hidden;
-}
+/* Optional generic hero (doesn't override the full-bleed margins above) */
+.about-hero { width: 100vw; min-height: 100svh; padding: 0; overflow: hidden; }
 
 /* SVG fills the hero */
-.about-svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
+.about-svg { width: 100%; height: 100%; display: block; }
 /* Some frameworks force svg/img { height:auto } — keep the hero filling */
 #about .about-svg { height: 100% !important; }
 #about image { width: 100%; height: 100%; }
@@ -447,26 +431,28 @@ body { margin: 0; overflow-x: hidden; }
   font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: #0b0d10;
   background: transparent;
+  container-type: inline-size;     /* enables cqw units */
 }
 
 /* Tabs */
 .svg-tabs{
   display: flex;
-  gap: 12px;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-  padding: 6px 4px 8px;
   user-select: none;
+  padding: 6px 4px 8px;
+  gap: clamp(6px, 2cqw, 14px);     /* scales with the “screen” width */
 }
 .svg-link{
   all: unset;
   cursor: pointer;
   font-weight: 700;
-  font-size: clamp(12px, 2.8vw, 15px);  /* a touch larger on phones */
   letter-spacing: .2px;
   color: #00fff2;
   padding: 2px 6px;
   position: relative;
+  font-size: clamp(12px, 3.2cqw, 15px);  /* container-query sizing */
 }
 .svg-link:hover{ color:#8a2be2; }
 .svg-link.svg-active::after{
@@ -481,16 +467,20 @@ body { margin: 0; overflow-x: hidden; }
   background:linear-gradient(90deg,#00fff2,#8a2be2);
 }
 
-/* Content */
+/* Content (true center) */
 .svg-content{
   flex: 1;
   overflow: auto;
   padding: 6px 6px 8px;
   line-height: 1.45;
-  font-size: clamp(13px, 3.4vw, 16px);
+  display: grid;
+  place-items: center;          /* centers both axes */
+  text-align: center;
   color:#0b0d10;
   text-shadow: 0 0 6px rgba(0,0,0,.18);
+  font-size: clamp(13px, 3.4cqw, 16px);  /* scales with screen width */
 }
+.svg-content p { margin: 0; }
 
 /* Panels toggle */
 .svg-panel{ display:none; }
@@ -501,41 +491,14 @@ body { margin: 0; overflow-x: hidden; }
 .svg-content::-webkit-scrollbar{ width:6px; }
 .svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
 
-/* Make the foreignObject’s root a container so we can use cqw (container width) */
-.svg-screen{
-  /* existing rules... */
-  container-type: inline-size;
-}
-
-/* Center the content block properly */
-.svg-content{
-  /* keep your existing rules */
-  display: grid;
-  place-items: center;   /* centers both axes */
-  text-align: center;
-}
-
-.svg-content p { margin: 0; }  /* avoid default <p> margins shifting center */
-
-/* Tabs: scale font & gaps by the screen width, not viewport */
-.svg-tabs{
-  /* existing rules... */
-  flex-wrap: wrap;  /* let it wrap on very narrow screens instead of clipping */
-  gap: clamp(6px, 2cqw, 14px);
-}
-
-.svg-link{
-  /* replace your font-size line with this: */
-  font-size: clamp(12px, 3.2cqw, 15px);
-}
-
-/* Fallback for browsers without container queries */
+/* Fallbacks for browsers without container queries */
 @supports not (width: 1cqw) {
-  .svg-link{ font-size: clamp(12px, 2.6vw, 15px); }
   .svg-tabs{ gap: 8px; }
+  .svg-link{ font-size: clamp(12px, 2.6vw, 15px); }
+  .svg-content{ font-size: clamp(13px, 3.4vw, 16px); }
 }
 
-/* Optional: tighten even more on very small phones */
+/* Optional: extra tightening on very small phones */
 @media (max-width: 390px) {
   .svg-tabs{ row-gap: 6px; }
 }
