@@ -115,10 +115,20 @@
 
     <!-- Background photo (now inside a scalable group) -->
     <g class="bg-zoom">
-      <image href="images/about-laptop1.jpg"
-             x="0" y="0" width="100%" height="100%"
-             preserveAspectRatio="xMidYMid slice" />
-    </g>
+      <!-- Desktop image (centered) -->
+<image class="bg-desktop"
+       href="images/about-laptop1.jpg"
+       x="0" y="0"
+       width="100%" height="100%"
+       preserveAspectRatio="xMidYMid slice" />
+
+<!-- Mobile image (nudged left a bit) -->
+<image class="bg-mobile"
+       href="images/about-laptop1.jpg"
+       x="-2.5%" y="0"          <!-- ← shift left; tweak -1% … -6% -->
+       width="105%" height="100%"  <!-- grow a touch so no edge shows -->
+       preserveAspectRatio="xMidYMid slice" />
+     </g>
 
     <!-- Laptop screen area (your existing coords) -->
     <foreignObject class="laptop-fo"
