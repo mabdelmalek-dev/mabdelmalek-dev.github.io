@@ -2305,3 +2305,30 @@ body { margin: 0; overflow-x: hidden; }
   /* Keep the SVG filling that fixed height */
   #about > svg.about-svg { height: 100% !important; }
 }
+
+/* Alternative: custom bullets for perfect alignment */
+.svg-content ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 92%;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.svg-content li{
+  display: grid;
+  grid-template-columns: auto 1fr;  /* bullet | text */
+  column-gap: 10px;
+  align-items: start;
+  margin: 4px 0 6px;
+}
+
+.svg-content li::before{
+  content: "•";
+  font-weight: 700;
+  line-height: 1;
+  color: #00fff2;                 /* matches your tab accent */
+  transform: translateY(1px);
+}
+
