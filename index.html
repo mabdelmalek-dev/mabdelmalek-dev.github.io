@@ -1243,6 +1243,20 @@ function openTabSvg(e, id){
   });
 </script>
 
+  <script>
+  (function () {
+    function setVh() {
+      var vh = window.innerHeight * 0.01;        // 1% of current viewport
+      document.documentElement.style.setProperty('--vh', vh + 'px');
+    }
+    setVh();
+    // Recompute on orientation change (not on every scroll)
+    window.addEventListener('orientationchange', function () {
+      setTimeout(setVh, 300);
+    });
+  })();
+</script>
+
 
 </body>
 </html>
