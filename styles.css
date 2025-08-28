@@ -501,6 +501,44 @@ body { margin: 0; overflow-x: hidden; }
 .svg-content::-webkit-scrollbar{ width:6px; }
 .svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
 
+/* Make the foreignObject’s root a container so we can use cqw (container width) */
+.svg-screen{
+  /* existing rules... */
+  container-type: inline-size;
+}
+
+/* Center the content block properly */
+.svg-content{
+  /* keep your existing rules */
+  display: grid;
+  place-items: center;   /* centers both axes */
+  text-align: center;
+}
+
+.svg-content p { margin: 0; }  /* avoid default <p> margins shifting center */
+
+/* Tabs: scale font & gaps by the screen width, not viewport */
+.svg-tabs{
+  /* existing rules... */
+  flex-wrap: wrap;  /* let it wrap on very narrow screens instead of clipping */
+  gap: clamp(6px, 2cqw, 14px);
+}
+
+.svg-link{
+  /* replace your font-size line with this: */
+  font-size: clamp(12px, 3.2cqw, 15px);
+}
+
+/* Fallback for browsers without container queries */
+@supports not (width: 1cqw) {
+  .svg-link{ font-size: clamp(12px, 2.6vw, 15px); }
+  .svg-tabs{ gap: 8px; }
+}
+
+/* Optional: tighten even more on very small phones */
+@media (max-width: 390px) {
+  .svg-tabs{ row-gap: 6px; }
+}
 
 
 
