@@ -94,34 +94,40 @@
 
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
-<section id="about" class="about-hero-svg">
-  <svg class="about-svg" viewBox="0 0 612 408" preserveAspectRatio="xMidYMid slice">
-    <!-- Background photo (scaled like CSS background-size:cover) -->
-    <image
-      href="images/about-laptop1.jpg"
-      x="0" y="0" width="612" height="408"
-      preserveAspectRatio="xMidYMid slice" />
+<section id="abbout" class="about-hero-svg">
+  <svg class="about-svg" viewBox="0 0 1519 690" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background photo -->
+    <image href="images/about-laptop1.jpg" x="0" y="0" width="1519" height="690" />
 
-    <!-- Laptop screen overlay (use % so it adapts as SVG scales) -->
-    <!-- Tweak these 4 percentages to perfectly match your photo -->
-    <foreignObject x="29.8%" y="25%" width="30.8%" height="46.5%">
+    <!-- Laptop screen area -->
+    <foreignObject x="44.83%" y="44.57%" width="34.57%" height="47.68%">
       <div xmlns="http://www.w3.org/1999/xhtml" class="svg-screen">
         <div class="svg-tabs">
-          <button class="svg-link svg-active">Skills</button>
-          <button class="svg-link">Experience</button>
-          <button class="svg-link">Education</button>
-          <button class="svg-link">About</button>
+          <button class="svg-link svg-active" data-tab="skills">Skills</button>
+          <button class="svg-link" data-tab="exp">Experience</button>
+          <button class="svg-link" data-tab="edu">Education</button>
+          <button class="svg-link" data-tab="about">About</button>
         </div>
 
         <div class="svg-content">
-          <div class="svg-panel svg-show">
-            Clean code and optimized design. I build reliable, performant software.
+          <div class="svg-panel svg-show" id="tab-skills">
+            <p>Java · Spring Boot · PostgreSQL · Flask · React</p>
+          </div>
+          <div class="svg-panel" id="tab-exp">
+            <p>Software & Systems Support Engineer — Best Buy</p>
+          </div>
+          <div class="svg-panel" id="tab-edu">
+            <p>B.S. Computer Engineering · University of South Florida</p>
+          </div>
+          <div class="svg-panel" id="tab-about">
+            <p>Passionate about building clean, reliable software solutions.</p>
           </div>
         </div>
       </div>
     </foreignObject>
   </svg>
 </section>
+
 
 
 
