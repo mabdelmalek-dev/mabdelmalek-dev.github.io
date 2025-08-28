@@ -2277,4 +2277,34 @@ body { margin: 0; overflow-x: hidden; }
   }
 
   .svg-content p{ margin: 0; }   /* remove default paragraph top margin */
+/* --- KEEP DESKTOP ZOOM ON MOBILE --- */
+@media (max-width: 768px) {
+  /* 1) Make the hero full height again (no zoom-out via shorter height) */
+  #about.about-hero-svg {
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+  @supports not (height: 100dvh) {
+    #about.about-hero-svg {
+      height: 100svh !important;
+      min-height: 100svh !important;
+    }
+  }
+  /* Ensure the SVG fills the hero */
+  #about > svg.about-svg { height: 100% !important; }
+
+  /* 2) Neutralize any image transforms added earlier */
+  #about .bg-zoom { transform: none !important; }   /* if you used the bg-zoom class */
+  .bg-mobile { display: none !important; }          /* if you tried the mobile alt image */
+  .bg-desktop { display: block !important; }
+}
+
+/* --- OPTIONAL: slight left bias without changing zoom --- */
+@media (max-width: 768px) {
+  #about.about-hero-svg { overflow: hidden; }
+  #about > svg.about-svg {
+    transform: translateX(-3vw);          /* tweak: -1vw … -6vw */
+    width: calc(100% + 6vw);              /* ~2× the shift so no right gap */
+  }
+}
 
