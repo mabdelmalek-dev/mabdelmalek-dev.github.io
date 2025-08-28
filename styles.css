@@ -496,8 +496,8 @@ body { margin: 0; overflow-x: hidden; }
   section#about.about-hero-svg,
   #about.about-hero-svg {
     /* Try 84dvh, 82dvh, even 80dvh for more zoom-out */
-    height: 76dvh !important;
-    min-height: 76dvh !important;
+    height: 60dvh !important;
+    min-height: 60dvh !important;
   }
   /* Keep the SVG stretching to the new height */
   #about .about-svg { height: 100% !important; }
