@@ -396,8 +396,7 @@ body{
 .about-svg{
   width: 100vw;      /* full-bleed */
   height: auto;
-  display: block;
-}
+ }
 
 /* Screen (HTML inside foreignObject) */
 .svg-screen{
