@@ -2247,6 +2247,7 @@ body { margin: 0; overflow-x: hidden; }
     place-items: start center;  /* = align-items: start; justify-items: center; */
     align-content: start;       /* ensures multi-line blocks stay up top */
     padding-top: 4px;           /* tiny breathing room */
+    margin: left 10px; 
   }
   .svg-content p { margin: 0; } /* no extra paragraph gap */
 }
