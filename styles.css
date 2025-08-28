@@ -2285,8 +2285,8 @@ body { margin: 0; overflow-x: hidden; }
   /* force the hero’s height to your desired zoom */
   section#about.about-hero-svg,
   body #about.about-hero-svg.about-hero-svg {
-    height: 70dvh !important;      /* adjust: 80–90 for taste */
-    min-height: 70dvh !important;
+    height: 60dvh !important;      /* adjust: 80–90 for taste */
+    min-height: 60dvh !important;
   }
 
   /* ensure the SVG stretches to the new height */
