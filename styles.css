@@ -2303,7 +2303,7 @@ body { margin: 0; overflow-x: hidden; }
 @media (max-width: 768px) {
   #about.about-hero-svg { overflow: hidden; }
   #about > svg.about-svg {
-    transform: translateX(-5vw);          /* tweak: -1vw … -6vw */
+    transform: translateX(-1vw);          /* tweak: -1vw … -6vw */
     width: calc(100% + 6vw);              /* ~2× the shift so no right gap */
   }
 }
