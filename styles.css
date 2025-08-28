@@ -2241,57 +2241,7 @@ body { margin: 0; overflow-x: hidden; }
 .svg-panel{ display:none; }
 .svg-panel.svg-show{ display:block; }
 
-/* Keep the SVG filling on mobile if a reset sets svg/img height:auto */
-#about .about-svg { height: 100% !important; }
-#about image { width: 100%; height: 100%; }
 
-/* --- Mobile zoom-out knob --- */
-:root { --hero-mobile-h: 88dvh; }   /* try 92dvh, 90dvh, 85dvh, etc. */
 
-@media (max-width: 768px) {
-  #about.about-hero-svg {
-    height: var(--hero-mobile-h) !important;
-    min-height: var(--hero-mobile-h) !important;
-  }
-}
 
-/* --- MOBILE ZOOM-OUT (strong override) --- */
-@media (max-width: 768px) {
-  section#about.about-hero-svg,
-  #about.about-hero-svg {
-    /* Try 84dvh, 82dvh, even 80dvh for more zoom-out */
-    height: 84dvh !important;
-    min-height: 84dvh !important;
-  }
-  /* Keep the SVG stretching to the new height */
-  #about .about-svg { height: 100% !important; }
-}
-
-@media (max-width: 480px) {
-  #about.about-hero-svg { height: 82dvh !important; min-height: 82dvh !important; }
-}
-@media (max-width: 380px) {
-  #about.about-hero-svg { height: 80dvh !important; min-height: 80dvh !important; }
-}
-
-/* === MOBILE ZOOM-OUT: hard override (place LAST) === */
-@media (max-width: 1024px) { /* catches large phones/tablets in devtools too */
-  /* kill any global min-height rules some themes add to sections */
-  section#about,
-  #about {
-    min-height: 0 !important;
-  }
-
-  /* force the hero’s height to your desired zoom */
-  section#about.about-hero-svg,
-  body #about.about-hero-svg.about-hero-svg {
-    height: 60dvh !important;      /* adjust: 80–90 for taste */
-    min-height: 60dvh !important;
-  }
-
-  /* ensure the SVG stretches to the new height */
-  #about > svg.about-svg {
-    height: 100% !important;
-  }
-}
 
