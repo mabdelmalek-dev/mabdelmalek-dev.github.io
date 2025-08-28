@@ -392,31 +392,37 @@ section, header, footer { background: transparent; }
 
 /* ---- About container & SVG ---- */
 
-/* Fullscreen hero */
+/* ===== Baseline ===== */
+html, body { height: 100%; }
+body { margin: 0; overflow-x: hidden; }
+
+/* ===== Fullscreen hero (escapes parent gutters) ===== */
 .about-hero-svg {
   position: relative;
   left: 50%;
   right: 50%;
-  margin-left: -50vw;     /* escape any parent max-width/padding */
+  margin-left: -50vw;          /* keep these to go full-bleed */
   margin-right: -50vw;
   width: 100vw;
-  height: 100vh;          /* fallback */
-  overflow: hidden;
-}
-.about-hero,
-.about-hero-svg {
-  width: 100vw;
-  height: 100svh;   /* mobile-safe */
-  margin: 0;
+  height: 100vh;               /* fallback */
   padding: 0;
   overflow: hidden;
 }
 
+/* Prefer dynamic/safe viewport units when available */
+@supports (height: 100dvh) {
+  .about-hero-svg { height: 100dvh; }
+}
 @supports (height: 100svh) {
   .about-hero-svg { height: 100svh; }
 }
-@supports (height: 100dvh) {
-  .about-hero-svg { height: 100dvh; }  /* best on modern mobile browsers */
+
+/* If you also use .about-hero elsewhere, it can be simple (don't reset margins on .about-hero-svg) */
+.about-hero {
+  width: 100vw;
+  min-height: 100svh;
+  padding: 0;
+  overflow: hidden;
 }
 
 /* SVG fills the hero */
@@ -426,7 +432,11 @@ section, header, footer { background: transparent; }
   display: block;
 }
 
-/* Content inside the laptop screen */
+/* Some frameworks force svg/img { height:auto } — keep the hero filling */
+#about .about-svg { height: 100% !important; }
+#about image { width: 100%; height: 100%; }
+
+/* ===== Content inside the laptop screen ===== */
 .svg-screen{
   width: 100%;
   height: 100%;
@@ -448,19 +458,17 @@ section, header, footer { background: transparent; }
   padding: 6px 4px 8px;
   user-select: none;
 }
-
 .svg-link{
   all: unset;
   cursor: pointer;
   font-weight: 700;
-  font-size: clamp(11px, 1vw, 14px);
+  font-size: clamp(12px, 2.8vw, 15px);  /* a touch larger on phones */
   letter-spacing: .2px;
   color: #00fff2;
   padding: 2px 6px;
   position: relative;
 }
 .svg-link:hover{ color:#8a2be2; }
-
 .svg-link.svg-active::after{
   content:"";
   position:absolute;
@@ -473,13 +481,13 @@ section, header, footer { background: transparent; }
   background:linear-gradient(90deg,#00fff2,#8a2be2);
 }
 
-/* Content area */
+/* Content */
 .svg-content{
   flex: 1;
   overflow: auto;
   padding: 6px 6px 8px;
   line-height: 1.45;
-  font-size: clamp(12px, 1.05vw, 15px);
+  font-size: clamp(13px, 3.4vw, 16px);
   color:#0b0d10;
   text-shadow: 0 0 6px rgba(0,0,0,.18);
 }
@@ -488,10 +496,11 @@ section, header, footer { background: transparent; }
 .svg-panel{ display:none; }
 .svg-panel.svg-show{ display:block; }
 
-/* Slim scrollbar within the faux screen */
+/* Slim scrollbar inside the faux screen */
 .svg-content{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
 .svg-content::-webkit-scrollbar{ width:6px; }
 .svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
 
 
 
