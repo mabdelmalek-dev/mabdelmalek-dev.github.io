@@ -97,26 +97,26 @@
 
   <!-- ================= About (bookshelf behind laptop) ================= -->
 <!-- ================= About (laptop scene) ================= -->
-<section class="about-hero" id="about">
+<section id="about" class="about-hero-svg">
   <svg class="about-svg"
        viewBox="0 0 1519 690"
        preserveAspectRatio="xMidYMid slice"
        xmlns="http://www.w3.org/2000/svg">
 
-    <!-- Background photo fills the SVG viewport -->
+    <!-- Background photo -->
     <image href="images/about-laptop1.jpg"
-           x="0" y="0"
-           width="100%" height="100%"
+           x="0" y="0" width="100%" height="100%"
            preserveAspectRatio="xMidYMid slice" />
 
-    <!-- Laptop screen area (tweak these %s if the bezel changes) -->
-    <foreignObject x="44.83%" y="44.57%" width="34.57%" height="47.68%">
+    <!-- Laptop screen area: DESKTOP defaults (JS will swap on mobile) -->
+    <foreignObject class="laptop-fo"
+                   x="44.83%" y="44.57%" width="34.57%" height="47.68%">
       <div xmlns="http://www.w3.org/1999/xhtml" class="svg-screen">
         <div class="svg-tabs">
           <button class="svg-link svg-active" data-tab="skills">Skills</button>
           <button class="svg-link" data-tab="exp">Experience</button>
           <button class="svg-link" data-tab="edu">Education</button>
-          <button class="svg-link" data-tab="About">About</button>
+          <button class="svg-link" data-tab="about-tab">About</button>
         </div>
 
         <div class="svg-content">
@@ -129,8 +129,7 @@
           <div class="svg-panel" id="edu">
             <p>B.S. Computer Engineering · University of South Florida</p>
           </div>
-          <!-- renamed to avoid conflicting with section id -->
-          <div class="svg-panel" id="About">
+          <div class="svg-panel" id="about-tab">
             <p>Passionate about building clean, reliable software solutions.</p>
           </div>
         </div>
@@ -138,6 +137,33 @@
     </foreignObject>
   </svg>
 </section>
+
+<!-- Mobile/desktop bezel switch (tiny helper) -->
+<script>
+(function () {
+  const fo = document.querySelector('#about .laptop-fo');
+  if (!fo) return;
+
+  // Tweak these four numbers if you want to nudge the mobile fit later.
+  const desktop = { x:'44.83%', y:'44.57%', w:'34.57%', h:'47.68%' };
+  const mobile  = { x:'9%',      y:'18%',    w:'82%',    h:'39%'    }; // matches your screenshot
+
+  function applyBox(box){
+    fo.setAttribute('x', box.x);
+    fo.setAttribute('y', box.y);
+    fo.setAttribute('width',  box.w);
+    fo.setAttribute('height', box.h);
+  }
+
+  function sync(){
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    applyBox(isMobile ? mobile : desktop);
+  }
+
+  sync();
+  window.addEventListener('resize', sync);
+})();
+</script>
 
 
 
