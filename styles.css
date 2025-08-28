@@ -380,6 +380,21 @@ body{
 
 /* ---- About container & SVG ---- */
 
+.about-hero {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.about-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* fills and crops evenly */
+  display: block;
+}
+
 /* Make the section span full width of the viewport */
 /* Make the section full-bleed and the SVG fill the viewport */
 .about-hero-svg{
