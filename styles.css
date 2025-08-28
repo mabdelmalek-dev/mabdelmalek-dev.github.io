@@ -449,12 +449,12 @@ body { margin: 0; overflow-x: hidden; }
   cursor: pointer;
   font-weight: 700;
   letter-spacing: .2px;
-  color: linear-gradient(90deg, #00fff2, #8a2be2, #6bd0ff);
+  color: linear-gradient(90deg, #000ff2, #8a2002, #6000ff);
   padding: 2px 6px;
   position: relative;
   font-size: clamp(12px, 3.2cqw, 15px);  /* container-query sizing */
 }
-.svg-link:hover{ color:(270deg, #00fff2, #2ba5e2, #6bd0ff); }
+.svg-link:hover{ color:(270deg, #00ff00, #2b00e2, #6000ff); }
 .svg-link.svg-active::after{
   content:"";
   position:absolute;
