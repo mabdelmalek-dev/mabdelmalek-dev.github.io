@@ -2277,19 +2277,7 @@ body { margin: 0; overflow-x: hidden; }
   }
 
   .svg-content p{ margin: 0; }   /* remove default paragraph top margin */
-/* --- KEEP DESKTOP ZOOM ON MOBILE --- */
-@media (max-width: 768px) {
-  /* 1) Make the hero full height again (no zoom-out via shorter height) */
-  #about.about-hero-svg {
-    height: 100dvh !important;
-    min-height: 100dvh !important;
-  }
-  @supports not (height: 100dvh) {
-    #about.about-hero-svg {
-      height: 100svh !important;
-      min-height: 100svh !important;
-    }
-  }
+
   /* Ensure the SVG fills the hero */
   #about > svg.about-svg { height: 100% !important; }
 
@@ -2308,3 +2296,10 @@ body { margin: 0; overflow-x: hidden; }
   }
 }
 
+@media (max-width: 900px) {
+  #about.about-hero-svg {
+    height: calc(var(--vh) * 100) !important;
+    min-height: calc(var(--vh) * 100) !important;
+  }
+  #about > svg.about-svg { height: 100% !important; }
+}
