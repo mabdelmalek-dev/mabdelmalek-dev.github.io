@@ -491,6 +491,19 @@ body { margin: 0; overflow-x: hidden; }
 .svg-content::-webkit-scrollbar{ width:6px; }
 .svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
 
+/* --- MOBILE ZOOM-OUT (strong override) --- */
+@media (max-width: 768px) {
+  section#about.about-hero-svg,
+  #about.about-hero-svg {
+    /* Try 84dvh, 82dvh, even 80dvh for more zoom-out */
+    height: 84dvh !important;
+    min-height: 84dvh !important;
+  }
+  /* Keep the SVG stretching to the new height */
+  #about .about-svg { height: 100% !important; }
+}
+
+
 /* Fallbacks for browsers without container queries */
 @supports not (width: 1cqw) {
   .svg-tabs{ gap: 8px; }
