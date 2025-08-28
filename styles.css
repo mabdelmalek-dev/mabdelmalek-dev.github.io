@@ -2241,7 +2241,15 @@ body { margin: 0; overflow-x: hidden; }
 .svg-panel{ display:none; }
 .svg-panel.svg-show{ display:block; }
 
-
+  .svg-content{
+    /* top-align vertically, keep horizontal centering */
+    display: grid;
+    place-items: start center;  /* = align-items: start; justify-items: center; */
+    align-content: start;       /* ensures multi-line blocks stay up top */
+    padding-top: 4px;           /* tiny breathing room */
+  }
+  .svg-content p { margin: 0; } /* no extra paragraph gap */
+}
 
 
 
