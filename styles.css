@@ -601,6 +601,8 @@ body{
   color:#0b0d10;
 }
 
+/* example: 14px at 612px wide, scales proportionally */
+.svg-content { font-size: calc(14px * (var(--svgW, 612) / 612)); }
 
 
 /* About — Laptop scene         */
