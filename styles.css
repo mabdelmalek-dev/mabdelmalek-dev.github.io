@@ -387,16 +387,21 @@ body{
 }
 
 /* Make the section span full width of the viewport */
+/* Make the section full-bleed and the SVG fill the viewport */
 .about-hero-svg{
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
 }
 
-/* SVG scales responsively */
 .about-svg{
-  width: 100vw;      /* full-bleed */
-  height: auto;
- }
+  width: 100vw;     /* fill the screen width */
+  height: 100svh;   /* fill the screen height, mobile-safe */
+  display: block;   /* remove inline gap */
+}
+
+/* optional: remove extra padding if any wrapper adds it */
+.about-hero{ padding: 0; }
+
 
 /* Screen (HTML inside foreignObject) */
 .svg-screen{
