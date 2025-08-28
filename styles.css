@@ -2252,5 +2252,29 @@ body { margin: 0; overflow-x: hidden; }
   .svg-content p { margin: 0; } /* no extra paragraph gap */
 }
 
+  .svg-screen{
+    display: flex;               /* override any grid from earlier */
+    flex-direction: column;
+    align-items: center;         /* horizontal center */
+    /*justify-content: center;      vertical center */
+    gap: 10px;                   /* tight space between tabs and text */
+  }
 
+  /* Tabs: keep centered */
+  .svg-tabs{
+    justify-content: center;
+    margin: 0;                   /* no extra top/bottom gap */
+    padding: 0;
+  }
+
+  /* Content: DO NOT grow; center the text */
+  .svg-content{
+    flex: 0 0 auto !important;   /* stop flex:1 expansion that creates the big gap */
+    display: grid;
+    place-items: center;          /* center both axes */
+    text-align: left;
+    padding: 0;                   /* keep it snug under tabs */
+  }
+
+  .svg-content p{ margin: 0; }   /* remove default paragraph top margin */
 
