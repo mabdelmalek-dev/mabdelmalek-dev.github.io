@@ -52,6 +52,18 @@ body{
     var(--bg);
 }
 
+body{
+  background:
+    radial-gradient(1200px 700px at 80% -200px, rgba(0,255,242,0.06), transparent 60%),
+    linear-gradient(180deg, #0c1218 0%, #0b0d10 70%);
+  /* If you ever see seams on mobile, remove the next line */
+  background-attachment: fixed, fixed;
+}
+
+/* Ensure sections don't override it */
+section, header, footer { background: transparent; }
+
+
 /* Layout utility */
 .container{ max-width: 1200px; margin: 0 auto; padding: 0 5%; }
 
