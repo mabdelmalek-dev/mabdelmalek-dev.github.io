@@ -392,69 +392,20 @@ body{
 }
 
 .about-svg {
-  width: 100vw;   /* full-bleed */
-  max-width: 900px;
-  height: auto;
+  width: 100vw;
+  height: auto;          /* keeps aspect ratio */
   display: block;
-  margin: 0 auto;
 }
 
 /* Screen content inside foreignObject */
-.svg-screen {
-  font-family: 'Poppins', system-ui, sans-serif;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  background: transparent;
-  color: #fff;
-}
-
+.svg-screen { display:flex; flex-direction:column; height:100%; background:transparent; }
 /* Tabs row */
-.svg-tabs {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 6px;
-  user-select: none;
-}
-
+.svg-tabs   { display:flex; gap:12px; justify-content:center; align-items:center; margin-bottom:6px; }
 /* Tab buttons */
-.svg-link {
-  all: unset; /* removes browser defaults */
-  cursor: pointer;
-  font-weight: 600;
-  font-size: clamp(10px, 0.9vw, 13px);
-  color: #00fff2;
-  padding: 2px 6px;
-  position: relative;
-}
-.svg-link:hover { color: #8a2be2; }
-.svg-link.svg-active::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -3px;
-  transform: translateX(-50%);
-  width: 60%;
-  height: 2px;
-  background: linear-gradient(90deg, #00fff2, #8a2be2);
-  border-radius: 2px;
-}
-
-/* Content area below tabs */
-.svg-content {
-  flex: 1;
-  padding: 4px 6px;
-  text-align: left;
-  line-height: 1.4;
-  overflow-y: auto;
-  color: #0b0d10;
-
-  /* Scales proportionally with the SVG’s natural width (612px) */
-  font-size: calc(14px * (var(--svgW, 612) / 612));
-  text-shadow: 0 0 6px rgba(0,0,0,.18);
-}
+.svg-link   { all:unset; cursor:pointer; font-weight:700; font-size:clamp(10px,.9vw,13px); color:#00fff2; padding:2px 6px; position:relative; }
+.svg-link:hover { color:#8a2be2; }
+.svg-link.svg-active::after { content:""; position:absolute; left:50%; bottom:-3px; transform:translateX(-50%); width:60%; height:2px; border-radius:2px; background:linear-gradient(90deg,#00fff2,#8a2be2); }
+.svg-content { flex:1; overflow:auto; padding:4px 6px; font-size:clamp(12px,1vw,14px); line-height:1.4; color:#0b0d10; }
 
 /* Panels */
 .svg-panel { display: none; }
