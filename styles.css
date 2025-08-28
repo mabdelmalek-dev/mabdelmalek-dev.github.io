@@ -380,60 +380,49 @@ body{
 
 /* ---- About container & SVG ---- */
 
+/* ---- Page baseline (prevents tiny gaps/scrollbars) ---- */
+html, body { height: 100%; }
+body { margin: 0; overflow-x: hidden; }
+
+/* ---- Fullscreen hero & SVG ---- */
 .about-hero {
   width: 100vw;
-  height: 100vh;
+  height: 100svh;      /* mobile-safe viewport height */
   margin: 0;
   padding: 0;
   overflow: hidden;
 }
 
-.about-hero img {
+.about-svg {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* fills and crops evenly */
-  display: block;
+  display: block;      /* remove inline gap */
 }
 
-/* Make the section span full width of the viewport */
-/* Make the section full-bleed and the SVG fill the viewport */
-.about-hero-svg{
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
-}
-
-.about-svg{
-  width: 100vw;     /* fill the screen width */
-  height: 100svh;   /* fill the screen height, mobile-safe */
-  display: block;   /* remove inline gap */
-  object-fit: cover; /* fills and crops evenly */
-}
-
-/* optional: remove extra padding if any wrapper adds it */
-.about-hero{ padding: 0; }
-
-
-/* Screen (HTML inside foreignObject) */
+/* ---- Screen (HTML inside foreignObject) ---- */
 .svg-screen{
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  padding: 12px 14px;  /* inner padding within the laptop screen */
   font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   color: #0b0d10;
   background: transparent; /* keep the photographed screen visible */
 }
 
-/* Tabs row */
+/* ---- Tabs row ---- */
 .svg-tabs{
   display: flex;
   gap: 12px;
   justify-content: center;   /* center the 4 tabs */
   align-items: center;
-  padding: 6px 4px 2px;
+  padding: 6px 4px 8px;
   user-select: none;
 }
 
-/* Buttons */
+/* ---- Buttons ---- */
 .svg-link{
   all: unset;                /* remove default button chrome */
   cursor: pointer;
@@ -459,7 +448,7 @@ body{
   background:linear-gradient(90deg,#00fff2,#8a2be2);
 }
 
-/* Scrollable content area under the tabs */
+/* ---- Scrollable content area under the tabs ---- */
 .svg-content{
   flex: 1;
   overflow: auto;
@@ -478,6 +467,7 @@ body{
 .svg-content{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
 .svg-content::-webkit-scrollbar{ width:6px; }
 .svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
 
 
 
