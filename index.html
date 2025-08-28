@@ -1137,7 +1137,28 @@ function openTabSvg(e, id){
   setSvgScale();
   addEventListener('resize', setSvgScale);
 </script>
-      
+
+<script>
+  // Tab switching for the SVG screen
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.svg-link');
+    if (!btn) return;
+
+    const screen = btn.closest('.svg-screen');
+    if (!screen) return;
+
+    // Update active tab style
+    screen.querySelectorAll('.svg-link').forEach(b => b.classList.remove('svg-active'));
+    btn.classList.add('svg-active');
+
+    // Show matching panel
+    const id = btn.dataset.tab;           // "skills", "exp", "edu", "about"
+    screen.querySelectorAll('.svg-panel').forEach(p => p.classList.remove('svg-show'));
+    const panel = screen.querySelector('#' + id);
+    if (panel) panel.classList.add('svg-show');
+  });
+</script>
+
 
 </body>
 </html>
