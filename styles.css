@@ -564,6 +564,43 @@ body{
   overflow-y: auto;
 }
 
+/* Tabs row inside the SVG screen */
+.svg-tabs{
+  display:flex; gap:10px; align-items:center; justify-content:center;
+  margin:0 0 4px 0;
+}
+
+.svg-link{
+  all:unset;
+  cursor:pointer;
+  font-weight:700;
+  /* smaller & responsive */
+  font-size: clamp(10px, 0.9vw, 13px);
+  letter-spacing:.2px;
+  color:#00fff2;
+  padding:2px 6px;
+  position:relative;
+}
+.svg-link:hover{ color:#8a2be2; }
+.svg-link.svg-active::after{
+  content:""; position:absolute; left:50%; bottom:-3px; transform:translateX(-50%);
+  width:60%; height:2px; border-radius:2px;
+  background:linear-gradient(90deg,#00fff2,#8a2be2);
+}
+
+/* The scrollable content area inside the laptop screen */
+.svg-content{
+  /* keep text well inside the bezel */
+  padding: 4px 6px;
+  max-height: calc(100% - 30px); /* 30px ≈ tab row height */
+  overflow:auto;
+
+  /* readable but contained */
+  font-size: clamp(11px, 1.0vw, 14px);
+  line-height: 1.35;
+  color:#0b0d10;
+}
+
 
 
 /* About — Laptop scene         */
