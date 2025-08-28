@@ -379,12 +379,6 @@ body{
 @keyframes photo-zoom{ to{ transform: scale(1); } }
 
 /* ---- About container & SVG ---- */
-.about-hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-}
 
 /* Make the section span full width of the viewport */
 /* Make the section full-bleed and the SVG fill the viewport */
