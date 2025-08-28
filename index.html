@@ -105,29 +105,15 @@
 
     <!-- Inline SVG CSS so media query always wins -->
    <style>
-  .bg-desktop{display:block}
-  .bg-mobile{display:none}
-  @media (max-width:768px){
-    .bg-desktop{display:none}
-    .bg-mobile{display:block}
-  }
+  .bg-img{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%}
+  @media (max-width:768px){ .bg-img{object-position:45% 50%} } /* tweak 44–48% */
+  .bg-wrap{width:100%;height:100%;pointer-events:none}
 </style>
-
-
-<!-- Desktop (centered) -->
-<g class="bg-desktop">
-  <image href="images/about-laptop1.jpg"
-         x="0" y="0" width="100%" height="100%"
-         preserveAspectRatio="xMidYMid slice" />
-</g>
-
-<!-- Mobile (same zoom, just bias crop to the LEFT) -->
-<g class="bg-mobile">
-  <image href="images/about-laptop1.jpg"
-         x="0" y="0" width="100%" height="100%"
-         preserveAspectRatio="xMinYMid slice" />
-</g>
-
+<foreignObject x="0" y="0" width="100%" height="100%">
+  <div xmlns="http://www.w3.org/1999/xhtml" class="bg-wrap">
+    <img src="images/about-laptop1.jpg" alt="" class="bg-img">
+  </div>
+</foreignObject>
 
     <!-- Laptop screen area (your existing coords) -->
     <foreignObject class="laptop-fo"
