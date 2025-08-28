@@ -393,6 +393,16 @@ section, header, footer { background: transparent; }
 /* ---- About container & SVG ---- */
 
 /* Fullscreen hero */
+.about-hero-svg {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;     /* escape any parent max-width/padding */
+  margin-right: -50vw;
+  width: 100vw;
+  height: 100vh;          /* fallback */
+  overflow: hidden;
+}
 .about-hero,
 .about-hero-svg {
   width: 100vw;
@@ -400,6 +410,13 @@ section, header, footer { background: transparent; }
   margin: 0;
   padding: 0;
   overflow: hidden;
+}
+
+@supports (height: 100svh) {
+  .about-hero-svg { height: 100svh; }
+}
+@supports (height: 100dvh) {
+  .about-hero-svg { height: 100dvh; }  /* best on modern mobile browsers */
 }
 
 /* SVG fills the hero */
