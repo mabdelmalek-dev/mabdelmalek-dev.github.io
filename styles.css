@@ -2444,3 +2444,29 @@ body { margin: 0; overflow-x: hidden; }
   padding: 0;
 }
 
+/* Aligned key–value rows inside the laptop screen */
+.svg-kv{
+  display: grid;
+  grid-template-columns: max-content 1fr;   /* label auto, value fills */
+  column-gap: clamp(8px, 1.2vw, 16px);
+  row-gap: .45em;
+  align-items: baseline;                    /* keep baselines aligned */
+  margin: 0;
+}
+
+.svg-kv dt{
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;                      /* keep label on one line */
+}
+
+.svg-kv dd{
+  margin: 0;                                /* remove default dd margin */
+}
+
+/* Stack on narrow screens */
+@media (max-width: 520px){
+  .svg-kv{ grid-template-columns: 1fr; }
+  .svg-kv dt{ margin-top: .4em; }
+}
+
