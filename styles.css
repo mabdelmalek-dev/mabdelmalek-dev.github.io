@@ -2470,3 +2470,37 @@ body { margin: 0; overflow-x: hidden; }
   .svg-kv dt{ margin-top: .4em; }
 }
 
+/* Key–value rows inside the laptop screen */
+.svg-kv{
+  display: grid;
+
+  /* Left label column scales with viewport:
+     - never smaller than 84px
+     - usually around 28vw on tiny phones
+     - caps at 160px on big screens
+  */
+  grid-template-columns: clamp(84px, 28vw, 160px) 1fr;
+
+  column-gap: clamp(8px, 2.5vw, 16px);
+  row-gap: .45em;
+  align-items: baseline;   /* align baselines of label/value */
+  margin: 0;
+}
+
+.svg-kv dt{
+  margin: 0;
+  font-weight: 700;
+  white-space: nowrap;     /* keep label on one line */
+}
+
+.svg-kv dd{
+  margin: 0;
+  /* make long words wrap nicely on small widths */
+  overflow-wrap: anywhere;
+}
+
+/* Optional: slightly smaller type on very small screens */
+@media (max-width: 420px){
+  .svg-content { font-size: 12px; } /* or whatever fits your screen */
+}
+
