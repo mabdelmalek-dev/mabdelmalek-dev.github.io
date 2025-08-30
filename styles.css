@@ -2608,33 +2608,3 @@ body { margin: 0; overflow-x: hidden; }
   animation:colonBlink 1s steps(1,end) infinite; }
 @keyframes colonBlink{ 50%{ opacity:0; } }
 
-/* stable desktop link styling */
-#sidemenu li { display:block; }
-#sidemenu a{
-  display:inline-block;              /* so padding/border don’t affect neighbors */
-  padding:.4rem .6rem;               /* fixed hit area */
-  line-height:1;
-  text-decoration:none;
-  font-weight:500;                   /* keep SAME weight on hover */
-  border-bottom:2px solid transparent; /* reserve space to prevent jump */
-  transition: color .18s ease;
-}
-
-/* hover cue with no reflow */
-#sidemenu a:hover{
-  color:#00aaff;
-  border-bottom-color:#00aaff;       /* color only; border already occupies space */
-}
-
-/* optional: nicer underline that animates without moving text */
-#sidemenu a{ position:relative; }
-#sidemenu a::after{
-  content:""; position:absolute; left:8px; right:8px; bottom:2px;
-  height:2px; background:#00aaff;
-  transform:scaleX(0); transform-origin:left; transition:transform .18s ease;
-}
-#sidemenu a:hover::after{ transform:scaleX(1); }
-
-/* make sure you are NOT changing these on hover anywhere else: */
-/* font-weight, letter-spacing, padding, margin */
-
