@@ -2526,7 +2526,7 @@ body { margin: 0; overflow-x: hidden; }
 /* Blinking caret */
 .caret{
   display:inline-block;
-  width:0.09em;
+  width:0.65em;
   height:1em;
   background: currentColor;
   margin-left: 2px;
