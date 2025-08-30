@@ -2527,7 +2527,7 @@ body { margin: 0; overflow-x: hidden; }
 .caret{
   display:inline-block;
   width:0.65em;
-  height:0.001em;
+  height:0.01em;
   background: currentColor;
   margin-left: 2px;
   animation: caret-blink 1s steps(1,end) infinite;
