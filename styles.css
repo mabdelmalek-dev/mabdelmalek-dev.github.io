@@ -2526,3 +2526,13 @@ body { margin: 0; overflow-x: hidden; }
   .caret{ animation:none; }
 }
 
+/* keep your gradient text style */
+.name-gradient{
+  background: linear-gradient(90deg, #00fff2, #6bd0ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* IMPORTANT: prevent pseudo-elements from auto showing the data-text */
+.name-gradient::before,
+.name-gradient::after{ content: none !important; }
