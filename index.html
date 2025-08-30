@@ -28,26 +28,17 @@
 <nav class="site-nav" role="navigation" aria-label="Primary">
   <img src="images/logo-head-new-png.png" class="logo" alt="Logo" />
 
-  <!-- optional hover trigger can stay -->
   <div id="hover-trigger" aria-hidden="true"></div>
 
-  <!-- MOBILE TOGGLE (visible under 768px) -->
+  <!-- Mobile toggle -->
   <button class="menu-toggle" aria-label="Open menu"
           aria-controls="sidemenu" aria-expanded="false"
           onclick="openmenu()">
     <i class="fa-solid fa-bars"></i>
   </button>
 
-  <!-- RIGHT MENU (only <li> inside a <ul>) -->
+  <!-- Right menu -->
   <ul id="sidemenu">
-    <li class="mobile-only avatar-li">
-      <a href="#about" class="avatar-link" aria-label="About Mohamed">
-            <img class="nav-avatar" src="images/me-avatar-128.jpg" srcset="images/me-avatar-32.png 1x, images/me-avatar-256.jpg 2x" alt="Mohamed" width="48" height="48"
-      loading="lazy" decoding="async" draggable="false"/>
-          <span class="avatar-name">Mohamed</span>
-      </a>
-    </li>
-
     <li><a href="#header">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#services">Projects</a></li>
@@ -59,29 +50,35 @@
         <i class="fa-solid fa-arrow-right"></i>
       </button>
     </li>
-      <div class="nav-extras nav-clock">
+
+    <!-- Mobile avatar INSIDE the slide-out menu -->
+    <li class="mobile-only avatar-li">
+      <a href="#about" class="avatar-link">
+        <img class="nav-avatar" src="images/me-avatar-128.jpg"
+             srcset="images/me-avatar-128.jpg 1x, images/me-avatar-256.jpg 2x"
+             alt="Mohamed" width="48" height="48" />
+        <span class="avatar-name">Mohamed</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Keep the clock OUTSIDE the <ul> -->
+  <div class="nav-extras nav-clock desktop-only">
     <div id="pill-time" class="pill pill--digital" title="Eastern Time">
       <i class="fa-solid fa-clock"></i>
       <span id="time-hours">00</span><span class="colon">:</span><span id="time-mins">00</span>
       <span id="time-tz">ET</span>
     </div>
   </div>
-  </ul>
 
-  <!-- CLOCK: keep OUTSIDE the <ul> -->
-<!-- Right-side avatar (desktop) -->
-<a href="#about" class="avatar-link desktop-only" aria-label="About Mohamed">
-  <img
-    class="nav-avatar"
-    src="images/me-avatar-128.jpg"
-    srcset="images/me-avatar-128.jpg 1x, images/me-avatar-256.jpg 2x"
-    alt="Mohamed"
-    width="36" height="36"
-    loading="lazy" decoding="async" draggable="false"
-  />
-</a>
-
+  <!-- Desktop avatar on the far right -->
+  <a href="#about" class="avatar-link desktop-only" aria-label="About Mohamed">
+    <img class="nav-avatar" src="images/me-avatar-128.jpg"
+         srcset="images/me-avatar-128.jpg 1x, images/me-avatar-256.jpg 2x"
+         alt="Mohamed" width="36" height="36" />
+  </a>
 </nav>
+
 
 
   <!-- ================= Header / Hero ================= -->
