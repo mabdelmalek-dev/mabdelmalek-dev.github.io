@@ -2609,3 +2609,31 @@ body { margin: 0; overflow-x: hidden; }
   object-fit:cover; border:1px solid rgba(255,255,255,.25);
   box-shadow:0 2px 10px rgba(0,0,0,.35);
 }
+
+/* default: hide desktop-only until wide screens */
+.desktop-only { display: none !important; }
+.mobile-only  { display: none !important; }
+
+/* show desktop avatar ≥769px */
+@media (min-width: 769px){
+  .desktop-only { display: inline-flex !important; }
+}
+
+/* layout + avatar styles */
+.site-nav{ display:flex; align-items:center; gap:1rem; }
+#sidemenu{ display:flex; align-items:center; gap:1rem; margin-left:auto; }
+
+/* ensure nothing else hides it */
+.avatar-link{ display:inline-flex; align-items:center; text-decoration:none; }
+.nav-avatar{
+  display:block !important;
+  width:48px; height:48px; border-radius:50%;
+  object-fit:cover; object-position:center;
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 2px 10px rgba(0,0,0,.35);
+  opacity:1 !important; visibility:visible !important;
+}
+
+/* debug (optional): outline to confirm it’s in the layout */
+/* .avatar-link { outline:1px solid red; } */
+
