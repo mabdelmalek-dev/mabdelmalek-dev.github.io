@@ -1375,12 +1375,11 @@ function openTabSvg(e, id){
 
 <script>
 (function(){
-  const form = document.querySelector('#submit-to-google-sheet'); // <-- update if needed
-  const modal = document.getElementById('sentModal');
+  const form   = document.querySelector('#submit-to-google-sheet'); 
+  const modal  = document.getElementById('sentModal');
 
   function openModal(){
     modal.setAttribute('aria-hidden', 'false');
-    // focus the Close button for accessibility
     const btn = modal.querySelector('[data-close]');
     if (btn) btn.focus();
   }
@@ -1388,27 +1387,48 @@ function openTabSvg(e, id){
     modal.setAttribute('aria-hidden', 'true');
   }
 
-  // Submit handler (simulate success; integrate your real submit/EmailJS/etc.)
   if (form){
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      // TODO: send your form (fetch/emailjs). On success:
-      openModal();
-      // Optionally: form.reset();
+
+      try {
+        // collect form data
+        const formData = new FormData(form);
+
+        // replace with your actual Google Apps Script endpoint
+        const scriptURL = "https://script.google.com/macros/s/XXXXXX/exec";
+
+        const res = await fetch(scriptURL, { method: "POST", body: formData });
+
+        if (res.ok) {
+          openModal();   // success modal
+          form.reset();  // clear form
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      } catch(err){
+        console.error(err);
+        alert("Error sending message. Check console for details.");
+      }
     });
   }
 
-  // Close handlers
+  // close modal on click
   modal.addEventListener('click', (e) => {
     if (e.target.dataset.close !== undefined || e.target.classList.contains('modal__backdrop')) {
       closeModal();
     }
   });
+
+  // close modal on ESC
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
+      closeModal();
+    }
   });
 })();
 </script>
+
 
   
   
