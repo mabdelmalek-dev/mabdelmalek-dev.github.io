@@ -2503,4 +2503,34 @@ body { margin: 0; overflow-x: hidden; }
 @media (max-width: 420px){
   .svg-content { font-size: 12px; } /* or whatever fits your screen */
 }
+.typing-line{
+  display: inline-flex;
+  align-items: baseline;
+  white-space: pre-wrap; /* keeps your <br> behavior */
+}
+
+/* Blinking caret */
+.caret{
+  display: inline-block;
+  width: 0.085em;           /* thin bar that scales with font-size */
+  height: 1em;              /* roughly the text height */
+  background: currentColor; /* matches your text color automatically */
+  margin-left: 2px;
+  transform: translateY(0.05em); /* nudge to baseline */
+  animation: caret-blink 1s steps(1, end) infinite;
+}
+
+@keyframes caret-blink{
+  50% { opacity: 0; }
+}
+
+/* Optional: faster blink while typing (if you toggle .is-typing in JS) */
+.typing-line.is-typing .caret{
+  animation-duration: 0.5s;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .caret{ animation: none; }
+}
 
