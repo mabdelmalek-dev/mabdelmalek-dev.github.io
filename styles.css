@@ -2512,7 +2512,7 @@ body { margin: 0; overflow-x: hidden; }
 
 .caret{
   display:inline-block;
-  width:0.65em;
+  width:0.9em;
   height:1em;
   background:currentColor;
   margin-left:2px;
