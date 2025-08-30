@@ -2505,34 +2505,35 @@ body { margin: 0; overflow-x: hidden; }
 }
 .typing-line{
   display:inline-block;
-  white-space:pre-wrap;  /* respects the <br> */
-  line-height:1.5;
-  max-width:65ch;        /* good readable width */
+  white-space:pre-wrap;    /* respect the <br> we reveal */
+  line-height:1.45;
+  max-width:65ch;
+  color:#e8f0f8;           /* or your site color */
 }
 
+/* Keep "I'm Mohamed" on the same line (even on mobile) */
+.nowrap{ white-space:nowrap; }
+
+/* Optional: gradient name style */
+.name-gradient{
+  background: linear-gradient(90deg, #00fff2, #6bd0ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.name-gradient::before,
+.name-gradient::after{ content:none !important; } /* prevent auto text via CSS */
+
+/* Blinking caret */
 .caret{
   display:inline-block;
-  width:0.9em;
+  width:0.09em;
   height:1em;
-  background:currentColor;
-  margin-left:2px;
+  background: currentColor;
+  margin-left: 2px;
   animation: caret-blink 1s steps(1,end) infinite;
 }
-
 @keyframes caret-blink { 50% { opacity:0; } }
-
 
 @media (prefers-reduced-motion: reduce){
   .caret{ animation:none; }
 }
-
-/* keep your gradient text style */
-.name-gradient{
-  background: linear-gradient(90deg, #00fff2, #6bd0ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* IMPORTANT: prevent pseudo-elements from auto showing the data-text */
-.name-gradient::before,
-.name-gradient::after{ content: none !important; }
