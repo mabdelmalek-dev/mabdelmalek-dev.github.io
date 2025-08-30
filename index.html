@@ -81,15 +81,22 @@
           <div class="typing-wrap" role="status" aria-live="polite">
             <div class="typing-reserve" aria-hidden="true"></div>
               <div class="typing-line">
-  <span id="l1" data-text="Welcome to my portfolio_"><br></span>
-  <br id="soft-break" hidden aria-hidden="true"> <!-- will appear after line 1 -->
-  <br><span id="l2a" data-text="I’m  "></span>
-  <span id="name" class="name-gradient" data-text="Mohamed"></span>
-  <span id="l2b"
-        data-text=" — a passionate Software Engineer who loves turning ideas into real-world solutions through clean code and optimized design."></span>
+  <span id="l1" data-text="Welcome to my portfolio_"></span>
+  <br id="soft-break" hidden aria-hidden="true">
 
+  <!-- Keep "I'm Mohamed" together on one line -->
+  <span class="nowrap">
+    <span id="l2a" data-text="I’m "></span>
+    <span id="name" class="name-gradient" data-text="Mohamed"></span>
+  </span>
+
+  <span id="l2b"
+        data-text=" — an aspiring software engineer who enjoys turning ideas into real solutions with clean, effective code."></span>
+
+  <!-- Blinking caret only after everything finishes -->
   <span class="caret" id="caret" hidden aria-hidden="true"></span>
 </div>
+
 
 
 
@@ -1283,14 +1290,14 @@ typingLine.classList.remove('is-typing');
 </scipt>
 
 <script>
-  function typeText(el, text, speed = 30){
-    return new Promise(res => {
+  function typeText(el, text, speed=28){
+    return new Promise(resolve => {
       el.textContent = "";
       let i = 0;
       (function tick(){
-        el.textContent += text[i++];
-        if (i < text.length) setTimeout(tick, speed);
-        else res();
+        el.textContent += text[i++] || "";
+        if(i <= text.length) setTimeout(tick, speed);
+        else resolve();
       })();
     });
   }
@@ -1298,25 +1305,35 @@ typingLine.classList.remove('is-typing');
   (async () => {
     const l1   = document.getElementById('l1');
     const br   = document.getElementById('soft-break');
-    const l2a  = document.getElementById('l2a');     // "I'm "
-    const name = document.getElementById('name');     // "Mohamed"
-    const l2b  = document.getElementById('l2b');
+    const l2a  = document.getElementById('l2a');   // "I’m "
+    const name = document.getElementById('name');  // "Mohamed"
+    const l2b  = document.getElementById('l2b');   // rest of sentence
     const caret= document.getElementById('caret');
 
-    // hide name until its turn (prevents early paint)
+    // Ensure name doesn't flash early
     name.style.visibility = 'hidden';
 
-    await typeText(l1, l1.dataset.text);   // "Welcome to my portfolio_"
-    br.hidden = false;                      // line break
+    // Line 1
+    await typeText(l1, l1.dataset.text);
 
-    await typeText(l2a, l2a.dataset.text); // "I'm "
+    // Reveal line break
+    br.hidden = false;
+
+    // "I'm "
+    await typeText(l2a, l2a.dataset.text);
+
+    // "Mohamed"
     name.style.visibility = 'visible';
-    await typeText(name, name.dataset.text, 28); // "Mohamed"
+    await typeText(name, name.dataset.text, 24);
 
-    await typeText(l2b, l2b.dataset.text); // rest of sentence
-    caret.hidden = false;                   // show blinking caret at end
+    // Rest of sentence
+    await typeText(l2b, l2b.dataset.text, 24);
+
+    // Show caret at the very end
+    caret.hidden = false;
   })();
 </script>
+
 
 
   
