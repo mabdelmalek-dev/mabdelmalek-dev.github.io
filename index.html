@@ -26,9 +26,8 @@
 
   <!-- ================= Nav ================= -->
 <nav class="site-nav" role="navigation" aria-label="Primary">
-  
-
-  <div id="hover-trigger" aria-hidden="true"></div>
+  <!-- Logo (left) -->
+  <img src="images/logo-head-new-png.png" class="logo" alt="Logo" />
 
   <!-- Mobile toggle -->
   <button class="menu-toggle" aria-label="Open menu"
@@ -53,20 +52,17 @@
 
     <!-- Mobile avatar INSIDE the slide-out menu -->
     <li class="mobile-only avatar-li">
-      <a href="#about" class="avatar-link">
-<img src="images/logo-head-new-png.png" class="logo" alt="Logo" />
-  <!-- Desktop avatar (before hover-trigger so it isn’t covered) -->
-  
-    <img class="nav-avatar"
-       src="images/me-avatar-32.png"
-       srcset="images/me-avatar-32.png 1x, images/me-avatar-32.png 2x"
-       alt="Mohamed" width="48" height="48" />
-    </a>
-
+      <a href="#about" class="avatar-link" aria-label="About Mohamed">
+        <img class="nav-avatar"
+             src="images/me-avatar-32.png"
+             srcset="images/me-avatar-32.png 1x, images/me-avatar-32.png 2x"
+             alt="Mohamed" width="48" height="48" />
+        <span class="avatar-name">Mohamed</span>
+      </a>
     </li>
   </ul>
 
-  <!-- Keep the clock OUTSIDE the <ul> -->
+  <!-- Clock OUTSIDE the <ul> -->
   <div class="nav-extras nav-clock desktop-only">
     <div id="pill-time" class="pill pill--digital" title="Eastern Time">
       <i class="fa-solid fa-clock"></i>
@@ -77,10 +73,14 @@
 
   <!-- Desktop avatar on the far right -->
   <a href="#about" class="avatar-link desktop-only" aria-label="About Mohamed">
-    <img class="nav-avatar" src="https://via.placeholder.com/48x48.png"
-         srcset="https://via.placeholder.com/48x48.png 1x, https://via.placeholder.com/48x48.png 2x"
+    <img class="nav-avatar"
+         src="images/me-avatar-32.png"
+         srcset="images/me-avatar-32.png 1x, images/me-avatar-32.png 2x"
          alt="Mohamed" width="36" height="36" />
   </a>
+
+  <!-- Hover trigger LAST so it doesn’t cover the avatar/logo -->
+  <div id="hover-trigger" aria-hidden="true"></div>
 </nav>
 
 
