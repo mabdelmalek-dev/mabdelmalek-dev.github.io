@@ -81,7 +81,7 @@
           <!-- Typing: layered + reserved space (no layout shift) -->
           <div class="typing-wrap" role="status" aria-live="polite">
             <div class="typing-reserve" aria-hidden="true"></div>
-              <div class="typing-line digital">
+              <div class="typing-line terminal-font">
   <span id="l1" data-text="Welcome to my portfolio_"></span>
   <br id="soft-break" hidden aria-hidden="true">
 
@@ -1279,16 +1279,6 @@ function openTabSvg(e, id){
   })();
 </script>
 
-<scipt>
-  const typingLine = document.querySelector('.typing-line');
-
-// when typing starts:
-typingLine.classList.add('is-typing');
-
-// when typing finishes:
-typingLine.classList.remove('is-typing');
-
-</scipt>
 
 <script>
   function typeText(el, text, speed=28){
