@@ -137,17 +137,7 @@ section, header, footer { background: transparent; }
   }
 
   /* Keep menu on the right, slide it slightly off-canvas by transform (not margins) */
-  #sidemenu{
-    margin-left: auto;
-    transform: translateX(140px);
-    transition: transform .28s ease;
-  }
 
-  /* Reveal when hovering the trigger or the menu itself */
-  #hover-trigger:hover + #sidemenu,
-  #sidemenu:hover{
-    transform: translateX(0);
-  }
 
   /* Desktop avatar size */
   .nav-avatar{ width: 36px; height: 36px; }
