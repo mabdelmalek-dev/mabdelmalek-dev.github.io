@@ -2546,4 +2546,54 @@ body { margin: 0; overflow-x: hidden; }
   line-height: 1.4;
 }
 
+/* Layout helpers for visibility */
+.desktop-only { display: inline-flex; }
+.mobile-only  { display: none; }
+
+/* Place items neatly in your existing .site-nav */
+.site-nav{
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* logo left, menu + avatar right */
+  gap: 1rem;
+}
+
+/* Ensure #sidemenu and avatar sit on the right */
+.site-nav > #sidemenu{
+  display:flex;
+  align-items:center;
+  gap: 1rem;
+}
+
+/* Avatar */
+.avatar-link{ display:inline-flex; align-items:center; gap:.5rem; }
+.avatar-link:focus-visible{
+  outline:2px solid #6bd0ff; outline-offset:3px; border-radius:999px;
+}
+.nav-avatar{
+  width:36px; height:36px; border-radius:50%;
+  object-fit:cover; object-position:center;
+  border:1px solid rgba(255,255,255,0.25);
+  box-shadow:0 2px 10px rgba(0,0,0,0.35);
+  user-select:none; -webkit-user-drag:none;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.nav-avatar:hover{ transform: translateY(-1px); }
+
+.avatar-li{
+  padding:.5rem .25rem;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  margin-bottom:.25rem;
+}
+.avatar-name{
+  font-weight:600;
+  color:#e6edf3; /* match your nav text color */
+}
+
+/* Responsive: show mobile avatar, hide desktop one under 768px */
+@media (max-width:768px){
+  .desktop-only{ display:none; }
+  .mobile-only { display:list-item; } /* so it behaves like other <li> */
+  .nav-avatar{ width:42px; height:42px; }
+}
 
