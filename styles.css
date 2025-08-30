@@ -2557,10 +2557,7 @@ body { margin: 0; overflow-x: hidden; }
   }
   /* reveal when the trigger is hovered OR when hovering the menu itself */
   .site-nav:has(#hover-trigger:hover) #sidemenu,
-  #sidemenu:hover{
-    transform:translateX(0);
   }
-}
 
 /* === Mobile slide-out === */
 @media (max-width:768px){
@@ -2606,6 +2603,8 @@ body { margin: 0; overflow-x: hidden; }
   .menu-toggle {
     display: block;
     background: none;
+    justify-contents: column;
+    align-items: top;
     border: 0;
     color: #fff;
     font-size: 1.5rem;
