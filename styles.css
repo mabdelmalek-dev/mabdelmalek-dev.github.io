@@ -126,14 +126,39 @@ section, header, footer { background: transparent; }
   cursor: pointer;
   margin-left: 16px;
 }
-#hover-trigger {
+/* Hover trigger: start BELOW the navbar so it won’t cover the avatar */
+#hover-trigger{
   position: fixed;
-  top: 0;
+  top: var(--nav-height);                 /* was 0 */
   right: 0;
   width: 22px;
-  height: 100vh;
-  z-index: 10000;
+  height: calc(100vh - var(--nav-height));/* was 100vh */
+  z-index: 1000;                          /* lower than the nav (nav is 2000) */
 }
+
+/* Desktop slide-out effect without negative margins */
+@media (min-width: 769px){
+  #sidemenu{
+    margin-left: auto;        /* keep menu on the right */
+    margin-right: 0;          /* remove the -140px */
+    transform: translateX(140px);         /* off to the right by default */
+    transition: transform .28s ease;
+  }
+  /* Reveal menu when hovering the trigger or the menu itself */
+  #hover-trigger:hover + #sidemenu,
+  #sidemenu:hover{
+    transform: translateX(0);
+  }
+
+  /* Show avatar on desktop */
+  .desktop-only{ display: inline-flex !important; }
+}
+
+/* Mobile keeps your existing slide-out styles */
+@media (max-width: 768px){
+  .desktop-only{ display: none !important; }
+}
+
 @media (max-width: 768px) {
   .site-nav .menu-toggle {
     display: block;
