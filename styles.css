@@ -2598,3 +2598,28 @@ body { margin: 0; overflow-x: hidden; }
   animation:colonBlink 1s steps(1,end) infinite; }
 @keyframes colonBlink{ 50%{ opacity:0; } }
 
+/* Hide mobile controls by default (desktop) */
+.menu-toggle,
+#sidemenu .menu-close {
+  display: none;
+}
+
+/* Show them only on mobile */
+@media (max-width: 768px){
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 16px;
+  }
+
+  #sidemenu .menu-close {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+}
