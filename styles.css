@@ -2553,7 +2553,6 @@ body { margin: 0; overflow-x: hidden; }
   /* slide menu a bit off-canvas by default */
   #sidemenu{
     margin-left:auto;
-    transform:translateX(140px);
     transition:transform .28s ease;
   }
   /* reveal when the trigger is hovered OR when hovering the menu itself */
