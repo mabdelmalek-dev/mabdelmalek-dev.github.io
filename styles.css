@@ -2538,11 +2538,13 @@ body { margin: 0; overflow-x: hidden; }
   .caret{ animation:none; }
 }
 
-/* Digital alarm font */
-.digital {
-  font-family: "Orbitron", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  text-transform: uppercase;   /* optional, makes it more like a display */
-  letter-spacing: 0.08em;      /* space out like segments */
-  color: #ffffff;              /* pick your LED color (green, red, amber) */
+.terminal-font {
+  font-family: 'VT323', monospace;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: #ffffff;          /* green phosphor */
+  background: #000000;     /* terminal background */
+  letter-spacing: 0.05em;
+  line-height: 1.4;
 }
+
 
