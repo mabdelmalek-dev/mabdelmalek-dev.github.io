@@ -2504,37 +2504,25 @@ body { margin: 0; overflow-x: hidden; }
   .svg-content { font-size: 12px; } /* or whatever fits your screen */
 }
 .typing-line{
-  display: inline-flex;
-  align-items: baseline;
-  white-space: pre-wrap; /* keeps your <br> behavior */
+  display:inline-block;
+  white-space:pre-wrap;      /* respect the <br> */
+  line-height:1.35;
+  max-width:65ch;
 }
 
-.typing-line {
-  display: inline-flex;
-  flex-wrap: wrap;        /* allow wrapping naturally */
-  align-items: baseline;
-  white-space: normal;    /* let text wrap instead of forcing inline breaks */
-  max-width: 65ch;        /* controls readable line length */
+.caret{
+  display:inline-block;
+  width:0.09em;
+  height:1em;
+  background:currentColor;
+  margin-left:2px;
+  transform:translateY(0.06em);
+  animation: caret-blink 1s steps(1,end) infinite;
 }
 
-/* caret stays inline with text */
-.caret {
-  display: inline-block;
-  width: 0.09em;
-  height: 1em;
-  background: currentColor;
-  margin-left: 2px;
-  transform: translateY(0.05em);
-  animation: caret-blink 1s steps(1, end) infinite;
-}
+@keyframes caret-blink { 50% { opacity:0; } }
 
-@keyframes caret-blink {
-  50% { opacity: 0; }
-}
-
-@media (max-width: 600px){
-  .typing-line {
-    max-width: 100%; /* let it wrap earlier on mobile */
-  }
+@media (prefers-reduced-motion: reduce){
+  .caret{ animation:none; }
 }
 
