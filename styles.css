@@ -2619,3 +2619,79 @@ body { margin: 0; overflow-x: hidden; }
     left: 16px;
   }
 }
+
+/* 1) Global guard: no sideways scroll on mobile */
+html, body { overflow-x: hidden; }
+
+/* 2) Phone layout rules */
+@media (max-width: 768px){
+
+  /* If you used full-bleed negative margins for the hero, cancel them on mobile */
+  .about-hero-svg,
+  .about-hero,
+  .about-svg-wrap{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Crop to the laptop screen area */
+  .svg-screen{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;                /* hard-clip to the bezel */
+    border-radius: 10px;             /* match your screen corners */
+  }
+
+  /* Inner wrapper that actually scrolls if needed */
+  .screen-inner{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    padding: 12px 14px;              /* reduce side pad on small screens */
+    overflow: auto;                   /* scroll inside the screen, not page */
+  }
+
+  /* Tabs row: wrap instead of spilling */
+  .about-tabs .tab-list{
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;                  /* keeps buttons within the screen */
+  }
+  .about-tabs .tab-list > *{
+    min-width: 0;                     /* allow shrinking */
+    flex: 1 1 auto;                   /* nice wrapping */
+  }
+
+  /* Panels/content: never exceed screen width */
+  .tab-panel,
+  .tab-content{
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: anywhere;          /* long words won’t push width */
+  }
+
+  /* Media & code blocks shouldn’t cause overflow */
+  .screen-inner img,
+  .screen-inner video,
+  .screen-inner svg,
+  .screen-inner canvas,
+  .screen-inner table{
+    max-width: 100%;
+    height: auto;
+  }
+  .screen-inner pre,
+  .screen-inner code{
+    white-space: pre-wrap;            /* wrap long code lines */
+    word-break: break-word;
+    max-width: 100%;
+  }
+
+  /* Kill any legacy full-width hacks that push content out */
+  .screen-inner [style*="width: calc(100% +"]{
+    width: 100% !important;
+  }
+  .screen-inner [style*="translateX("]{
+    transform: none !important;       /* avoid nudging past bezel */
+  }
+}
