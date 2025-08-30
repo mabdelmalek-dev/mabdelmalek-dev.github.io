@@ -70,183 +70,128 @@ section, header, footer { background: transparent; }
 /* ============================ */
 /* Fixed Top Navigation         */
 /* ============================ */
-.site-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2000;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* keep logo left, everything else right */
+/* ===== NAV BAR (desktop & mobile) ===== */
+.site-nav{
+  position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: space-between;
   height: var(--nav-height);
-
-  background: linear-gradient(to bottom,
-              rgba(11,13,16,0.85),
-              rgba(11,13,16,0.45));
+  background: linear-gradient(to bottom, rgba(11,13,16,0.85), rgba(11,13,16,0.45));
   border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 14px rgba(0,0,0,.35);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  gap: 8px;
 }
 
-.site-nav .logo {
-  height: 56px;
-  width: auto;
-  display: block;
+/* Logo (left) */
+.site-nav .logo{
+  height: 56px; width: auto; display: block;
   margin-left: 20px;
-  margin-right: 0; /* remove the old auto push */
 }
 
-#sidemenu {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* Right menu list (desktop baseline) */
+#sidemenu{
+  display: flex; align-items: center; gap: 28px;
+  list-style: none; margin: 0; padding: 0;
 }
 
-#sidemenu a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
+/* Links */
+#sidemenu a{
+  color: #fff; text-decoration: none; font-weight: 500;
   transition: color .2s ease;
 }
-#sidemenu a:hover {
-  color: #00aaff;
-}
-#sidemenu .menu-close {
-  display: none;
-}
-.site-nav .menu-toggle {
-  display: none;
-  background: none;
-  border: 0;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-left: 16px;
-}
-/* Hover trigger: start BELOW the navbar so it won’t cover the avatar */
-#hover-trigger{
-  position: fixed;
-  top: var(--nav-height);                 /* was 0 */
-  right: 0;
-  width: 22px;
-  height: calc(100vh - var(--nav-height));/* was 100vh */
-  z-index: 1000;                          /* lower than the nav (nav is 2000) */
+#sidemenu a:hover{ color: #00aaff; }
+
+/* Clock & avatar group (right) */
+.nav-extras{ margin-left: .75rem; }
+
+/* Avatar */
+.avatar-link{ display: inline-flex; align-items: center; gap: .5rem; text-decoration: none; }
+.nav-avatar{
+  display: block;
+  width: 36px; height: 36px; border-radius: 50%;
+  object-fit: cover; object-position: center;
+  border: 1px solid rgba(255,255,255,.25);
+  box-shadow: 0 2px 10px rgba(0,0,0,.35);
 }
 
-/* Desktop slide-out effect without negative margins */
-@media (min-width: 769px){
-  #sidemenu{
-    margin-left: auto;        /* keep menu on the right */
-    margin-right: 0;          /* remove the -140px */
-    transform: translateX(140px);         /* off to the right by default */
-    transition: transform .28s ease;
-  }
-  /* Reveal menu when hovering the trigger or the menu itself */
-  #hover-trigger:hover + #sidemenu,
-  #sidemenu:hover{
-    transform: translateX(0);
-  }
+/* Show/hide helpers */
+.desktop-only{ display: inline-flex; }
+.mobile-only{ display: none; }
+.avatar-name{ color: #e6edf3; font-weight: 600; }
 
-  /* Show avatar on desktop */
-  .desktop-only{ display: inline-flex !important; }
-}
-
-/* Mobile keeps your existing slide-out styles */
-@media (max-width: 768px){
-  .desktop-only{ display: none !important; }
-}
-
-@media (max-width: 768px) {
-  .site-nav .menu-toggle {
-    display: block;
-  }
-
-  #sidemenu {
-    position: fixed;
-    top: 0;
-    right: -180px; /* hidden off-screen */
-    width: 180px;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background: rgba(11,13,16,0.95);
-    border-left: 1px solid var(--ring);
-    transition: right .28s ease;
-    z-index: 9999;
-    padding: 0 10px;
-  }
-  #sidemenu.open {
-    right: 0;
-  }
-
-  #sidemenu .menu-close {
-    display: block;
-    position: absolute;
-    top: 16px;
-    left: 16px;
-  }
-
-  /* Hover trigger unnecessary on mobile */
-  #hover-trigger {
-    display: none;
-  }
-}
-@media (min-width: 769px){
-  #hover-trigger:hover + #sidemenu,
-  #sidemenu:hover{ right: 0; }
-}
-
-/* keep right menu truly on the right on desktop */
-#sidemenu{
-  margin-left: auto;
-  margin-right: -140px;   /* your existing offset; tweak if needed */
-  display: flex; align-items: center; gap: 28px;
-  list-style: none;
-}
-
-/* colon shouldn't be flex (it widens and nudges things) */
+/* Colon in clock */
 #pill-time .colon{
   display: inline-block; width: .7ch; text-align: center;
   animation: colonBlink 1s steps(1, end) infinite;
 }
 
-/* remove extra padding from the timezone */
-#pill-time #time-tz{ margin-left: 8px; font-size: .85em; opacity: .95; text-transform: uppercase; }
-
-/* mobile slide-out */
-@media (max-width: 768px){
-  .site-nav .menu-toggle{ display:block; }
-  #sidemenu{
-    position: fixed; top:0; right:-180px;
-    width:180px; height:100vh;
-    flex-direction:column; justify-content:center; align-items:center; gap:20px;
-    background: rgba(11,13,16,0.95);
-    border-left:1px solid var(--ring);
-    transition:right .28s ease;
-    z-index:9999;
-    padding: 0 10px; margin:0;  /* reset desktop margins */
-  }
-  #sidemenu.open{ right:0; }
-  #sidemenu .menu-close{ display:block; position:absolute; top:16px; left:16px; }
-  #hover-trigger{ display:none; }
-}
-
-/* If you use the desktop hover-to-open trick, #sidemenu must be the NEXT sibling of #hover-trigger.
-   In your previous markup the button sat between them, which breaks `#hover-trigger:hover + #sidemenu`.
-   Either keep the order as shown above or delete this hover rule: */
+/* ===== DESKTOP HOVER-REVEAL (>=769px) ===== */
 @media (min-width: 769px){
-  /* optional: remove if not using */
-  /* #hover-trigger:hover + #sidemenu,
-     #sidemenu:hover{ right: 0; } */
+  /* Hover trigger lives at the far right EDGE of the viewport, below the navbar */
+  #hover-trigger{
+    position: fixed;
+    top: var(--nav-height); right: 0;
+    width: 22px; height: calc(100vh - var(--nav-height));
+    z-index: 1000;            /* beneath the nav (nav is 2000) */
+    pointer-events: auto;     /* allows hover */
+  }
+
+  /* Keep menu on the right, slide it slightly off-canvas by transform (not margins) */
+  #sidemenu{
+    margin-left: auto;
+    transform: translateX(140px);
+    transition: transform .28s ease;
+  }
+
+  /* Reveal when hovering the trigger or the menu itself */
+  #hover-trigger:hover + #sidemenu,
+  #sidemenu:hover{
+    transform: translateX(0);
+  }
+
+  /* Desktop avatar size */
+  .nav-avatar{ width: 36px; height: 36px; }
 }
+
+/* ===== MOBILE SLIDE-OUT (<=768px) ===== */
+@media (max-width: 768px){
+  .desktop-only{ display: none !important; }
+  .mobile-only{ display: list-item !important; }
+
+  .site-nav .menu-toggle{
+    display: block; background: none; border: 0; color: #fff;
+    font-size: 1.5rem; cursor: pointer; margin-left: 16px;
+  }
+
+  /* Hide desktop hover trigger on mobile */
+  #hover-trigger{ display: none; }
+
+  /* Slide-out panel for the list */
+  #sidemenu{
+    position: fixed; top: 0; right: -200px; /* hidden */
+    width: 200px; height: 100vh;
+    flex-direction: column; justify-content: center; align-items: center;
+    gap: 20px; background: rgba(11,13,16,0.95);
+    border-left: 1px solid var(--ring);
+    transition: right .28s ease;
+    z-index: 9999; padding: 0 10px;
+  }
+  #sidemenu.open{ right: 0; }
+
+  #sidemenu .menu-close{
+    display: block; position: absolute; top: 16px; left: 16px;
+  }
+
+  /* Bigger touch target for avatar on mobile */
+  .nav-avatar{ width: 42px; height: 42px; }
+}
+
+/* ===== OPTIONAL: focus styles & small niceties ===== */
+.avatar-link:focus-visible{ outline: 2px solid #6bd0ff; outline-offset: 3px; border-radius: 999px; }
+
+/* Example blink keyframes for the clock colon */
+@keyframes colonBlink { 50% { opacity: 0; } }
+
 
 
 /* ============================ */
@@ -2574,88 +2519,5 @@ body { margin: 0; overflow-x: hidden; }
   line-height: 1.4;
 }
 
-/* Layout */
-
-/* Clock + avatar block stay on the right */
-.nav-extras { margin-left:.5rem; }
-
-/* Avatar */
-.avatar-link{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; }
-.nav-avatar{
-  width:36px; height:36px; border-radius:50%;
-  object-fit:cover; border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
-}
-
-/* Show/hide */
-.desktop-only{ display:inline-flex; }
-.mobile-only{ display:none; }
-.avatar-name{ color:#e6edf3; font-weight:600; }
-
-/* Mobile: slide-out menu likely stacks; show mobile avatar, hide desktop items */
-@media (max-width:768px){
-  .desktop-only{ display:none !important; }
-  .mobile-only{ display:list-item; }
-  .nav-avatar{ width:42px; height:42px; } /* bigger touch target */
-}
-
-/* Default: hide desktop-only things unless we're above 768px */
-.desktop-only { display: none !important; }
-.mobile-only  { display: none !important; }
-
-@media (min-width: 769px){
-  .desktop-only { display: inline-flex !important; }
-}
-
-@media (max-width: 768px){
-  .mobile-only  { display: list-item !important; } /* inside the <ul> */
-}
-
-
-.nav-extras{ margin-left: .75rem; }     /* clock block */
-.avatar-link.desktop-only{ margin-left: .75rem; position:relative; z-index:5; }
-
-.avatar-link{ display:inline-flex; align-items:center; text-decoration:none; }
-.nav-avatar{
-  width:36px; height:36px; border-radius:50%;
-  object-fit:cover; border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
-}
-
-/* default: hide desktop-only until wide screens */
-.desktop-only { display: none !important; }
-.mobile-only  { display: none !important; }
-
-/* show desktop avatar ≥769px */
-@media (min-width: 769px){
-  .desktop-only { display: inline-flex !important; }
-}
-
-/* layout + avatar styles */
-.site-nav{ display:flex; align-items:center; gap:1rem; }
-
-
-/* ensure nothing else hides it */
-.avatar-link{ display:inline-flex; align-items:center; text-decoration:none; }
-.nav-avatar{
-  display:block !important;
-  width:48px; height:48px; border-radius:50%;
-  object-fit:cover; object-position:center;
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
-  opacity:1 !important; visibility:visible !important;
-}
-
-/* debug (optional): outline to confirm it’s in the layout */
-/* .avatar-link { outline:1px solid red; } */
-.avatar-link{ display:inline-flex; align-items:center; }
-.nav-avatar{
-  width:48px; height:48px; border-radius:50%;
-  object-fit:cover; object-position:center;
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
-}
-
-.site-nav .logo{ margin-right:auto; }  /* pushes rest to the right */
 
 
