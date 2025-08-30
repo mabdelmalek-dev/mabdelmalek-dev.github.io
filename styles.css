@@ -2505,9 +2505,9 @@ body { margin: 0; overflow-x: hidden; }
 }
 .typing-line{
   display:inline-block;
-  white-space:pre-wrap;      /* respect the <br> */
-  line-height:1.35;
-  max-width:65ch;
+  white-space:pre-wrap;  /* respects the <br> */
+  line-height:1.5;
+  max-width:65ch;        /* good readable width */
 }
 
 .caret{
@@ -2516,11 +2516,11 @@ body { margin: 0; overflow-x: hidden; }
   height:1em;
   background:currentColor;
   margin-left:2px;
-  transform:translateY(0.06em);
   animation: caret-blink 1s steps(1,end) infinite;
 }
 
 @keyframes caret-blink { 50% { opacity:0; } }
+
 
 @media (prefers-reduced-motion: reduce){
   .caret{ animation:none; }
