@@ -2540,7 +2540,7 @@ body { margin: 0; overflow-x: hidden; }
 
 .terminal-font {
   font-family: 'VT323', monospace;
-  font-size: clamp(18px, 2.5vw, 28px);
+  font-size: clamp(14px, 2.5vw, 28px);
   color: #ffffff;          /* green phosphor */
   letter-spacing: 0.05em;
   line-height: 1.4;
