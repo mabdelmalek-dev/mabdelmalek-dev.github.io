@@ -2543,6 +2543,6 @@ body { margin: 0; overflow-x: hidden; }
   font-family: "Orbitron", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
   text-transform: uppercase;   /* optional, makes it more like a display */
   letter-spacing: 0.08em;      /* space out like segments */
-  color: #c1ebff;              /* pick your LED color (green, red, amber) */
+  color: #ffffff;              /* pick your LED color (green, red, amber) */
 }
 
