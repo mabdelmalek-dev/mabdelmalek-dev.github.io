@@ -2695,3 +2695,68 @@ html, body { overflow-x: hidden; }
     transform: none !important;       /* avoid nudging past bezel */
   }
 }
+
+/* Modal layout */
+.modal[aria-hidden="true"] { display: none; }
+.modal{
+  position: fixed; inset: 0; z-index: 3000;
+  display: grid; place-items: center;
+}
+.modal__backdrop{
+  position: absolute; inset: 0;
+  background: rgba(10,12,16,.65);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.modal__panel{
+  position: relative;
+  width: min(520px, 92vw);
+  background: #0f141c;
+  color: #e6edf3;
+  border: 1px solid #223042;
+  border-radius: 16px;
+  padding: 28px 22px 22px;
+  text-align: center;
+  box-shadow: 0 24px 70px rgba(0,0,0,.45);
+  animation: pop .26s ease-out;
+}
+@keyframes pop { from { transform: scale(.96); opacity: 0 } to { transform: scale(1); opacity: 1 } }
+
+.modal__close{
+  position: absolute; top: 8px; right: 10px;
+  border: 0; background: transparent; color: #8aa2c0;
+  font-size: 26px; cursor: pointer;
+}
+
+/* Envelope icon */
+.icon-envelope{
+  width: 84px; height: 84px; margin: 8px auto 6px;
+  color: #6bd0ff;
+  filter: drop-shadow(0 6px 16px rgba(107,208,255,.25));
+}
+
+/* Check animation */
+.icon-check{ width: 64px; height: 64px; margin: 6px auto 10px; display: block; }
+.check__circle{
+  stroke: #21c27a; stroke-width: 3; opacity: .25;
+}
+.check__mark{
+  stroke: #21c27a; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 48; stroke-dashoffset: 48;
+  animation: draw .6s .15s ease-out forwards;
+}
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+#sentTitle{
+  margin: 6px 0 2px;
+  font-size: clamp(20px, 3.6vw, 26px);
+  letter-spacing: .3px;
+}
+.modal__hint{ opacity: .9; margin: 0 0 14px; }
+
+.btn{
+  background: #172232; color: #e6edf3; border: 1px solid #2a3a50;
+  padding: .6rem 1rem; border-radius: 10px; cursor: pointer;
+}
+.btn:hover{ background: #1d2a3d; }
+
