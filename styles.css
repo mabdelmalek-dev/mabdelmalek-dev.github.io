@@ -2509,28 +2509,32 @@ body { margin: 0; overflow-x: hidden; }
   white-space: pre-wrap; /* keeps your <br> behavior */
 }
 
-/* Blinking caret */
-.caret{
+.typing-line {
+  display: inline-flex;
+  flex-wrap: wrap;        /* allow wrapping naturally */
+  align-items: baseline;
+  white-space: normal;    /* let text wrap instead of forcing inline breaks */
+  max-width: 65ch;        /* controls readable line length */
+}
+
+/* caret stays inline with text */
+.caret {
   display: inline-block;
-  width: 0.085em;           /* thin bar that scales with font-size */
-  height: 1em;              /* roughly the text height */
-  background: currentColor; /* matches your text color automatically */
+  width: 0.09em;
+  height: 1em;
+  background: currentColor;
   margin-left: 2px;
-  transform: translateY(0.05em); /* nudge to baseline */
+  transform: translateY(0.05em);
   animation: caret-blink 1s steps(1, end) infinite;
 }
 
-@keyframes caret-blink{
+@keyframes caret-blink {
   50% { opacity: 0; }
 }
 
-/* Optional: faster blink while typing (if you toggle .is-typing in JS) */
-.typing-line.is-typing .caret{
-  animation-duration: 0.5s;
-}
-
-/* Respect reduced motion */
-@media (prefers-reduced-motion: reduce){
-  .caret{ animation: none; }
+@media (max-width: 600px){
+  .typing-line {
+    max-width: 100%; /* let it wrap earlier on mobile */
+  }
 }
 
