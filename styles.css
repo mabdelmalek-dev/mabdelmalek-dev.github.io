@@ -166,11 +166,9 @@ section, header, footer { background: transparent; }
     transition: right .28s ease;
     z-index: 9999; padding: 0 10px;
   }
-  #sidemenu.open{ right: 0; }
+  
 
-  #sidemenu .menu-close{
-    display: block; position: absolute; top: 16px; left: 16px;
-  }
+
 
   /* Bigger touch target for avatar on mobile */
   .nav-avatar{ width: 42px; height: 42px; }
