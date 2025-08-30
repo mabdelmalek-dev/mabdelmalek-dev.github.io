@@ -81,16 +81,16 @@
           <div class="typing-wrap" role="status" aria-live="polite">
             <div class="typing-reserve" aria-hidden="true"></div>
               <div class="typing-line">
-                <span id="l1" data-text="Welcome to my portfolio_"></span>
-                <br id="soft-break" hidden aria-hidden="true">
-                <span id="l2a" data-text="I'm "></span>
-                <span id="name" class="name-gradient" data-text="Mohamed"></span>
-                <span id="l2b"
-                data-text=" — a passionate Software Engineer who loves turning ideas into real-world solutions through clean code and optimized design."></span>
+  <span id="l1" data-text="Welcome to my portfolio_"></span>
+  <br id="soft-break" hidden aria-hidden="true"> <!-- will appear after line 1 -->
+  <span id="l2a" data-text="I’m "></span>
+  <span id="name" class="name-gradient" data-text="Mohamed"></span>
+  <span id="l2b"
+        data-text=" — a passionate Software Engineer who loves turning ideas into real-world solutions through clean code and optimized design."></span>
 
-  <!-- caret appears ONLY after all typing finishes -->
-                <span class="caret" id="caret" hidden aria-hidden="true"></span>
-            </div>
+  <span class="caret" id="caret" hidden aria-hidden="true"></span>
+</div>
+
 
 
           </div>
@@ -1283,23 +1283,19 @@ typingLine.classList.remove('is-typing');
 </scipt>
 
 <script>
-  // Type helper (returns a Promise so we can chain steps)
   function typeText(el, text, speed=30){
     return new Promise(resolve => {
       let i = 0;
-      const tick = () => {
+      el.textContent = "";
+      (function tick(){
         el.textContent += text[i++];
         if(i < text.length) setTimeout(tick, speed);
         else resolve();
-      };
-      // if element has data-text, use it unless explicit text passed
-      if(text == null) text = el.dataset.text || "";
-      el.textContent = "";  // start clean
-      tick();
+      })();
     });
   }
 
-  (async function runTyping(){
+  (async function(){
     const l1   = document.getElementById('l1');
     const br   = document.getElementById('soft-break');
     const l2a  = document.getElementById('l2a');
@@ -1307,25 +1303,15 @@ typingLine.classList.remove('is-typing');
     const l2b  = document.getElementById('l2b');
     const caret= document.getElementById('caret');
 
-    // 1) "Welcome to my portfolio_"
-    await typeText(l1);
-
-    // 2) break
-    br.hidden = false;
-
-    // 3) "I am "
-    await typeText(l2a);
-
-    // 4) "Mohamed" (slightly faster if you like)
+    await typeText(l1, l1.dataset.text);
+    br.hidden = false;                    // reveal line break
+    await typeText(l2a, l2a.dataset.text);
     await typeText(name, name.dataset.text, 25);
-
-    // 5) rest of sentence
-    await typeText(l2b);
-
-    // 6) show caret only now
-    caret.hidden = false;
+    await typeText(l2b, l2b.dataset.text);
+    caret.hidden = false;                 // show blinking caret at the end
   })();
 </script>
+
   
   
 </body>
