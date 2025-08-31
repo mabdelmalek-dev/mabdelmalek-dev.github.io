@@ -801,32 +801,3 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   .modal__header h3{ font-size: 18px; }
 }
 
-/* --- Modal: default closed & non-blocking --- */
-.modal{
-  display: none;                /* hide by default */
-  pointer-events: none;         /* don't trap clicks when closed */
-}
-
-/* Use this class to open the modal */
-.modal.is-open{
-  display: grid;                /* your existing grid centering */
-  pointer-events: auto;         /* allow interactions */
-}
-
-/* Backdrop: remove strong blur; keep dim */
-.modal__backdrop{
-  background: rgba(0,0,0,.55);
-  -webkit-backdrop-filter: none; /* was blur(2px) */
-  backdrop-filter: none;
-}
-
-/* Panel stays interactive */
-.modal__panel, .modal__dialog{
-  pointer-events: auto;
-}
-
-/* Optional: lock page scroll ONLY while open */
-body.modal-open{
-  overflow: hidden;
-}
-
