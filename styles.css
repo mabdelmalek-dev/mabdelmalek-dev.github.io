@@ -1494,6 +1494,39 @@ form .btn2{ padding:12px 22px; font-size:16px; cursor:pointer; }
   }
 }
 
+/* 1) Never allow horizontal scroll */
+html, body { overflow-x: hidden; }
+
+/* 2) Mobile: use *viewport-safe* units and drop the nudge */
+@media (max-width:768px){
+  /* full-bleed wrapper */
+  .about-hero-svg{
+    margin-left: calc(50% - 50svw);      /* svw avoids address-bar jitter */
+    margin-right: calc(50% - 50svw);
+  }
+  /* SVG itself */
+  .about-svg{
+    width: 100svw;                        /* not 100vw */
+    height: auto;
+    display:block;
+  }
+  /* Background image inside the SVG */
+  .bg-img{
+    width: 100%;                          /* remove 101.65% */
+    transform: none;                      /* remove translateX(-3%) */
+    object-fit: cover;
+    object-position: 50% 50%;
+  }
+}
+
+/* 3) ForeignObject content fits the “laptop screen” exactly */
+.svg-screen{
+  box-sizing: border-box;
+  width: 100%;
+  overflow-wrap: anywhere;
+}
+
+
 
 #competencies{ padding:48px 0; }
 #competencies .sub-title{ margin-bottom:12px; }
