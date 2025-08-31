@@ -28,7 +28,6 @@
 
 *{ margin:0; padding:0; box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
-html, body { height: 100%; overflow-x: hidden; }
 
 body{
   font-family:'Poppins',sans-serif;
@@ -36,13 +35,34 @@ body{
   line-height:1.6;
   padding-top: var(--nav-height);
   background:
-    radial-gradient(1200px 700px at 80% -200px, rgba(0,255,242,0.06), transparent 60%),
-    linear-gradient(180deg, #0c1218 0%, #0b0d10 70%);
-  background-attachment: fixed, fixed; /* remove this if you see mobile seams */
+    linear-gradient(to bottom,
+      rgba(8,168,237,0.10) 0%,
+      rgba(8,168,237,0.10) 22%,
+      rgba(0,0,0,0.00) 22%,
+      rgba(0,0,0,0.00) 34%,
+      rgba(144,202,239,0.08) 34%,
+      rgba(144,202,239,0.08) 56%,
+      rgba(0,0,0,0.00) 56%,
+      rgba(0,0,0,0.00) 75%,
+      rgba(8,168,237,0.07) 75%,
+      rgba(8,168,237,0.07) 100%
+    ),
+    radial-gradient(1000px 700px at 120% 20%, rgba(144,202,239,0.08), transparent 60%),
+    radial-gradient(1200px 800px at 20% -5%, rgba(8,168,237,0.08), transparent 60%),
+    var(--bg);
 }
 
-/* Ensure sections don't override body bg */
+body{
+  background:
+    radial-gradient(1200px 700px at 80% -200px, rgba(0,255,242,0.06), transparent 60%),
+    linear-gradient(180deg, #0c1218 0%, #0b0d10 70%);
+  /* If you ever see seams on mobile, remove the next line */
+  background-attachment: fixed, fixed;
+}
+
+/* Ensure sections don't override it */
 section, header, footer { background: transparent; }
+
 
 /* Layout utility */
 .container{ max-width: 1200px; margin: 0 auto; padding: 0 5%; }
@@ -50,168 +70,298 @@ section, header, footer { background: transparent; }
 /* ============================ */
 /* Fixed Top Navigation         */
 /* ============================ */
-.site-nav{
-  position: fixed; top: 0; left: 0; right: 0; z-index: 2000;
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 8px;
+.site-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
   height: var(--nav-height);
-  background: linear-gradient(to bottom, rgba(11,13,16,0.85), rgba(11,13,16,0.45));
+
+  /* background bar */
+  background: linear-gradient(to bottom,
+              rgba(11,13,16,0.85),
+              rgba(11,13,16,0.45));
   border-bottom: 1px solid var(--border);
   box-shadow: 0 2px 14px rgba(0,0,0,.35);
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
 }
-.site-nav .logo{ height:56px; width:auto; display:block; margin:0 0 0 20px; justify-self: start; }
-
-#sidemenu{
-  display:flex; align-items:center; gap:28px; list-style:none; margin:0; padding:0; justify-self:end;
+.site-nav .logo {
+  height: 56px;
+  width: auto;
+  display: block;
+  margin-left: 20px;   /* ✅ leave 20px from left edge */
+  margin-right: auto;  /* ✅ push everything else to the right */
 }
-#sidemenu a{
-  color:#fff; text-decoration:none; font-weight:500; transition: color .2s ease;
+#sidemenu {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
 }
-#sidemenu a:hover{ color:#00aaff; }
-
-.nav-extras{ margin-left:.75rem; }
-.nav-extras.nav-clock{ grid-column: 2; justify-self: center; }
-
-.avatar-link{ display:inline-flex; align-items:center; gap:.5rem; text-decoration:none; }
-.nav-avatar{
-  width:36px; height:36px; border-radius:50%;
-  object-fit:cover; object-position:center;
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 2px 10px rgba(0,0,0,.35);
+#sidemenu a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .2s ease;
 }
-.desktop-only{ display:inline-flex; }
-.mobile-only{ display:none; }
-.avatar-name{ color:#e6edf3; font-weight:600; }
-
-/* Clock colon blink */
-#pill-time .colon{ display:inline-block; width:.7ch; text-align:center; animation: colonBlink 1s steps(1, end) infinite; }
-@keyframes colonBlink { 50% { opacity: 0; } }
-
-/* Hover trigger for desktop (if used) */
-@media (min-width: 769px){
-  #hover-trigger{
-    position: fixed; top: var(--nav-height); right: 0;
-    width: 22px; height: calc(100vh - var(--nav-height)); z-index: 1000;
-    pointer-events: auto;
+#sidemenu a:hover {
+  color: #00aaff;
+}
+#sidemenu .menu-close {
+  display: none;
+}
+.site-nav .menu-toggle {
+  display: none;
+  background: none;
+  border: 0;
+  color: #fff;
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin-left: 16px;
+}
+#hover-trigger {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 22px;
+  height: 100vh;
+  z-index: 10000;
+}
+@media (max-width: 768px) {
+  .site-nav .menu-toggle {
+    display: block;
   }
-  .nav-avatar{ width:36px; height:36px; }
-}
 
-/* Mobile slide-out */
-.menu-toggle,
-#sidemenu .menu-close { display: none; }
-
-@media (max-width: 768px){
-  .desktop-only{ display: none !important; }
-  .mobile-only{ display: list-item !important; }
-  .menu-toggle{
-    display:block; background:none; border:0; color:#fff;
-    font-size:1.5rem; cursor:pointer; margin-left:16px;
-  }
-  #hover-trigger{ display:none; }
-  #sidemenu{
-    position: fixed; top:0; right:-200px;
-    width:200px; height:100vh; z-index: 9999; padding:0 10px;
-    flex-direction: column; justify-content: center; align-items: center; gap: 20px;
+  #sidemenu {
+    position: fixed;
+    top: 0;
+    right: -180px; /* hidden off-screen */
+    width: 180px;
+    height: 100vh;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
     background: rgba(11,13,16,0.95);
     border-left: 1px solid var(--ring);
     transition: right .28s ease;
+    z-index: 9999;
+    padding: 0 10px;
+  }
+  #sidemenu.open {
+    right: 0;
+  }
+
+  #sidemenu .menu-close {
+    display: block;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+
+  /* Hover trigger unnecessary on mobile */
+  #hover-trigger {
+    display: none;
+  }
+}
+@media (min-width: 769px){
+  #hover-trigger:hover + #sidemenu,
+  #sidemenu:hover{ right: 0; }
+}
+
+/* keep right menu truly on the right on desktop */
+#sidemenu{
+  margin-left: auto;
+  margin-right: -140px;   /* your existing offset; tweak if needed */
+  display: flex; align-items: center; gap: 28px;
+  list-style: none;
+}
+
+/* colon shouldn't be flex (it widens and nudges things) */
+#pill-time .colon{
+  display: inline-block; width: .7ch; text-align: center;
+  animation: colonBlink 1s steps(1, end) infinite;
+}
+
+/* remove extra padding from the timezone */
+#pill-time #time-tz{ margin-left: 8px; font-size: .85em; opacity: .95; text-transform: uppercase; }
+
+/* mobile slide-out */
+@media (max-width: 768px){
+  .site-nav .menu-toggle{ display:block; }
+  #sidemenu{
+    position: fixed; top:0; right:-180px;
+    width:180px; height:100vh;
+    flex-direction:column; justify-content:center; align-items:center; gap:20px;
+    background: rgba(11,13,16,0.95);
+    border-left:1px solid var(--ring);
+    transition:right .28s ease;
+    z-index:9999;
+    padding: 0 10px; margin:0;  /* reset desktop margins */
   }
   #sidemenu.open{ right:0; }
   #sidemenu .menu-close{ display:block; position:absolute; top:16px; left:16px; }
-  .nav-avatar{ width:42px; height:42px; }
-  .nav-extras.nav-clock{ display:none; }
+  #hover-trigger{ display:none; }
 }
 
-/* Focus niceties */
-.avatar-link:focus-visible{ outline: 2px solid #6bd0ff; outline-offset: 3px; border-radius: 999px; }
+/* If you use the desktop hover-to-open trick, #sidemenu must be the NEXT sibling of #hover-trigger.
+   In your previous markup the button sat between them, which breaks `#hover-trigger:hover + #sidemenu`.
+   Either keep the order as shown above or delete this hover rule: */
+@media (min-width: 769px){
+  /* optional: remove if not using */
+  /* #hover-trigger:hover + #sidemenu,
+     #sidemenu:hover{ right: 0; } */
+}
+
 
 /* ============================ */
 /* Header / Hero                */
 /* ============================ */
 #header{
-  position: relative; width: 100%; min-height: 100svh;
-  display:flex; align-items:flex-start; justify-content:center;
-  background: center / cover no-repeat url("images/codingBG.png");
+  position: relative; width: 100%; min-height: 100vh;
+  display:flex; align-items:center; justify-content:center;
+  background-image: url("images/codingBG.png");
+  background-position: center; background-repeat: no-repeat; background-size: cover;
   margin-top: -60px;
-  padding-top: clamp(96px, 18vh, 160px);
-  opacity: var(--heroOpacity, 1); transition: opacity .2s linear;
-  z-index: 0;
 }
 #header::before{
-  content:""; position:absolute; inset:0; background: rgba(0,0,0,0.55); z-index:1;
+  content:""; position:absolute; inset:0;
+  background: rgba(0,0,0,0.55);
+  z-index:1;
 }
-.header-content{ position: relative; z-index:2; width:100%; align-content: start; }
+.header-content{ position: relative; z-index:2; width:100%; }
 
+/* Hero content grid */
 .intro-section{
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
-  align-items: flex-start;
+  align-items: center;
   gap: clamp(20px, 4vw, 56px);
   padding: 0 5%;
 }
-.intro-photo{ grid-column: 2 / span 5; justify-self: end; }
-.intro-text{ grid-column: 7 / -2; justify-self: start; max-width: 60ch; color:#fff; position: relative; }
-
-.headline{
-  margin:0 0 .25rem;
-  font-size:24px; font-weight:800;
-  background: linear-gradient(90deg, #00fff2, #8a2be2); -webkit-background-clip:text; background-clip:text;
-  color: transparent; -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 10px rgba(0,170,255,0.35);
-  font-family: var(--font-tech); text-transform: uppercase; letter-spacing: .08em;
+.intro-photo{ 
+  grid-column: 2 / span 5;
+  justify-self: end;
+}
+.intro-text{
+  grid-column: 7 / -2;
+  justify-self: start;
+  max-width: 60ch;
+  color:#fff;
 }
 
+/* Headline & typing fonts (kept from your theme) */
+.headline{
+  margin:0 0 16px;
+  font-size:24px;
+  font-weight:800;
+  background: linear-gradient(90deg, #00fff2, #8a2be2);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px rgba(0,170,255,0.35);
+  font-family: var(--font-tech);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+}
+.subheadline,
+#typing-text{
+  font-family: var(--font-mono);
+  letter-spacing: .02em;
+  font-weight: 400;
+}
+@media (min-width: 900px){
+  .intro-text .headline{ margin-left: -20px; }
+  .intro-text #typing-text{ margin-left: -12px; }
+}
+/* Stop clipping the first letter on large screens */
+@media (min-width: 900px){
+  .intro-text #typing-text{
+    margin-left: 0 !important;   /* kill the negative nudge */
+  }
+}
+
+/* Optional: tiny left pad to avoid subpixel clipping across browsers */
+.typing-line{
+  text-indent: 0;
+  padding-left: 0.1ch;           /* subtle, prevents edge clipping */
+  overflow: hidden;              /* keep, to prevent layout shift */
+}
+
+@media (max-width: 899px){
+  .intro-text .headline,
+  .intro-text #typing-text{ margin-left: 0; }
+}
+.subheadline{ text-shadow: 0 0 8px rgba(0,170,255,.25); }
+
+#typing-text{
+  display:inline-block; margin-top:6px; color:#fff;
+}
+
+/* Was: .subheadline, #typing-text { ... } */
+/* Now include the name and the trailing chunk, too */
 .subheadline,
 #typing-text,
 .name-gradient,
 #contyping{
   font-family: var(--font-mono);
   letter-spacing: .02em;
-  font-weight: 400;
+  font-weight: 400; /* leave .name-gradient bold if you want via its own rule */
 }
 
-.typing-wrap{ position: relative; }
-.typing-reserve{ height: 2.8rem; }
-.typing-line{
-  position: absolute; left: 0; top: 0;
-  max-width: min(75ch, 100%); overflow: hidden; white-space: nowrap; line-height: 2.8rem; text-indent: 0;
-}
-@media (max-width:640px){
-  .typing-reserve{ height:5.6rem; }
-  .typing-line{ white-space: normal; line-height: 1.3; }
-}
-@media (min-width:900px){
-  .typing-line{ white-space: normal !important; line-height: 1.35; }
-  .typing-reserve{ height: calc(1.35em * 2); }
-}
-.typing{ position: relative; }
+
+/* caret follows the element currently being typed */
+.typing { position: relative; }
 .typing::after{
-  content: "|"; display:inline-block; width:0; height:1em; margin-left:2px;
-  border-right:2px solid currentColor; animation: blink .7s step-end infinite; vertical-align:-2px;
+  content: "|";
+  display: inline-block;
+  width: 0;
+  height: 1em;
+  margin-left: 2px;
+  border-right: 2px solid #fff;   /* or currentColor */
+  animation: blink .7s step-end infinite;
+  vertical-align: -2px;
 }
 @keyframes blink { 0%,50%{opacity:1} 50.01%,100%{opacity:0} }
 
-.highlight-name,
-#typing-text .name-gradient{
-  font-weight:700;
+
+
+/* Gradient text for the name inside the hero headline */
+.highlight-name{
+  font-weight: 700;
   background-image: linear-gradient(90deg, #00fff2, #8a2be2, #6bd0ff);
-  background-size:160% auto; background-position:0% center;
-  -webkit-background-clip:text; background-clip:text;
-  -webkit-text-fill-color:transparent !important; color:transparent !important;
-  text-shadow:none; animation: nameGradientSlide 6s linear infinite;
+  background-size: 160% auto;              /* bigger than 100% so it can move */
+  background-position: 0% center;
+  -webkit-background-clip: text;            /* Safari / iOS */
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;     /* Safari / iOS */
+  text-shadow: none;                         /* keep the gradient crisp */
+  animation: nameGradientSlide 6s linear infinite;
 }
-@keyframes nameGradientSlide{ to { background-position: 160% center; } }
-#typing-text::after,
-#typing-text.done-typing::after{ content:none !important; border:0 !important; margin:0 !important; animation:none !important; }
+
+@keyframes nameGradientSlide{
+  to { background-position: 160% center; }
+}
 
 /* ============================ */
 /* Glowing Ring + Photo         */
 /* ============================ */
-.ring-wrap{ position: relative; width: clamp(260px, 32vw, 420px); aspect-ratio: 1 / 1; }
+.ring-wrap{
+  position: relative;
+  width: clamp(260px, 32vw, 420px);
+  aspect-ratio: 1 / 1;
+}
 .ring-wrap .sweep-overlay{
   position:absolute; inset:0; border-radius:50%;
-  background: conic-gradient(from -90deg,
+  background: conic-gradient(
+    from -90deg,
     rgba(14,165,233,0) 0deg,
     rgba(14,165,233,0) 300deg,
     rgba(14,165,233,0.18) 312deg,
@@ -219,7 +369,8 @@ section, header, footer { background: transparent; }
     rgba(14,165,233,0.90) 330deg,
     rgba(14,165,233,0.42) 338deg,
     rgba(14,165,233,0.18) 344deg,
-    rgba(14,165,233,0) 360deg);
+    rgba(14,165,233,0) 360deg
+  );
   -webkit-mask:
     radial-gradient(circle at 50% 50%, transparent 59%, #000 60%),
     radial-gradient(circle at 50% 50%, #000 74%, transparent 75%);
@@ -234,148 +385,144 @@ section, header, footer { background: transparent; }
 .ring-wrap img.profile-photo{
   position:absolute; inset:0; margin:auto; width:72%; height:72%;
   object-fit:cover; border-radius:50%;
-  transform: scale(.86); animation: photo-zoom 1.4s ease forwards; z-index:2;
+  transform: scale(.86); animation: photo-zoom 1.4s ease forwards;
+  z-index:2;
 }
 @keyframes photo-zoom{ to{ transform: scale(1); } }
 
-/* ============================ */
-/* ====== ABOUT (scoped) ====== */
-/* ============================ */
+/* ---- About container & SVG ---- */
 
-/* Full-bleed SVG hero */
-#about.about-hero-svg{
+/* ===== Baseline ===== */
+html, body { height: 100%; }
+body { margin: 0; overflow-x: hidden; }
+
+/* ===== Fullscreen hero (escapes parent gutters) ===== */
+.about-hero-svg {
   position: relative;
-  left: 50%; right: 50%;
-  margin-left: calc(50% - 50svw);
-  margin-right: calc(50% - 50svw);
-  width: 100svw;
-  height: 100svh;              /* uses safe viewport units */
-  min-height: 100svh;
-  padding: 0 !important;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;          /* full-bleed escape */
+  margin-right: -50vw;
+  width: 100vw;
+  height: 100vh;               /* fallback */
+  padding: 0;
   overflow: hidden;
 }
-@supports (height: 100dvh){ #about.about-hero-svg{ height: 100dvh; min-height: 100dvh; } }
+@supports (height: 100dvh) { .about-hero-svg { height: 100dvh; } }
+@supports (height: 100svh) { .about-hero-svg { height: 100svh; } }
 
-#about .about-svg{ width: 100% !important; height: 100% !important; display: block; }
-#about image{ width: 100%; height: 100%; }
+/* Optional generic hero (doesn't override the full-bleed margins above) */
+.about-hero { width: 100vw; min-height: 100svh; padding: 0; overflow: hidden; }
 
-/* Generic non-SVG hero variant (kept for compatibility) */
-#about.about-hero{
-  position: relative; display:grid; place-items:center; z-index:1;
-  width: 100svw; min-height: 100svh; padding: 0; overflow: hidden;
-  opacity: var(--aboutOpacity, 0); transition: opacity .2s linear;
-}
-#about.about-hero .scene-bg{
-  position: absolute; inset: 0;
-  background: center / cover no-repeat url("images/about-laptop1.jpg");
-  background-position: center -100px; z-index: 0;
-}
-#about.about-hero::after{
-  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
-  background: radial-gradient(120% 80% at 50% 30%, transparent 38%, rgba(0,0,0,.55) 70%);
-}
+/* SVG fills the hero */
+.about-svg { width: 100%; height: 100%; display: block; }
+/* Some frameworks force svg/img { height:auto } — keep the hero filling */
+#about .about-svg { height: 100% !important; }
+#about image { width: 100%; height: 100%; }
 
-/* Screen overlay geometry (CSS variables usable from JS) */
-#about.about-hero{
-  --screen-w: 36.00vw;
-  --screen-h: 26.50vw;
-  --screen-x: 34.40vw;
-  --screen-y: 20.40vw;
-}
-
-/* Laptop “screen” overlay */
-#about .screen{
-  position: absolute;
-  left: var(--screen-x); top: var(--screen-y);
-  width: var(--screen-w); height: var(--screen-h);
-  z-index: 2; overflow: hidden;
-}
-#about .screen.screen--flex{
-  display: flex !important; flex-direction: column !important; box-sizing: border-box !important;
-  --pad-x: clamp(20px, 3vw, 48px);
-  --pad-y: clamp(12px, 2.5vh, 24px);
-  padding: var(--pad-y) var(--pad-x) !important;
-  overflow: hidden;
-}
-
-/* Tabs row */
-#about .tab-titles{
-  position: static !important; inset: auto !important; transform: none !important; width: 100% !important;
-  display: flex !important; justify-content: center !important; align-items: center !important;
-  gap: clamp(12px, 1.8vw, 28px); line-height: 1.25; min-height: 40px;
-  margin: 0 0 12px; padding: 0; z-index: 3;
-}
-#about .tab-links{
-  background: transparent; border: 0; display: inline-flex; align-items: center;
-  margin: 0; padding: 8px 10px; cursor: pointer;
-  font-weight: 600; font-size: clamp(12px, 1.05vw, 16px); color: #076993; opacity: .95; position: relative;
-}
-#about .tab-links:hover{ opacity: 1; }
-#about .tab-links::after{
-  content:""; position:absolute; left:50%; transform:translateX(-50%); bottom:-6px;
-  width:0; height:2px; background: linear-gradient(90deg,#00fff2,#6bd0ff); transition: width .25s ease;
-}
-#about .tab-links.active-link::after{ width:60%; }
-
-/* Content area */
-#about .screen-content{
-  position: static !important; margin: 0; flex: 1 1 auto;
-  overflow: auto; text-align: left; color:#0b0d10;
-  scrollbar-width: thin;
-}
-#about .screen-content::-webkit-scrollbar{ width:6px; }
-#about .screen-content::-webkit-scrollbar-thumb{ background: rgba(0,0,0,.25); border-radius: 6px; }
-
-/* Panels */
-#about .tab-contents{ display:none; }
-#about .tab-contents.active-tab{ display:block; }
-#about .tab-contents p{ max-width: 62ch; margin: 0 auto; line-height: 1.7; }
-
-/* Inside-SVG app (if you’re using foreignObject) */
-#about .svg-screen{
-  width: 100%; height: 100%;
-  display: flex; flex-direction: column; box-sizing: border-box;
+/* ===== Content inside the laptop screen ===== */
+.svg-screen{
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
   padding: 12px 14px;
   font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-  color: #0b0d10; background: transparent; container-type: inline-size;
+  color: #0b0d10;
+  background: transparent;
+  container-type: inline-size;     /* enables cqw units */
 }
-#about .svg-tabs{
-  display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
-  user-select:none; padding: 6px 4px 8px; gap: clamp(6px, 2cqw, 14px);
-}
-#about .svg-link{
-  all: unset; cursor: pointer; font-weight:700; letter-spacing:.2px;
-  color: #076993; /* fixed: remove invalid gradient as color */
-  padding: 2px 6px; position: relative; font-size: clamp(12px, 3.2cqw, 15px);
-}
-#about .svg-link:hover{ color:#0a84ae; }
-#about .svg-link.svg-active::after{
-  content:""; position:absolute; left:50%; bottom:-3px; transform:translateX(-50%);
-  width:60%; height:2px; border-radius:2px; background:linear-gradient(90deg,#00fff2,#8a2be2);
-}
-#about .svg-content{
-  flex:1; overflow:auto; padding: 6px 6px 8px;
-  line-height:1.45; display:grid; place-items:center; text-align:center;
-  color:#0b0d10; text-shadow:0 0 6px rgba(0,0,0,.18);
-  font-size: clamp(13px, 3.4cqw, 16px);
-}
-#about .svg-panel{ display:none; }
-#about .svg-panel.svg-show{ display:block; }
 
-/* Mobile tuning for About */
-@media (max-width: 700px){
-  #about.about-hero{
-    --screen-x: 8vw; --screen-y: 18vw; --screen-w: 84vw; --screen-h: 58vw;
-  }
-  #about .screen.screen--flex{
-    --pad-x: clamp(14px, 4vw, 22px); --pad-y: clamp(10px, 3.6vw, 18px);
-  }
+/* Tabs */
+.svg-tabs{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  padding: 6px 4px 8px;
+  gap: clamp(6px, 2cqw, 14px);     /* scales with the “screen” width */
 }
-@media (max-width: 768px){
-  #about.about-hero-svg{ height: 60dvh !important; min-height: 60dvh !important; }
-  #about .about-svg{ height: 100% !important; }
-  #about .bg-img{ width:100% !important; transform: none !important; object-fit: cover; object-position: 50% 50%; }
+.svg-link{
+  all: unset;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: .2px;
+  color: linear-gradient(90deg, #blue, #8a2002, #6000ff);
+  padding: 2px 6px;
+  position: relative;
+  font-size: clamp(12px, 3.2cqw, 15px);  /* container-query sizing */
 }
+.svg-link:hover{ color:(270deg, #00ff00, #2b00e2, #6000ff); }
+.svg-link.svg-active::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  bottom:-3px;
+  transform:translateX(-50%);
+  width:60%;
+  height:2px;
+  border-radius:2px;
+  background:linear-gradient(90deg,#00fff2,#8a2be2);
+}
+
+/* Content (true center) */
+.svg-content{
+  flex: 1;
+  overflow: auto;
+  padding: 6px 6px 8px;
+  line-height: 1.45;
+  display: grid;
+  place-items: center;          /* centers both axes */
+  text-align: center;
+  color:#0b0d10;
+  text-shadow: 0 0 6px rgba(0,0,0,.18);
+  font-size: clamp(13px, 3.4cqw, 16px);  /* scales with screen width */
+}
+.svg-content p { margin: 0; }
+
+/* Panels toggle */
+.svg-panel{ display:none; }
+.svg-panel.svg-show{ display:block; }
+
+/* Slim scrollbar inside the faux screen */
+.svg-content{ scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
+.svg-content::-webkit-scrollbar{ width:6px; }
+.svg-content::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
+/* --- MOBILE ZOOM-OUT (strong override) --- */
+@media (max-width: 768px) {
+  section#about.about-hero-svg,
+  #about.about-hero-svg {
+    /* Try 84dvh, 82dvh, even 80dvh for more zoom-out */
+    height: 60dvh !important;
+    min-height: 60dvh !important;
+  }
+  /* Keep the SVG stretching to the new height */
+  #about .about-svg { height: 100% !important; }
+}
+
+
+/* Fallbacks for browsers without container queries */
+@supports not (width: 1cqw) {
+  .svg-tabs{ gap: 8px; }
+  .svg-link{ font-size: clamp(12px, 2.6vw, 15px); }
+  .svg-content{ font-size: clamp(13px, 3.4vw, 16px); }
+}
+
+/* Optional: extra tightening on very small phones */
+@media (max-width: 390px) {
+  .svg-tabs{ row-gap: 6px; }
+}
+
+
+
+
+
+
+/* About — Laptop scene         */
+
 
 /* ============================ */
 /* Services / Projects          */
@@ -408,140 +555,268 @@ section, header, footer { background: transparent; }
 }
 .services-list div:hover a{ background: #10eefadd; border-color: var(--ring); }
 
-/* ==== Projects – dark neon style ==== */
+/* ==== Projects — dark neon style ==== */
 .projects-dark{
-  --accent: #00fff2;
-  --accent-2: #6bd0ff;
+  --accent: #00fff2;                /* neon cyan */
+  --accent-2: #6bd0ff;              /* soft blue partner */
   --card-bg1: var(--panel, #1a1f27);
   --card-bg2: var(--panel-2, #222a35);
   --card-border: var(--border, rgba(255,255,255,.08));
-  background: center / cover no-repeat url("images/projectBG.jpg");
+  background-image: url("images/projectBG.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+    
 }
-.projects-dark .sub-title{ font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif; letter-spacing: .2px; }
+
+
+
+.projects-dark .sub-title{
+  font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif;
+  letter-spacing: .2px;
+}
+
 .projects-dark .proj-grid{
-  display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: clamp(16px, 2vw, 28px); margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: clamp(16px, 2vw, 28px);
+  margin-top: 18px;
 }
+
+/* Card base */
 .projects-dark .proj-card{
-  position: relative; border-radius: var(--radius-sm);
+  position: relative;
+  border-radius: var(--radius-sm, 10px);
   background: linear-gradient(180deg, var(--card-bg1), var(--card-bg2));
-  border: 1px solid var(--card-border); box-shadow: var(--shadow);
-  padding: 18px 18px 16px; overflow: hidden;
+  border: 1px solid var(--card-border);
+  box-shadow: var(--shadow, 0 10px 30px rgba(0,0,0,.35));
+  padding: 18px 18px 16px;
+  overflow: hidden;
   transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  isolation: isolate;
+  isolation: isolate; /* keeps glow inside */
 }
+
+/* Neon top accent bar */
 .projects-dark .proj-card .accent{
   position: absolute; inset: 0 0 auto 0; height: 3px;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2)); opacity: .9;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: .9;
 }
+
+/* Soft radial glow on hover */
 .projects-dark .proj-card::before{
-  content:""; position:absolute; inset:auto -20% -40% -20%; height: 120%;
-  background: radial-gradient(60% 40% at 50% 100%, color-mix(in oklab, var(--accent) 35%, transparent), transparent 60%);
-  filter: blur(18px); opacity: 0; transition: opacity .25s ease; pointer-events: none; z-index: -1;
+  content:"";
+  position:absolute; inset:auto -20% -40% -20%;
+  height: 120%;
+  background: radial-gradient(60% 40% at 50% 100%,
+    color-mix(in oklab, var(--accent) 35%, transparent),
+    transparent 60%);
+  filter: blur(18px);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+  z-index: -1;
 }
+
+/* Hover / focus styles */
 .projects-dark .proj-card:hover,
 .projects-dark .proj-card:focus-within{
   transform: translateY(-6px);
   border-color: color-mix(in oklab, var(--accent) 45%, #0ff0);
-  box-shadow: 0 18px 42px rgba(8,168,237,.18), inset 0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent);
+  box-shadow:
+    0 18px 42px rgba(8,168,237,.18),
+    inset 0 0 0 1px color-mix(in oklab, var(--accent) 35%, transparent);
 }
 .projects-dark .proj-card:hover::before,
 .projects-dark .proj-card:focus-within::before{ opacity: 1; }
 
-.projects-dark .proj-head{ display: grid; gap: 8px; }
-.projects-dark .proj-head i{ font-size: 28px; color: var(--accent-2); }
+/* Header */
+.projects-dark .proj-head{
+  display: grid; gap: 8px;
+}
+.projects-dark .proj-head i{
+  font-size: 28px; color: var(--accent-2);
+}
 .projects-dark .proj-head h2{
   font-size: 20px; line-height: 1.25;
-  font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif; letter-spacing: .2px;
+  font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif;
+  letter-spacing: .2px;
 }
-.projects-dark .proj-head p{ color: var(--muted); font-size: 14px; }
+.projects-dark .proj-head p{
+  color: var(--muted, #b8c2cc);
+  font-size: 14px;
+}
+
+/* Tech chips */
 .projects-dark .tech-chips{
-  margin: 12px 0 6px; display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0;
+  margin: 12px 0 6px;
+  display: flex; flex-wrap: wrap; gap: 6px;
+  list-style: none; padding: 0;
 }
 .projects-dark .tech-chips li{
-  font-size: 12px; line-height: 1; padding: 6px 10px; border-radius: 999px;
-  border: 1px solid var(--card-border); color: #e9faff;
-  background: linear-gradient(180deg, rgba(0,255,242,.14), rgba(0,255,242,.06));
+  font-size: 12px; line-height: 1;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--card-border);
+  color: #e9faff;
+  background:
+    linear-gradient(180deg, rgba(0,255,242,.14), rgba(0,255,242,.06));
   backdrop-filter: saturate(120%);
 }
-.projects-dark .proj-actions{ display: flex; gap: 10px; margin-top: 10px; }
+
+/* Actions */
+.projects-dark .proj-actions{
+  display: flex; gap: 10px; margin-top: 10px;
+}
+
 .projects-dark .btn-ghost,
 .projects-dark .btn-cta{
   display: inline-flex; align-items: center; justify-content: center;
-  padding: 10px 14px; border-radius: 10px; font-size: 13px; text-decoration: none;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; text-decoration: none;
   transition: transform .15s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease, color .2s ease;
   border: 1px solid var(--card-border);
 }
-.projects-dark .btn-ghost{ color: #e7fbff; background: rgba(0,0,0,.15); }
-.projects-dark .btn-ghost:hover{
-  background: #00fff2; border-color: color-mix(in oklab, var(--accent) 35%, var(--card-border)); transform: translateY(-1px);
+
+.projects-dark .btn-ghost{
+  color: #e7fbff;
+  background: rgba(0,0,0,.15);
 }
+.projects-dark .btn-ghost:hover{
+  background: #00fff2;
+  border-color: color-mix(in oklab, var(--accent) 35%, var(--card-border));
+  transform: translateY(-1px);
+}
+
 .projects-dark .btn-cta{
-  color:#051314; background: linear-gradient(90deg, var(--accent), var(--accent-2)); border-color: transparent;
+  color: #051314;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-color: transparent;
   box-shadow: 0 8px 22px rgba(0,255,242,.20);
 }
-.projects-dark .btn-cta:hover{ box-shadow: 0 10px 28px #00fff2; transform: translateY(-1px); }
-
-.projects-dark .proj-card a:focus{
-  outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 40%, transparent); border-color: var(--accent);
+.projects-dark .btn-cta:hover{
+  box-shadow: 0 10px 28px #00fff2;
+  transform: translateY(-1px);
 }
+
+/* Keyboard focus */
+.projects-dark .proj-card a:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 40%, transparent);
+  border-color: var(--accent);
+}
+
+/* Responsive niceties */
 @media (max-width: 520px){
   .projects-dark .proj-head h2{ font-size: 18px; }
   .projects-dark .proj-head p{ font-size: 13px; }
   .projects-dark .btn-ghost, .projects-dark .btn-cta{ flex: 1 1 auto; }
 }
-
 /* ============================ */
-/* Core Competencies            */
+/* core competencies            */
 /* ============================ */
-#competencies{ padding:48px 0; }
+/* ----- Core Competencies grid ----- */
 #competencies .sub-title{
   font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
+
 .competency-grid{
-  list-style:none; padding:0; margin:20px 0 0;
-  display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 18px;
+  margin-top: 18px;
 }
+
+/* Card base */
 .cc-card{
-  position: relative; background: linear-gradient(180deg, var(--panel), var(--panel-2));
-  border: 1px solid var(--border); border-radius: var(--radius-sm);
-  padding: 18px 16px; color: var(--text); box-shadow: var(--shadow);
+  position: relative;
+  background: linear-gradient(180deg, var(--panel, #1a1f27), var(--panel-2, #222a35));
+  border: 1px solid var(--border, rgba(255,255,255,.08));
+  border-radius: var(--radius-sm, 10px);
+  padding: 18px 16px;
+  color: var(--text, #f5f7fa);
+  box-shadow: var(--shadow, 0 10px 30px rgba(0,0,0,.35));
   transition: transform .18s ease, box-shadow .22s ease, border-color .18s ease, background .22s ease;
-  cursor: default; outline: none;
+  cursor: default;
+  outline: none; /* we’ll handle focus ring */
 }
+
+/* Neon accent border on hover/focus */
 .cc-card::after{
-  content: ""; position: absolute; inset: -1px; border-radius: inherit;
-  background: linear-gradient(90deg, var(--primary), var(--primary-2));
-  opacity: 0; transition: opacity .18s ease; z-index: 0; pointer-events: none; padding: 1px;
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor; mask-composite: exclude;
+  content: "";
+  position: absolute; inset: -1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--primary, #00fff2), var(--primary-2, #6bd0ff));
+  opacity: 0; transition: opacity .18s ease;
+  z-index: 0;
+  pointer-events: none;
+  /* create a 1px neon border illusion */
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  padding: 1px;
 }
+
+/* Top neon bar (subtle) */
 .cc-card::before{
-  content:""; position:absolute; left:10px; right:10px; top:10px; height:3px; border-radius:2px;
-  background: linear-gradient(90deg, var(--primary), var(--primary-2)); opacity:.0; transition: opacity .18s ease;
+  content:"";
+  position:absolute; left:10px; right:10px; top:10px; height:3px; border-radius:2px;
+  background: linear-gradient(90deg, var(--primary, #00fff2), var(--primary-2, #6bd0ff));
+  opacity:.0; transition: opacity .18s ease;
 }
-.cc-icon{ font-size: 22px; color: var(--primary-2); margin-bottom: 8px; }
+
+/* Title & icon */
+.cc-icon{
+  font-size: 22px; color: var(--primary-2, #6bd0ff);
+  margin-bottom: 8px;
+}
 .cc-title{
-  margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: .2px;
+  margin: 0 0 6px;
+  font-size: 18px; font-weight: 700;
+  letter-spacing: .2px;
   font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif;
 }
+
+/* Body text: clamp by default, expand on hover/focus */
 .cc-body{
-  color: var(--muted); font-size: 14px; line-height: 1.5;
-  display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; transition: color .18s ease;
+  color: var(--muted, #b8c2cc);
+  font-size: 14px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;   /* show first ~3 lines */
+  overflow: hidden;
+  transition: color .18s ease;
 }
+
+/* Hover / focus = neon like your buttons + expand body */
 .cc-card:hover,
 .cc-card:focus-visible{
   transform: translateY(-6px);
   border-color: rgba(0,255,242,.35);
   box-shadow: 0 16px 44px rgba(0,255,242,.18), 0 8px 22px rgba(0,0,0,.35);
-  background: linear-gradient(180deg, var(--panel-2), var(--panel));
+  background: linear-gradient(180deg, var(--panel-2, #222a35), var(--panel, #1a1f27));
 }
-.cc-card:hover::after, .cc-card:focus-visible::after{ opacity: 1; }
-.cc-card:hover::before, .cc-card:focus-visible::before{ opacity: .95; }
-.cc-card:hover .cc-title, .cc-card:focus-visible .cc-title{ color: var(--primary); }
-.cc-card:hover .cc-body, .cc-card:focus-visible .cc-body{ -webkit-line-clamp: unset; color: #eafcff; }
-.cc-card:focus-visible{ box-shadow: 0 0 0 3px rgba(0,255,242,.28), 0 14px 36px rgba(0,255,242,.18); }
+.cc-card:hover::after,
+.cc-card:focus-visible::after{ opacity: 1; }
+.cc-card:hover::before,
+.cc-card:focus-visible::before{ opacity: .95; }
+.cc-card:hover .cc-title,
+.cc-card:focus-visible .cc-title{ color: var(--primary, #00fff2); }
+.cc-card:hover .cc-body,
+.cc-card:focus-visible .cc-body{
+  -webkit-line-clamp: unset;     /* expand text */
+  color: #eafcff;
+}
+
+/* Keyboard focus ring for accessibility */
+.cc-card:focus-visible{
+  box-shadow: 0 0 0 3px rgba(0,255,242,.28), 0 14px 36px rgba(0,255,242,.18);
+}
+
+/* Reduced motion fallback: simple lift */
 @media (prefers-reduced-motion: reduce){
   .cc-card{ transition: border-color .18s ease, background .18s ease; }
   .cc-card:hover, .cc-card:focus-visible{ transform: none; }
@@ -583,8 +858,7 @@ section, header, footer { background: transparent; }
 
 .btn{
   display:block; margin:40px auto 0; width:fit-content; padding:14px 28px; border-radius:12px;
-  text-decoration:none; color: var(--text);
-  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  text-decoration:none; color: var(--text); background: linear-gradient(180deg, var(--panel), var(--panel-2));
   border:1px solid var(--border); box-shadow: var(--shadow);
   transition: transform .2s ease, box-shadow .2s ease, background .25s ease;
 }
@@ -606,71 +880,14 @@ section, header, footer { background: transparent; }
 
 .social-icons{ margin-top:14px; display:flex; gap:14px; }
 .social-icons a{
-  display:inline-grid; place-items:center;
-  width:40px; height:40px; border-radius:10px;
-  font-size:22px; color:#a9b6c3; background:transparent;
-  border:1px solid rgba(255,255,255,.12);
-  transition: transform .22s ease, color .18s ease, background .18s ease, border-color .18s ease, box-shadow .22s ease;
+  font-size:22px; color:#18f5f9; display:inline-grid; place-items:center; width:40px; height:40px;
+  border-radius:10px; border:1px solid var(--border);
+  transition: transform .25s ease, color .25s ease, border-color .25s ease, background .25s ease;
 }
-.social-icons a i{ color: inherit; }
-.social-icons a:hover,
-.social-icons a:focus-visible{ transform: translateY(-4px); outline: none; color:#fff; }
 
-/* Brand hovers (single, consolidated set) */
-.social-icons a[aria-label="LinkedIn"]:hover,
-.social-icons a[aria-label="LinkedIn"]:focus-visible,
-.social-icons a[href*="linkedin.com"]:hover,
-.social-icons a[href*="linkedin.com"]:focus-visible{
-  background:#0A66C2; border-color:#0A66C2; box-shadow:0 8px 24px rgba(10,102,194,.35);
-}
-.social-icons a[aria-label="GitHub"]:hover,
-.social-icons a[aria-label="GitHub"]:focus-visible,
-.social-icons a[href*="github.com"]:hover,
-.social-icons a[href*="github.com"]:focus-visible{
-  background:#24292e; border-color:#24292e; box-shadow:0 8px 24px rgba(36,41,46,.35);
-}
-.social-icons a[aria-label="Twitter"]:hover,
-.social-icons a[aria-label="Twitter"]:focus-visible{ background:#1DA1F2; border-color:#1DA1F2; box-shadow:0 8px 24px rgba(29,161,242,.35); }
-.social-icons a[aria-label="Facebook"]:hover,
-.social-icons a[aria-label="Facebook"]:focus-visible,
-.social-icons a[href*="facebook.com"]:hover,
-.social-icons a[href*="facebook.com"]:focus-visible{
-  background:#1877F2; border-color:#1877F2; box-shadow:0 8px 24px rgba(24,119,242,.35);
-}
-.social-icons a[aria-label="YouTube"]:hover,
-.social-icons a[aria-label="YouTube"]:focus-visible,
-.social-icons a[href*="youtube.com"]:hover,
-.social-icons a[href*="youtube.com"]:focus-visible,
-.social-icons a[href*="youtu.be"]:hover,
-.social-icons a[href*="youtu.be"]:focus-visible{
-  background:#FF0000; border-color:#FF0000; box-shadow:0 8px 24px rgba(255,0,0,.35);
-}
-.social-icons a[aria-label="Slack"]:hover,
-.social-icons a[aria-label="Slack"]:focus-visible,
-.social-icons a[href*="slack.com"]:hover,
-.social-icons a[href*="slack.com"]:focus-visible,
-.social-icons a[href*="join.slack.com"]:hover,
-.social-icons a[href*="join.slack.com"]:focus-visible,
-.social-icons a[href*="app.slack.com"]:hover,
-.social-icons a[href*="app.slack.com"]:focus-visible{
-  background:#4A154B; border-color:#4A154B; box-shadow:0 8px 24px rgba(74,21,75,.35);
-}
-.social-icons a[aria-label="Dev.to"]:hover,
-.social-icons a[aria-label="Dev.to"]:focus-visible{ background:#0A0A0A; border-color:#0A0A0A; box-shadow:0 8px 24px rgba(10,10,10,.35); }
-.social-icons a[aria-label="Stack Overflow"]:hover,
-.social-icons a[aria-label="Stack Overflow"]:focus-visible{ background:#F48024; border-color:#F48024; box-shadow:0 8px 24px rgba(244,128,36,.35); }
-.social-icons a[aria-label="Kaggle"]:hover,
-.social-icons a[aria-label="Kaggle"]:focus-visible{ background:#20BEFF; border-color:#20BEFF; box-shadow:0 8px 24px rgba(32,190,255,.35); }
-.social-icons a[aria-label="Medium"]:hover,
-.social-icons a[aria-label="Medium"]:focus-visible{ background:#00ab6c; border-color:#00ab6c; box-shadow:0 8px 24px rgba(0,171,108,.35); }
-.social-icons a[aria-label="CodePen"]:hover,
-.social-icons a[aria-label="CodePen"]:focus-visible{ background:#000000; border-color:#000000; box-shadow:0 8px 24px rgba(0,0,0,.35); }
-.social-icons a[aria-label="CodeSandbox"]:hover,
-.social-icons a[aria-label="CodeSandbox"]:focus-visible{ background:#151515; border-color:#151515; box-shadow:0 8px 24px rgba(21,21,21,.35); }
-.social-icons a[aria-label="HackerRank"]:hover,
-.social-icons a[aria-label="HackerRank"]:focus-visible{ background:#2EC866; border-color:#2EC866; box-shadow:0 8px 24px rgba(46,200,102,.35); }
-.social-icons a[aria-label="LeetCode"]:hover,
-.social-icons a[aria-label="LeetCode"]:focus-visible{ background:#FFA116; border-color:#FFA116; box-shadow:0 8px 24px rgba(255,161,22,.35); }
+
+.btn.btn2{ margin-top:16px; display:inline-block; background: linear-gradient(180deg, var(--panel), var(--panel-2)); border:1px solid var(--border); }
+.btn.btn2:hover{ background: linear-gradient(180deg, var(--panel-2), var(--panel)); }
 
 .contact-right form{ width:100%; }
 form input, form textarea{
@@ -686,6 +903,180 @@ form .btn2{ padding:12px 22px; font-size:16px; cursor:pointer; }
   background: linear-gradient(180deg, var(--panel), var(--panel-2));
   border-top:1px solid var(--border); font-weight:400; color: var(--muted); margin-top:28px;
 }
+
+
+/* base (keeps your current look) */
+.social-icons a{
+  
+  background: transparent;
+  border:1px solid var(--border);
+  width:40px; height:40px; display:inline-grid; place-items:center;
+  border-radius:10px;
+  transition: transform .25s, color .2s, background .2s, border-color .2s, box-shadow .2s;
+}
+.social-icons a:hover,
+.social-icons a:focus-visible{
+  transform: translateY(-4px);
+  outline: none;
+}
+
+/* brand hover/focus */
+.social-icons a[aria-label="LinkedIn"]:hover,
+.social-icons a[aria-label="LinkedIn"]:focus-visible{
+  color:#fff; background:#0A66C2; border-color:#0A66C2;
+  box-shadow: 0 8px 24px rgba(10,102,194,.35);
+}
+/* GitHub brand hover/focus */
+.social-icons a[aria-label="GitHub"]:hover,
+.social-icons a[aria-label="GitHub"]:focus-visible{
+  color:#fff;                 /* icon inherits this */
+  background:#24292e;         /* GitHub black */
+  border-color:#24292e;
+  box-shadow:0 8px 24px rgba(36,41,46,.35);
+}
+
+
+
+/* LinkedIn */
+.social-icons a[aria-label="LinkedIn"]:hover,
+.social-icons a[aria-label="LinkedIn"]:focus-visible{
+  color:#fff;
+  background:#0A66C2;
+  border-color:#0A66C2;
+  box-shadow:0 8px 24px rgba(10,102,194,.35);
+}
+
+/* make icons inherit the link color on hover/focus */
+.social-icons a:hover i,
+.social-icons a:focus-visible i { color: inherit; }
+
+.social-icons a[aria-label="YouTube"]:hover,
+.social-icons a[aria-label="YouTube"]:focus-visible{
+  color:#fff; background:#FF0000; border-color:#FF0000;
+  box-shadow: 0 8px 24px rgba(255,0,0,.35);
+}
+
+.social-icons a[aria-label="Slack"]:hover,
+.social-icons a[aria-label="Slack"]:focus-visible{
+  color:#fff; background:#4A154B; border-color:#4A154B; /* Slack purple */
+  box-shadow: 0 8px 24px rgba(74,21,75,.35);
+}
+
+/* Make icons inherit the link color on hover/focus */
+.social-icons a:hover i,
+.social-icons a:focus-visible i { color: inherit; }
+
+/* Default hover lift you already use (kept here for completeness) */
+.social-icons a:hover,
+.social-icons a:focus-visible{
+  transform: translateY(-4px);
+  outline: none;
+  color: #fff; /* most brand backgrounds need white icons */
+}
+
+/* LinkedIn */
+.social-icons a[aria-label="LinkedIn"]:hover,
+.social-icons a[aria-label="LinkedIn"]:focus-visible{
+  background:#0A66C2; border-color:#0A66C2;
+  box-shadow:0 8px 24px rgba(10,102,194,.35);
+}
+
+/* GitHub */
+.social-icons a[aria-label="GitHub"]:hover,
+.social-icons a[aria-label="GitHub"]:focus-visible{
+  background:#24292e; border-color:#24292e;
+  box-shadow:0 8px 24px rgba(36,41,46,.35);
+}
+
+/* X / Twitter */
+.social-icons a[aria-label="Twitter"]:hover,
+.social-icons a[aria-label="Twitter"]:focus-visible{
+  background:#1DA1F2; border-color:#1DA1F2;
+  box-shadow:0 8px 24px rgba(29,161,242,.35);
+}
+
+/* Facebook */
+.social-icons a[aria-label="Facebook"]:hover,
+.social-icons a[aria-label="Facebook"]:focus-visible{
+  background:#1877F2; border-color:#1877F2;
+  box-shadow:0 8px 24px rgba(24,119,242,.35);
+}
+
+.social-icons a[aria-label="Facebook"]:hover i,
+.social-icons a[aria-label="Facebook"]:focus-visible i{
+  color:#fff;
+}
+
+
+/* YouTube */
+.social-icons a[aria-label="YouTube"]:hover,
+.social-icons a[aria-label="YouTube"]:focus-visible{
+  background:#FF0000; border-color:#FF0000;
+  box-shadow:0 8px 24px rgba(255,0,0,.35);
+}
+
+/* Dev.to */
+.social-icons a[aria-label="Dev.to"]:hover,
+.social-icons a[aria-label="Dev.to"]:focus-visible{
+  background:#0A0A0A; border-color:#0A0A0A;
+  box-shadow:0 8px 24px rgba(10,10,10,.35);
+}
+
+/* Stack Overflow */
+.social-icons a[aria-label="Stack Overflow"]:hover,
+.social-icons a[aria-label="Stack Overflow"]:focus-visible{
+  background:#F48024; border-color:#F48024;
+  box-shadow:0 8px 24px rgba(244,128,36,.35);
+}
+
+/* Kaggle */
+.social-icons a[aria-label="Kaggle"]:hover,
+.social-icons a[aria-label="Kaggle"]:focus-visible{
+  background:#20BEFF; border-color:#20BEFF;
+  box-shadow:0 8px 24px rgba(32,190,255,.35);
+}
+
+/* Slack */
+.social-icons a[aria-label="Slack"]:hover,
+.social-icons a[aria-label="Slack"]:focus-visible{
+  background:#4A154B; border-color:#4A154B;
+  box-shadow:0 8px 24px rgba(74,21,75,.35);
+}
+
+/* Medium */
+.social-icons a[aria-label="Medium"]:hover,
+.social-icons a[aria-label="Medium"]:focus-visible{
+  background:#00ab6c; border-color:#00ab6c;
+  box-shadow:0 8px 24px rgba(0,171,108,.35);
+}
+
+/* CodePen */
+.social-icons a[aria-label="CodePen"]:hover,
+.social-icons a[aria-label="CodePen"]:focus-visible{
+  background:#000000; border-color:#000000;
+  box-shadow:0 8px 24px rgba(0,0,0,.35);
+}
+
+/* CodeSandbox */
+.social-icons a[aria-label="CodeSandbox"]:hover,
+.social-icons a[aria-label="CodeSandbox"]:focus-visible{
+  background:#151515; border-color:#151515;
+  box-shadow:0 8px 24px rgba(21,21,21,.35);
+}
+
+/* Optional: HackerRank & LeetCode if you use them */
+.social-icons a[aria-label="HackerRank"]:hover,
+.social-icons a[aria-label="HackerRank"]:focus-visible{
+  background:#2EC866; border-color:#2EC866;
+  box-shadow:0 8px 24px rgba(46,200,102,.35);
+}
+.social-icons a[aria-label="LeetCode"]:hover,
+.social-icons a[aria-label="LeetCode"]:focus-visible{
+  background:#FFA116; border-color:#FFA116;
+  box-shadow:0 8px 24px rgba(255,161,22,.35);
+}
+
+
 
 /* ============================ */
 /* Animations & Misc            */
@@ -706,40 +1097,500 @@ form .btn2{ padding:12px 22px; font-size:16px; cursor:pointer; }
   .about-hero .scene-bg{ transform: none !important; }
 }
 
-/* Seamless header → about fade (mask) */
-#about.about-hero{
+/* ============================ */
+/* Seamless header → about fade */
+/* ============================ */
+#header     { position: relative; z-index: 0; opacity: var(--heroOpacity, 1);  transition: opacity .2s linear; }
+.about-hero { position: relative; z-index: 1; opacity: var(--aboutOpacity, 0); transition: opacity .2s linear; }
+
+/* Optional soft overlap+mask between sections */
+.about-hero{
   margin-top: -3vw;
   padding-top: calc(4rem + 9vw);
-  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 2.5vw, #000 7.5vw);
-  mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.45) 2.5vw, #000 7.5vw);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.45) 2.5vw,
+    #000 7.5vw
+  );
+          mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(0,0,0,.45) 2.5vw,
+    #000 7.5vw
+  );
 }
 @media (max-width: 680px){
-  #about.about-hero{
+  .about-hero{
     margin-top: -12vw;
     padding-top: calc(3.5rem + 12vw);
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 4vw, #000 10vw);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 4vw, #000 10vw);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,.4) 4vw, #000 10vw);
+  }
+}
+/* Gradient name without touching HTML */
+/* Gradient text for the hero name */
+.name-gradient{
+  font-weight: 700;
+  background-image: linear-gradient(90deg, #00ffbb, #00bfff, #15dee8)!important;
+  background-size: 160% auto;
+  background-position: 0% center;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: nameGradientSlide 6s linear infinite;
+}
+@keyframes nameGradientSlide { to { background-position: 160% center; } }
+
+/* Ensure the gradient wins on the hero name */
+#typing-text .name-gradient{
+  background-image: linear-gradient(90deg, #00fff2, #8a2be2, #6bd0ff);
+  background-size: 160% auto;
+  background-position: 0% center;
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-text-fill-color: transparent !important;
+          color: transparent !important;  /* for non-WebKit */
+  font-weight: 700;
+  text-shadow: none;
+  animation: nameGradientSlide 6s linear infinite;
+}
+
+/* If an element has BOTH classes, still force gradient */
+#typing-text .highlight-name.name-gradient{
+  -webkit-text-fill-color: transparent !important;
+          color: transparent !important;
+  text-shadow: none !important;
+}
+
+/* (Optional) Retire the old solid-color rule so it can’t fight */
+#typing-text .highlight-name{
+  color: inherit;            /* or comment this whole block out */
+  text-shadow: none;
+}
+@keyframes nameGradientSlide { to { background-position: 160% center; } }
+
+/* disable the old static caret on the first span */
+#typing-text::after,
+#typing-text.done-typing::after{
+  content: none !important;
+  border: 0 !important;
+  margin: 0 !important;
+  animation: none !important;
+}
+/* give the same mono/tech look to all parts */
+.subheadline,
+#typing-text,
+.name-gradient
+{
+  font-family: var(--font-mono);
+  letter-spacing: .02em;
+  font-weight: 400;
+  font-size: 14pt;
+}
+
+/* keep them purely inline to avoid any boxy spacing */
+#typing-text,
+.name-gradient,
+#contyping{
+  display: inline;      /* was inline-block on #typing-text */
+  margin: 0;            /* remove any margins */
+  padding: 0;           /* just in case */
+}
+
+/* 1) Anchor the hero block so it doesn't re-center as the line grows */
+#header {
+  min-height: 100svh;             /* keep full-height hero */
+  display: flex;
+  align-items: flex-start;         /* top-align vertically (prevents "push up") */
+  justify-content: center;         /* keep horizontal centering if desired */
+  padding-top: clamp(96px, 18vh, 160px); /* visual offset from the top */
+}
+
+/* If any inner container/grid was vertically centering, override that: */
+#header .header-content { align-content: start; }
+#header .intro-section {
+  align-items: flex-start;         /* if it's flex */
+}
+
+/* 2) Make the typing line not affect layout */
+.intro-text { position: relative; }
+
+.typing-wrap { position: relative; }
+
+/* Reserve the vertical space the typing line needs so siblings never move */
+.typing-reserve {
+  height: 2.8rem;                  /* ≈ one line at your current font-size */
+}
+
+/* Place the actual typing content on its own layer */
+.typing-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  max-width: min(75ch, 100%);
+  overflow: hidden;
+  white-space: nowrap;             /* no height growth while typing */
+  line-height: 2.8rem;             /* match the reserved height */
+}
+
+/* Keep the headline from micro-shifting due to margins */
+.headline { margin-block: 0 0.25rem; }
+
+/* Small screens: allow wrapping, but keep the height stable */
+@media (max-width: 640px) {
+  .typing-reserve { height: 5.6rem; } /* reserve ~two lines */
+  .typing-line { white-space: normal; line-height: 1.3; }
+}
+
+
+    /* crossfade support */
+#header{ opacity: var(--heroOpacity, 1); transition: opacity .2s linear; }
+.about-hero{ opacity: var(--aboutOpacity, 0); transition: opacity .2s linear; }
+
+    /* subheadline reveal */
+.subheadline{ opacity:0; transform: translateY(6px); transition: opacity .45s ease, transform .45s ease; }
+.subheadline.is-visible{ opacity:1; transform:none; }
+
+    /* ===== HERO PIN + TYPING NO-SHIFT (add to styles.css if you prefer) ===== */
+#header{
+      min-height:100svh;
+      display:flex;
+      align-items:flex-start;            /* keep stack anchored to top */
+      justify-content:center;
+      padding-top:clamp(96px,18vh,160px);
+}
+#header .header-content{ align-content:start; }
+#header .intro-section{ align-items:flex-start; }
+
+.intro-text{ position:relative; }
+.typing-wrap{ position:relative; }
+.typing-reserve{ height:2.8rem; }    /* reserve one line */
+.typing-line{
+      position:absolute; left:0; top:0;
+      max-width:min(75ch,100%);
+      overflow:hidden;
+      white-space:nowrap;                /* prevents height changes as it types */
+      line-height:2.8rem;                /* match reserve height */
+      text-indent:0;                     /* make sure first glyph isn't clipped */
+}
+.headline{ margin-block:0 .25rem; }  /* avoid micro-shifts from margins */
+
+    @media (max-width:640px){
+      .typing-reserve{ height:5.6rem; }  /* reserve ~two lines on small screens */
+      .typing-line{ white-space:normal; line-height:1.3; }
+}
+
+.typing-line { text-indent: 0; white-space: nowrap; overflow: hidden; }
+@media (max-width:640px){ .typing-line{ white-space: normal; } }
+
+.typing-line { white-space: nowrap; overflow: hidden; text-indent: 0; }
+@media (max-width:640px){ .typing-line{ white-space: normal; } }
+.typed-first-unit { display: inline; } /* ensure it sits right before the typed text */
+
+/* Ensure inline flow for typing siblings */
+.typing-line > * { position: static !important; display: inline; }
+.typing-line { text-indent: 0; white-space: nowrap; overflow: hidden; }
+@media (max-width:640px){ .typing-line{ white-space: normal; } }
+
+.about-hero{
+  --screen-w: 30.8vw;  /* width  */
+  --screen-h: 26.5vw;  /* height */
+  --screen-x: 29.8vw;  /* left   */
+  --screen-y: 18.0vw;  /* top    */
+}
+
+/* Position the white screen using those vars */
+.about-hero .screen{
+  position: absolute;
+  left: var(--screen-x);
+  top:  var(--screen-y);
+  width:  var(--screen-w);
+  height: var(--screen-h);
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Position the photographed screen (keep your CSS vars for x/y/size) */
+.about-hero .screen.screen--flex{
+  position: absolute;
+  left: var(--screen-x);            /* your overlay tuner vars */
+  top:  var(--screen-y);
+  width:  var(--screen-w);
+  height: var(--screen-h);
+  z-index: 2;
+
+  /* key: make the screen a column so tabs sit above content */
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+
+  /* safe padding inside the bezel */
+  --pad-x: clamp(20px, 3vw, 48px);
+  --pad-y: clamp(12px, 2.5vh, 24px);
+  padding: var(--pad-y) var(--pad-x) !important;
+
+  overflow: hidden; /* keep everything inside the white area */
+}
+
+/* Centered tab row (in normal flow, not absolute) */
+.about-hero .screen.screen--flex > .tab-titles{
+  position: static !important;
+  left: auto !important; right: auto !important; top: auto !important; bottom: auto !important;
+  transform: none !important;
+  width: 100% !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: clamp(12px, 1.8vw, 28px);
+  margin: 0 0 10px;      /* << space below tabs so they don’t overlap text */
+  padding: 0;
+  flex: 0 0 auto;
+  z-index: 3;
+}
+
+/* Tab buttons */
+.about-hero .screen.screen--flex .tab-links{
+  background: transparent; border: 0;
+  display: inline-flex; align-items: center;
+  margin: 0; padding: 8px 10px;
+  font-weight: 600; font-size: clamp(12px, 1.05vw, 16px);
+  color: #076993; opacity: .95; position: relative;
+}
+.about-hero .screen.screen--flex .tab-links:hover{ opacity: 1; }
+.about-hero .screen.screen--flex .tab-links::after{
+  content: ""; position: absolute; left: 50%; transform: translateX(-50%);
+  bottom: -6px; width: 0; height: 2px;
+  background: linear-gradient(90deg,#00fff2,#6bd0ff);
+  transition: width .25s ease;
+}
+.about-hero .screen.screen--flex .tab-links.active-link::after{ width: 60%; }
+
+/* Content fills the rest of the screen below the tabs */
+.about-hero .screen.screen--flex > .screen-content{
+  position: static !important;
+  margin: 0;                       /* don’t fight the tab margin */
+  flex: 1 1 auto;
+  overflow: auto;                   /* scroll only inside the laptop if needed */
+  text-align: left;
+  color: #0b0d10;
+}
+
+/* Panels */
+.about-hero .screen.screen--flex .tab-contents{ display: none; }
+.about-hero .screen.screen--flex .tab-contents.active-tab{ display: block; }
+
+/* Nice reading width */
+.about-hero .screen.screen--flex .tab-contents p{
+  max-width: 62ch; margin: 0 auto; line-height: 1.75;
+}
+
+/* (Optional) Hide vertical scrollbar inside the white screen if barely needed */
+.about-hero .screen.screen--flex > .screen-content{
+  scrollbar-width: thin;
+}
+.about-hero .screen.screen--flex > .screen-content::-webkit-scrollbar{
+  width: 6px;
+}
+.about-hero .screen.screen--flex > .screen-content::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,.25); border-radius: 6px;
+}
+
+/* Keep your debug outline feature */
+/*.about-hero.debug .screen{ outline: 2px dashed rgba(0,255,242,.55); }
+
+/* ===== About scene base ===== */
+.about-hero{
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: 4rem 2rem;
+  color: #fff;
+
+  /* overlay geometry (adjust or use your tuner) */
+  --screen-w: 36.00vw;
+  --screen-h: 26.50vw;
+  --screen-x: 34.40vw;
+  --screen-y: 20.40vw;
+
+}
+.about-hero .scene-bg{
+  position: absolute; inset: 0;
+  background: center / cover no-repeat url("images/about-laptop1.jpg");
+  background-position: center -100px;
+  z-index: 0;
+}
+
+/* Optional vignette */
+.about-hero::after{
+  content:""; position:absolute; inset:0; z-index:1; pointer-events:none;
+  background: radial-gradient(120% 80% at 50% 30%, transparent 38%, rgba(0,0,0,.55) 70%);
+}
+
+/* ===== Laptop “screen” overlay ===== */
+.about-hero .screen{
+  position: absolute;
+  left: var(--screen-x);
+  top:  var(--screen-y);
+  width:  var(--screen-w);
+  height: var(--screen-h);
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Debug outline (toggle via JS if you use the tuner) */
+.about-hero.debug .screen{ outline: 2px dashed rgba(0,255,242,.55); }
+
+/* Make the screen a flex column so tabs sit above the content */
+.about-hero .screen.screen--flex{
+  display: flex !important;
+  flex-direction: column !important;
+  box-sizing: border-box !important;
+  --pad-x: clamp(20px, 3vw, 48px);
+  --pad-y: clamp(12px, 2.5vh, 24px);
+  padding: var(--pad-y) var(--pad-x) !important;
+}
+
+/* ===== Tabs row (normal flow, centered) ===== */
+.about-hero .screen.screen--flex > .tab-titles{
+  position: static !important;
+  inset: auto !important;
+  transform: none !important;
+  width: 100% !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: clamp(12px, 1.8vw, 28px);
+  line-height: 1.25;
+  min-height: 40px;
+  margin: 0 0 12px;   /* space below tabs */
+  padding: 0;
+  z-index: 3;
+}
+.about-hero .screen.screen--flex .tab-links{
+  background: transparent; border: 0;
+  display: inline-flex; align-items: center;
+  margin: 0; padding: 8px 10px;
+  font-weight: 600; font-size: clamp(12px, 1.05vw, 16px);
+  color: #076993; opacity: .95; position: relative;
+  cursor: pointer;
+}
+.about-hero .screen.screen--flex .tab-links:hover{ opacity: 1; }
+.about-hero .screen.screen--flex .tab-links::after{
+  content:""; position:absolute; left:50%; transform:translateX(-50%);
+  bottom:-6px; width:0; height:2px;
+  background: linear-gradient(90deg,#00fff2,#6bd0ff);
+  transition: width .25s ease;
+}
+.about-hero .screen.screen--flex .tab-links.active-link::after{ width:60%; }
+
+/* ===== Content fills the rest of the screen ===== */
+.about-hero .screen.screen--flex > .screen-content{
+  position: static !important;
+  margin: 0;
+  flex: 1 1 auto;
+  overflow: auto;            /* scroll only inside the laptop if needed */
+  text-align: left;
+  color: #0b0d10;            /* dark text on light screen */
+  scrollbar-width: thin;     /* nicer inner scrollbar */
+}
+.about-hero .screen.screen--flex > .screen-content::-webkit-scrollbar{ width:6px; }
+.about-hero .screen.screen--flex > .screen-content::-webkit-scrollbar-thumb{
+  background: rgba(0,0,0,.25); border-radius: 6px;
+}
+
+/* Panels */
+.about-hero .screen.screen--flex .tab-contents{ display: none; }
+.about-hero .screen.screen--flex .tab-contents.active-tab{ display: block; }
+
+/* Readability */
+.about-hero .screen.screen--flex .tab-contents p{
+  max-width: 62ch; margin: 0 auto; line-height: 1.7;
+}
+.about-hero .screen.screen--flex .screen-list{
+  margin: .5rem auto; padding-left: 1.2rem; max-width: 62ch; color:#0b0d10;
+}
+.about-hero .screen.screen--flex .screen-list li{ list-style: disc; margin: .4rem 0; }
+.about-hero .screen.screen--flex .screen-list li span{
+  color:#56bfec; font-weight:600; margin-right:.25rem;
+}
+
+/* ===== Mobile fallback: let the overlay occupy most of the phone ===== */
+@media (max-width: 700px){
+  .about-hero{
+    --screen-x: 8vw;
+    --screen-y: 18vw;
+    --screen-w: 84vw;
+    --screen-h: 58vw;
+  }
+  .about-hero .screen.screen--flex{
+    --pad-x: clamp(14px, 4vw, 22px);
+    --pad-y: clamp(10px, 3.6vw, 18px);
   }
 }
 
-/* Reveal-on-scroll utility */
-.reveal-on-scroll{ opacity: 0; transform: translateY(12px) scale(.98); will-change: opacity, transform; }
-.reveal-on-scroll.is-visible{
-  opacity: 1; transform: none;
-  transition: opacity .6s ease, transform .6s cubic-bezier(.2,.8,.2,1);
-}
-.reveal-on-scroll .reveal-child{ opacity: 0; transform: translateY(8px); }
-.reveal-on-scroll.is-visible .reveal-child{ opacity: 1; transform:none; transition: opacity .5s ease .06s, transform .5s ease .06s; }
 
-/* 3D tilt fallback */
-.proj-card{ transform-style: preserve-3d; will-change: transform; transition: transform .2s ease; }
-.proj-card .accent{ transform: translateZ(12px); }
+#competencies{ padding:48px 0; }
+#competencies .sub-title{ margin-bottom:12px; }
+
+.competency-grid{
+  list-style:none; padding:0; margin:20px 0 0;
+  display:grid; gap:12px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+.competency-grid li{
+  background: linear-gradient(180deg, var(--panel), var(--panel-2));
+  border:1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding:14px 16px;
+  box-shadow: var(--shadow);
+  display:flex; flex-direction:column; gap:4px;
+}
+.competency-grid li span{ font-weight:600; color:var(--text); }
+.competency-grid li small{ color: var(--muted); line-height:1.5; }
+
+/* ========== Smooth scroll reveal ========== */
+.reveal-on-scroll{
+  opacity: 0;
+  transform: translateY(12px) scale(.98);
+  will-change: opacity, transform;
+}
+.reveal-on-scroll.is-visible{
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity .6s ease,
+    transform .6s cubic-bezier(.2,.8,.2,1);
+}
+
+/* Optional: slight stagger on children */
+.reveal-on-scroll .reveal-child{
+  opacity: 0; transform: translateY(8px);
+}
+.reveal-on-scroll.is-visible .reveal-child{
+  opacity: 1; transform: none;
+  transition: opacity .5s ease .06s, transform .5s ease .06s;
+}
+
+/* ========== 3D tilt for project cards ========== */
+.proj-card{
+  transform-style: preserve-3d;
+  will-change: transform;
+  transition: transform .2s ease;
+}
+.proj-card .accent{ transform: translateZ(12px); } /* tiny depth for accent */
+
+/* Fallback hover lift if motion is reduced */
 @media (prefers-reduced-motion: reduce){
   .proj-card{ transition: transform .2s ease; }
   .proj-card:hover{ transform: translateY(-6px); }
 }
 
-/* Neon underline helper */
+/* ========== Neon underline on hover (nav/buttons optional) ========== */
 a.neon-underline{
   background-image: linear-gradient(90deg,#00fff2,#6bd0ff);
   background-repeat: no-repeat;
@@ -749,45 +1600,36 @@ a.neon-underline{
 }
 a.neon-underline:hover{ background-size: 100% 2px; }
 
-/* Accessible focus rings */
-a, button, [role="button"], .proj-card a{ outline: none; }
+/* ========== Nicer focus rings on interactive elements ========== */
+a, button, [role="button"], .proj-card a{
+  outline: none;
+}
 a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
-  box-shadow: 0 0 0 3px rgba(0,255,242,.35); border-radius: 10px;
+  box-shadow: 0 0 0 3px rgba(0,255,242,.35);
+  border-radius: 10px;
 }
 
-/* Video wrapper */
-.proj-video{ position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
-.proj-video iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 12px; }
-
-/* ===== Modal (single source of truth) ===== */
-
-/* closed by default, non-blocking */
-.modal {
-  display: none;
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 5000;        /* above navbar */
+/* ========== Tech chips compact spacing tweak (if you added them) ========== */
+.tech-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; list-style:none; padding:0; }
+.tech-chips li{
+  font-size:12px; line-height:1; padding:6px 10px; border-radius:999px;
+  border:1px solid var(--border);
+  background: linear-gradient(180deg, rgba(0,255,242,.14), rgba(0,255,242,.06));
+  color:#e9faff;
 }
 
-/* open state */
-.modal.is-open {
-  display: grid;        /* centers the dialog */
-  place-items: center;
-  pointer-events: auto;
+/* ----- Modal (neon dark) ----- */
+.modal[hidden]{ display:none !important; }
+.modal{
+  position: fixed; inset: 0; z-index: 5000;
+  display: grid; place-items: center;
 }
-
-/* backdrop: dim only (no heavy blur) */
-.modal__backdrop {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,.55);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+.modal__backdrop{
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(3px);
 }
-
-/* dialog/panel (kept from your theme) */
-.modal__dialog, .modal__panel {
+.modal__dialog{
   position: relative;
   width: min(720px, 92vw);
   max-height: 88vh;
@@ -798,62 +1640,910 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
   box-shadow: 0 24px 60px rgba(0,0,0,.45);
   color: var(--text, #f5f7fa);
   animation: modalIn .18s ease;
-  pointer-events: auto; /* keep interactive */
 }
-
-.modal__accent{ position:absolute; inset: 0 0 auto 0; height: 3px;
-  background: linear-gradient(90deg, #00fff2, #6bd0ff); }
-
 @keyframes modalIn { from { transform: translateY(6px); opacity: 0; } }
 
-/* optional attribute support */
-.modal[hidden] { display: none !important; pointer-events: none !important; }
-
-/* page scroll lock only while open */
-body.modal-open { overflow: hidden; }
-
-/* ===== Modal: final safety overrides ===== */
-
-/* Closed by default */
-.modal,
-.modal[hidden],
-.modal:not(.is-open){
-  display: none !important;
-  pointer-events: none !important;
+.modal__accent{
+  position:absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, #00fff2, #6bd0ff);
 }
 
-/* Only when open */
-.modal.is-open{
-  display: grid !important;
-  place-items: center;
-  position: fixed;
-  inset: 0;
-  z-index: 5000;
-  pointer-events: auto;
+.modal__header, .modal__footer{ padding: 14px 18px; }
+.modal__body{ padding: 2px 18px 16px; }
+.modal__header{
+  display: flex; align-items: center; gap: 10px; justify-content: space-between;
+  border-bottom: 1px solid var(--border, rgba(255,255,255,.08));
+}
+.modal__header h3{
+  margin: 0; font-size: 20px; letter-spacing: .2px;
+  font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif;
+}
+.modal__close{
+  background: transparent; border: 0; color: #eafcff; font-size: 28px; line-height: 1;
+  cursor: pointer; border-radius: 8px; padding: 2px 8px;
+}
+.modal__close:hover{ background: rgba(0,255,242,.10); }
+
+.modal__footer{
+  display: flex; gap: 10px; justify-content: flex-end;
+  border-top: 1px solid var(--border, rgba(255,255,255,.08));
 }
 
-/* Backdrop: dim, NO BLUR */
-.modal__backdrop{
-  position: absolute; inset: 0;
-  background: rgba(0,0,0,.55) !important;
-  -webkit-backdrop-filter: none !important;
-  backdrop-filter: none !important;
-}
-
-/* Dialog block (works with either .modal__dialog or .modal__panel) */
-.modal__dialog, .modal__panel{
-  position: relative;
-  width: min(720px, 92vw);
-  max-height: 88vh;
-  overflow: auto;
-  border-radius: 14px;
-  background: linear-gradient(180deg, var(--panel,#1a1f27), var(--panel-2,#222a35));
+/* Reuse your button styles */
+.modal .btn-ghost,
+.modal .btn-cta{
+  display: inline-flex; align-items:center; justify-content:center;
+  padding: 10px 14px; border-radius: 10px; font-size: 13px; text-decoration: none;
   border: 1px solid var(--border, rgba(255,255,255,.08));
-  box-shadow: 0 24px 60px rgba(0,0,0,.45);
-  color: var(--text,#f5f7fa);
+}
+.modal .btn-ghost{ color:#e7fbff; background: rgba(0,0,0,.15); }
+.modal .btn-ghost:hover{ background: rgba(0,255,242,.10); }
+.modal .btn-cta{
+  color:#051314;
+  background: linear-gradient(90deg, #00fff2, #6bd0ff);
+  border-color: transparent;
+  box-shadow: 0 8px 22px rgba(0,255,242,.20);
+}
+.modal .btn-cta:hover{ box-shadow: 0 10px 28px rgba(0,255,242,.28); }
+
+@media (max-width: 520px){
+  .modal__dialog{ width: 94vw; }
+  .modal__header h3{ font-size: 18px; }
 }
 
-/* Only lock scroll while modal is open */
-html, body{ overflow-y: auto; }          /* reset any global locks */
-body.modal-open{ overflow: hidden; }     /* lock only when open */
+/* Base: gray icons, subtle border, transparent background */
+.social-icons a{
+  display:inline-grid;
+  place-items:center;
+  width:40px; height:40px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:10px;
+  color:#a9b6c3;                 /* gray glyph */
+  background:transparent;
+  transition: transform .22s ease, color .18s ease,
+              background .18s ease, border-color .18s ease, box-shadow .22s ease;
+}
+.social-icons a i{ color: inherit; }   /* icon inherits link color */
+
+/* Hover/focus lift */
+.social-icons a:hover,
+.social-icons a:focus-visible{
+  transform: translateY(-4px);
+  outline: none;
+}
+
+/* ---------- Brand fills on hover/focus ---------- */
+
+/* LinkedIn */
+.social-icons a[href*="linkedin.com"]:hover,
+.social-icons a[href*="linkedin.com"]:focus-visible{
+  background:#0A66C2; border-color:#0A66C2; color:#fff;
+  box-shadow:0 8px 24px rgba(10,102,194,.35);
+}
+
+/* Facebook */
+.social-icons a[href*="facebook.com"]:hover,
+.social-icons a[href*="facebook.com"]:focus-visible{
+  background:#1877F2; border-color:#1877F2; color:#fff;
+  box-shadow:0 8px 24px rgba(24,119,242,.35);
+}
+
+/* GitHub */
+.social-icons a[href*="github.com"]:hover,
+.social-icons a[href*="github.com"]:focus-visible{
+  background:#24292e; border-color:#24292e; color:#fff;
+  box-shadow:0 8px 24px rgba(36,41,46,.35);
+}
+
+/* Slack (cover app/join/workspace URLs) */
+.social-icons a[href*="slack.com"]:hover,
+.social-icons a[href*="slack.com"]:focus-visible,
+.social-icons a[href*="join.slack.com"]:hover,
+.social-icons a[href*="join.slack.com"]:focus-visible,
+.social-icons a[href*="app.slack.com"]:hover,
+.social-icons a[href*="app.slack.com"]:focus-visible{
+  background:#4A154B; border-color:#4A154B; color:#fff;
+  box-shadow:0 8px 24px rgba(74,21,75,.35);
+}
+
+/* Accessibility: clear focus ring for keyboard users on dark bg */
+.social-icons a:focus-visible{
+  box-shadow:0 0 0 3px rgba(0,255,242,.25), 0 10px 24px rgba(0,0,0,.35);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .social-icons a{ transition: background .18s, border-color .18s, color .18s; }
+  .social-icons a:hover, .social-icons a:focus-visible{ transform:none; }
+}
+/* YouTube */
+.social-icons a[href*="youtube.com"]:hover,
+.social-icons a[href*="youtube.com"]:focus-visible,
+.social-icons a[href*="youtu.be"]:hover,
+.social-icons a[href*="youtu.be"]:focus-visible{
+  background:#FF0000;            /* YouTube red */
+  border-color:#FF0000;
+  color:#fff;                    /* icon turns white */
+  box-shadow:0 8px 24px rgba(255,0,0,.35);
+}
+
+/* Center the clock using a 3-column grid on desktop */
+@media (min-width: 769px){
+  .site-nav{
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* left | center | right */
+    align-items: center;
+  }
+  .site-nav .logo{ margin:0 !important; justify-self: start; }
+  #sidemenu{ margin:0 !important; justify-self: end; }
+  .nav-extras.nav-clock{ grid-column: 2; justify-self: center; }
+}
+
+/* Hide clock on narrow screens if you prefer (optional) */
+@media (max-width: 768px){
+  .nav-extras.nav-clock{ display: none; }
+}
+
+/* Base pill (reuse your style) */
+.pill{
+  display:inline-grid; grid-auto-flow:column; align-items:center; gap:8px;
+  height:36px; padding:0 12px; font-size:14px;
+  color:#a9b6c3; background:transparent; border:1px solid rgba(255,255,255,.12);
+  border-radius:999px;
+  transition: transform .2s, background .18s, border-color .18s, color .18s, box-shadow .22s;
+}
+.pill i{ color:inherit; }
+
+/* Digital-alarm look */
+.pill--digital{
+  height:40px; padding:0 14px;
+  font-family: var(--font-mono, 'Share Tech Mono', ui-monospace, SFMono-Regular, Menlo, monospace);
+  letter-spacing:.08em; font-variant-numeric: tabular-nums;
+  color:#e8fdff;
+  background:
+    radial-gradient(120% 180% at 50% 0, rgba(0,255,242,.10), rgba(0,0,0,0)),
+    rgba(5,10,14,.85);
+  border:1px solid rgba(0,255,242,.35);
+  box-shadow:
+    inset 0 0 0 2px rgba(0,255,242,.10),
+    0 0 18px rgba(0,255,242,.12),
+    0 8px 24px rgba(0,0,0,.35);
+  text-shadow: 0 0 6px rgba(0,255,242,.35);
+}
+.pill--digital:hover,
+.pill--digital:focus-visible{
+  transform: translateY(-3px);
+  background:
+    radial-gradient(120% 180% at 50% 0, rgba(0,255,242,.16), rgba(0,0,0,0)),
+    rgba(5,10,14,.92);
+  border-color:#00fff2;
+  box-shadow:
+    inset 0 0 0 2px rgba(0,255,242,.16),
+    0 0 20px rgba(0,255,242,.20),
+    0 10px 28px rgba(0,0,0,.45);
+  outline:none;
+}
+
+/* Give the hero extra room on the right side on mobile */
+@media (max-width: 768px){
+  /* increase inner padding of the hero grid */
+  .intro-section{
+    padding-left:  max(6vw, 18px, env(safe-area-inset-left));
+    padding-right: max(10vw, 28px, env(safe-area-inset-right)); /* more on the right */
+    gap: clamp(16px, 4vw, 28px);
+    grid-template-columns: 1fr;  /* stack photo over text if you like; remove if not wanted */
+  }
+
+  /* keep the text flush-left and not stretched */
+  .intro-text{
+    justify-self: start;
+    text-align: left;
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  /* typing line already wraps on mobile; ensure it does */
+  .typing-line{
+    white-space: normal;
+    line-height: 1.3;
+  }
+}
+
+/* If the right edge still feels tight on very small phones, add this extra nudge */
+@media (max-width: 420px){
+  .intro-section{
+    padding-right: max(12vw, 32px, env(safe-area-inset-right));
+  }
+}
+
+/* Desktop: allow the typing line to wrap, and reserve space for 2 lines */
+@media (min-width: 900px){
+  .typing-line{
+    white-space: normal !important;    /* was nowrap */
+    line-height: 1.35;
+  }
+  .typing-reserve{
+    height: calc(1.35em * 2);  /* ~two lines worth of space */
+  }
+}
+
+/* Safety: don't nudge the first span left (prevents clipping the first letter) */
+@media (min-width: 900px){
+  .intro-text #typing-text{ margin-left: 0 !important; }
+}
+
+/* Optional micro-pad so no edge clipping across browsers */
+.typing-line{ padding-left: 0.1ch; }
+
+/* ===== About "laptop screen" mobile tune ===== */
+@media (max-width: 680px){
+
+  /* 1) Lower the overlay a bit and widen it slightly on phones */
+  .about-hero{
+    --screen-left: 10%;
+    --screen-top:  16%;   /* was ~12–13%; this drops the whole white screen */
+    --screen-width: 80%;
+  }
+
+  /* 2) Inside the white screen: more top padding so text isn't jammed up */
+  .about-hero .screen.screen--flex{
+    --pad-y: clamp(18px, 4.2vh, 28px);
+    padding-top: calc(var(--pad-y) + 6px);
+  }
+
+  /* 3) Make sure tabs are NOT absolutely positioned on mobile */
+  .about-hero .screen.screen--flex > .tab-titles{
+    position: static !important;
+    left: auto !important; right: auto !important; top: auto !important;
+    transform: none !important;
+    margin-bottom: 8px;
+    justify-content: center;
+    gap: clamp(10px, 3.2vw, 18px);
+  }
+
+  /* 4) Give the content a touch of breathing room below the tabs */
+  .about-hero .screen.screen--flex > .screen-content{
+    margin-top: 6px !important;
+  }
+
+  /* (Optional) slightly smaller tab labels so they don’t wrap awkwardly */
+  .about-hero .tab-links{
+    padding: 6px 8px !important;
+    font-size: clamp(12px, 3.6vw, 15px);
+  }
+}
+
+/* ===== Contain About content inside the simulated laptop screen (mobile) ===== */
+@media (max-width: 680px){
+  /* Slight position/size tune for the overlay box */
+  .about-hero{
+    --screen-left: 10%;
+    --screen-top:  17%;   /* nudge down a touch */
+    --screen-width: 80%;
+  }
+
+  /* The white screen: fixed height + hidden overflow */
+  .about-hero .screen.screen--flex{
+    height: clamp(320px, 50vw, 420px);           /* <- adjust this if needed */
+    padding: clamp(16px, 3.8vh, 24px) clamp(18px, 4vw, 26px);
+    box-sizing: border-box;
+    overflow: hidden;                             /* keep everything inside */
+  }
+
+  /* Tabs in normal flow */
+  .about-hero .screen.screen--flex > .tab-titles{
+    position: static !important;
+    left: auto !important; right: auto !important; top: auto !important;
+    transform: none !important;
+    flex: 0 0 auto;
+    margin: 0 0 6px;
+    justify-content: center;
+    gap: clamp(10px, 3.2vw, 18px);
+  }
+
+  /* Content: fills the remainder and scrolls INSIDE the white area */
+  .about-hero .screen.screen--flex > .screen-content{
+    min-height: 0;               /* CRITICAL for flex children */
+    flex: 1 1 auto;
+    overflow: auto;              /* scroll only the inner panel */
+    overscroll-behavior: contain;
+  }
+
+  /* Comfortable text sizing inside the panel */
+  .about-hero .tab-contents{ padding-right: 6px; }
+  .about-hero .tab-contents p{
+    margin: 0;
+    font-size: clamp(13px, 3.6vw, 15px);
+    line-height: 1.45;
+  }
+}
+
+/* Also keep containment on larger screens */
+.about-hero .screen.screen--flex{ overflow: hidden; }
+.about-hero .screen.screen--flex > .screen-content{ min-height: 0; }
+
+/* ===== About screen sizing (MOBILE) ===== */
+@media (max-width: 680px){
+  /* Narrow the white screen and drop it slightly */
+  .about-hero{
+    --screen-left: 10%;      /* move right edge in a bit */
+    --screen-top:  18%;      /* nudge down if needed */
+    --screen-width: 72%;     /* ↓ width (try 72–78%) */
+  }
+
+  /* Lower panel height to fit inside the bezel */
+  .about-hero .screen.screen--flex{
+    height: clamp(280px, 46vw, 360px);   /* ↓ overall height (try 44–50vw) */
+    padding: clamp(14px, 3.2vh, 20px) clamp(16px, 4vw, 22px);
+    overflow: hidden;
+  }
+
+  /* Keep text comfortably inside the bezel and scroll within */
+  .about-hero .screen.screen--flex > .screen-content{
+    max-width: 92%;               /* ← narrow content a touch */
+    margin: 6px auto 0;
+    min-height: 0;
+    flex: 1 1 auto;
+    overflow: auto;
+  }
+}
+
+/* ===== About screen sizing (DESKTOP) ===== */
+@media (min-width: 681px){
+  .about-hero{
+    /* trim width slightly so it matches the photo’s inner screen */
+    --screen-left: 20.8%;
+    --screen-top:  25.2%;
+    --screen-width: 29.6%;     /* ↓ a bit from your current value */
+  }
+  .about-hero .screen.screen--flex{
+    height: 44.5%;             /* ↓ from ~46.5% if needed */
+    overflow: hidden;
+  }
+  .about-hero .screen.screen--flex > .screen-content{
+    max-width: 88%;            /* tighter content to avoid touching edges */
+    margin: 8px auto 0;
+  }
+}
+
+/* Video wrapper keeps aspect ratio */
+.proj-video {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+}
+.proj-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 12px;
+}
+
+/* Overlay version that doesn’t block video clicks */
+.work.video-overlay .layer {
+  pointer-events: none; /* let clicks go through to iframe */
+  background: linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,0.35) 60%);
+}
+
+/* ------- MOBILE TUNE: keep tabs + content inside laptop screen ------- */
+@media (max-width: 680px){
+
+  /* 1) Reposition & resize the photographed screen area */
+  .about-hero{
+    /* tweak these until the outline hugs the real screen */
+    --screen-left: 11.6%;
+    --screen-top:  12.0%;
+    --screen-width: 77.0%;
+  }
+  .about-hero .screen{
+    height: 49%;          /* mobile screen is a bit shorter */
+    --pad: 10px;          /* less inner padding on small screens */
+    --tabsH: 38px;        /* a touch taller for finger-friendly tabs */
+
+    /* TEMP: turn this on to align, then delete it */
+    outline: 2px dashed rgba(255,255,255,.45);
+  }
+
+  /* 2) Tabs row: start at left, allow scrolling if tight */
+  .about-hero .tab-titles{
+    justify-content: flex-start;     /* start at left, not spaced out */
+    gap: 12px;
+    overflow-x: auto;                /* scrollable if they don’t all fit */
+    scrollbar-width: none;
+  }
+  .about-hero .tab-titles::-webkit-scrollbar{ display: none; }
+
+  .about-hero .tab-links{
+    font-size: 12px;
+    margin-left: 0;
+    margin-right: 0;
+    white-space: nowrap;
+  }
+
+  /* 3) Content area sits fully inside the photographed screen */
+  .about-hero .screen-content{
+    top: calc(var(--pad) + var(--tabsH) + 4px);  /* leave room for tabs */
+    left: var(--pad);
+    right: var(--pad);
+    bottom: var(--pad);
+    overflow: hidden;   /* nothing spills out of the photo screen */
+  }
+
+  /* 4) Panels scroll internally (slim scrollbar) */
+  .about-hero .tab-contents{
+    height: 100%;
+    overflow: auto;
+    padding-right: 4px;               /* avoid scrollbar overlap */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0,0,0,.25) transparent;
+  }
+  .about-hero .tab-contents::-webkit-scrollbar{ width:6px; }
+  .about-hero .tab-contents::-webkit-scrollbar-track{ background:transparent; }
+  .about-hero .tab-contents::-webkit-scrollbar-thumb{ background:rgba(0,0,0,.25); border-radius:6px; }
+
+  /* 5) Text sizing inside the screen */
+  .about-hero .type-target,
+  .about-hero .screen-content,
+  .about-hero .screen .tab-contents{
+    font-size: 14px;
+    line-height: 1.5;
+  }
+}
+
+.about-svg { max-width: 100%; height: auto; display: block; }
+
+.screen-content {
+  height: 100%;
+  overflow: auto;
+  color: #fff;
+  background: rgba(0,0,0,0.45); /* optional while aligning for readability */
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 6px;
+}
+
+.tab-titles {
+  display: flex; gap: 8px; margin-bottom: 8px; flex-wrap: wrap;
+}
+.tab-links {
+  font-size: 12px; color: #00fff2; background: transparent; border: 0; cursor: pointer;
+}
+.tab-contents { display: none; }
+.tab-contents.active-tab { display: block; }
+
+.align-hud {
+  position: fixed; left: 12px; bottom: 12px;
+  background: rgba(0,0,0,0.6); color: #fff; font: 12px/1.3 system-ui, sans-serif;
+  padding: 8px 10px; border-radius: 8px; z-index: 99999;
+}
+
+.about-hero { position: relative; overflow: hidden; z-index: 1; }
+.about-svg { display: block; max-width: 100%; height: auto; }
+.about-hero::after { z-index: 0; } /* vignette stays inside About only */
+
+/* ==== MOBILE FIX PACK for the SVG hero ==== */
+
+/* 1) Make the hero escape any padded/centered parent and fill the viewport */
+#about.about-hero-svg {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;          /* escape .container gutters */
+  margin-right: -50vw;
+  width: 100vw;
+  height: 100vh;               /* fallback */
+  min-height: 100vh;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+@supports (height: 100dvh) {
+  #about.about-hero-svg {
+    height: 100dvh;            /* correct on mobile (accounts for URL bar) */
+    min-height: 100dvh;
+  }
+}
+@supports (height: 100svh) {
+  #about.about-hero-svg {
+    height: 100svh;            /* safe variant */
+    min-height: 100svh;
+  }
+}
+
+/* 2) Defeat framework reset: many themes do svg,img { height:auto } */
+#about.about-hero-svg .about-svg {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;     /* critical: fill the hero's height on mobile */
+}
+
+/* 3) Ensure the <image> inside the SVG covers fully */
+#about.about-hero-svg image {
+  width: 100%;
+  height: 100%;
+}
+
+/* Optional: if your site sets section padding globally, nuke it here */
+#about.about-hero-svg,
+#about.about-hero-svg section {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Baseline */
+html, body { height: 100%; }
+body { margin: 0; overflow-x: hidden; }
+
+/* Full-bleed hero (escapes any parent container limits) */
+.about-hero-svg {
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+  height: 100vh;                 /* fallback */
+  overflow: hidden;
+}
+@supports (height: 100dvh) { .about-hero-svg { height: 100dvh; } }
+@supports (height: 100svh) { .about-hero-svg { height: 100svh; } }
+
+.about-svg { width: 100%; height: 100%; display: block; }
+
+/* Content inside the laptop screen */
+.svg-screen{
+  width: 100%; height: 100%;
+  display: flex; flex-direction: column;
+  box-sizing: border-box;
+  padding: 12px 14px;
+  font-family: Poppins, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  color: #0b0d10;
+  background: transparent;
+}
+
+/* Tabs */
+.svg-tabs{
+  display: flex; gap: 12px;
+  justify-content: center; align-items: center;
+  padding: 6px 4px 8px; user-select: none;
+}
+.svg-link{
+  all: unset; cursor: pointer;
+  font-weight: 700;
+  font-size: clamp(12px, 2.8vw, 15px);  /* a bit larger on phones */
+  letter-spacing: .2px;
+  color: #00fff2;
+  padding: 2px 6px; position: relative;
+}
+.svg-link:hover{ color:#8a2be2; }
+.svg-link.svg-active::after{
+  content:""; position:absolute; left:50%; bottom:-3px; transform:translateX(-50%);
+  width:60%; height:2px; border-radius:2px;
+  background: linear-gradient(90deg,#00fff2,#8a2be2);
+}
+
+/* Content */
+.svg-content{
+  flex: 1; overflow: auto;
+  padding: 6px 6px 8px;
+  line-height: 1.45;
+  font-size: clamp(13px, 3.4vw, 16px);
+  color:#0b0d10;
+  text-shadow: 0 0 6px rgba(0,0,0,.18);
+}
+
+/* Panels toggle */
+.svg-panel{ display:none; }
+.svg-panel.svg-show{ display:block; }
+
+  .svg-content{
+    /* top-align vertically, keep horizontal centering */
+    display: grid;
+    place-items: start center;  /* = align-items: start; justify-items: center; */
+    align-content: start;       /* ensures multi-line blocks stay up top */
+    padding-top: 4px;           /* tiny breathing room */
+    margin: left 10px; 
+  }
+  .svg-content p { margin: 0; } /* no extra paragraph gap */
+}
+
+  .svg-screen{
+    display: flex;               /* override any grid from earlier */
+    flex-direction: column;
+    align-items: center;         /* horizontal center */
+    /*justify-content: center;      vertical center */
+    gap: 10px;                   /* tight space between tabs and text */
+  }
+
+  /* Tabs: keep centered */
+  .svg-tabs{
+    justify-content: center;
+    margin: 0;                   /* no extra top/bottom gap */
+    padding: 0;
+  }
+
+  /* Content: DO NOT grow; center the text */
+  .svg-content{
+    flex: 0 0 auto !important;   /* stop flex:1 expansion that creates the big gap */
+    display: grid;
+    place-items: center;          /* center both axes */
+    text-align: left;
+    padding: 0;                   /* keep it snug under tabs */
+  }
+
+  .svg-content p{ margin: 0; }   /* remove default paragraph top margin */
+
+  /* Ensure the SVG fills the hero */
+  #about > svg.about-svg { height: 100% !important; }
+
+  /* 2) Neutralize any image transforms added earlier */
+  #about .bg-zoom { transform: none !important; }   /* if you used the bg-zoom class */
+  .bg-mobile { display: none !important; }          /* if you tried the mobile alt image */
+  .bg-desktop { display: block !important; }
+}
+
+/* --- OPTIONAL: slight left bias without changing zoom --- */
+@media (max-width: 768px) {
+  #about.about-hero-svg { overflow: hidden; }
+  #about > svg.about-svg {
+    transform: translateX(-3vw);          /* tweak: -1vw … -6vw */
+    width: calc(100% + 6vw);              /* ~2× the shift so no right gap */
+  }
+}
+
+@media (max-width: 900px) {
+  /* Lock hero height so it doesn't grow/shrink while scrolling */
+  #about.about-hero-svg {
+    height: 100svh !important;
+    min-height: 100svh !important;
+  }
+  /* Keep the SVG filling that fixed height */
+  #about > svg.about-svg { height: 100% !important; }
+}
+
+/* Alternative: custom bullets for perfect alignment */
+.svg-content ul{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-width: 92%;
+  margin-inline: auto;
+  text-align: left;
+}
+
+.svg-content li{
+  display: grid;
+  grid-template-columns: auto 1fr;  /* bullet | text */
+  column-gap: 10px;
+  align-items: start;
+  margin: 4px 0 6px;
+}
+
+.svg-content li::before{
+  content: "•";
+  font-weight: 700;
+  line-height: 1;
+  color: #00fff2;                 /* matches your tab accent */
+  transform: translateY(1px);
+}
+
+/* === SVG screen alignment fixes === */
+.svg-screen {
+  /* keep everything inside the photographed screen */
+  box-sizing: border-box;
+  padding: clamp(6px, 0.9vw, 12px);  /* tiny, consistent inset */
+  margin: 0;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* reset default element margins inside the screen */
+.svg-screen p,
+.svg-screen h1, .svg-screen h2, .svg-screen h3,
+.svg-screen ul, .svg-screen ol {
+  margin: 0 0 0.55em 0;
+  padding: 0;
+}
+
+/* tab row – no extra vertical space */
+.svg-tabs {
+  margin: 0;
+  padding: 0 0 clamp(4px, 0.6vw, 8px) 0; /* small gap under tabs */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.1vw, 14px);
+}
+
+/* tab buttons */
+.svg-link {
+  all: unset;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: clamp(11px, 1vw, 14px);
+  letter-spacing: .2px;
+  color: #00fff2;
+  padding: 2px 4px;     /* very small to avoid shifting */
+  position: relative;
+}
+.svg-link:hover { color: #8a2be2; }
+.svg-link.svg-active::after {
+  content:"";
+  position:absolute;
+  left:50%; bottom:-3px; transform:translateX(-50%);
+  width:60%; height:2px; border-radius:2px;
+  background: linear-gradient(90deg, #00fff2, #8a2be2);
+}
+
+/* content area fills the remaining height exactly */
+.svg-content {
+  flex: 1;
+  min-height: 0;              /* critical for flex overflow in some browsers */
+  overflow: auto;
+  text-align: left;
+  padding: 0;                 /* remove extra padding that pushed content */
+  line-height: 1.45;
+  font-size: clamp(12px, 1.05vw, 15px);
+  color: #0b0d10;
+  text-shadow: 0 0 6px rgba(0,0,0,.18);
+}
+
+/* optional slimmer scrollbar inside the screen */
+.svg-content { scrollbar-width: thin; scrollbar-color: rgba(0,0,0,.25) transparent; }
+.svg-content::-webkit-scrollbar { width: 6px; }
+.svg-content::-webkit-scrollbar-thumb { background: rgba(0,0,0,.25); border-radius: 6px; }
+
+/* ensure the photo always fills without black bars */
+.about-svg image {
+  width: 100%;
+  height: 100%;
+  /* zoom/crop to fill section while maintaining aspect */
+  preserveAspectRatio: xMidYMid slice;
+}
+
+/* Slight safe zone inside the laptop screen */
+.svg-screen {
+  box-sizing: border-box;
+  padding: clamp(8px, 1vw, 14px);  /* ← increase padding */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tabs row adjustment */
+.svg-tabs {
+  margin: 0 0 6px 0;   /* small gap below tabs */
+  padding: 0;
+  justify-content: center;
+  gap: clamp(8px, 1.2vw, 14px);
+}
+
+/* Content area inset */
+.svg-content {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 4px 8px;   /* ← small left/right padding to keep text off bezel */
+  font-size: clamp(12px, 1.05vw, 15px);
+  line-height: 1.45;
+  color: #0b0d10;
+  text-shadow: 0 0 6px rgba(0,0,0,.18);
+}
+
+/* Reset p and list margins */
+.svg-content p,
+.svg-content ul,
+.svg-content li {
+  margin: 0 0 0.5em 0;
+  padding: 0;
+}
+
+/* Aligned key–value rows inside the laptop screen */
+.svg-kv{
+  display: grid;
+  grid-template-columns: max-content 1fr;   /* label auto, value fills */
+  column-gap: clamp(8px, 1.2vw, 16px);
+  row-gap: .45em;
+  align-items: baseline;                    /* keep baselines aligned */
+  margin: 0;
+}
+
+.svg-kv dt{
+  font-weight: 700;
+  margin: 0;
+  white-space: nowrap;                      /* keep label on one line */
+}
+
+.svg-kv dd{
+  margin: 0;                                /* remove default dd margin */
+}
+
+/* Stack on narrow screens */
+@media (max-width: 520px){
+  .svg-kv{ grid-template-columns: 1fr; }
+  .svg-kv dt{ margin-top: .4em; }
+}
+
+/* Key–value rows inside the laptop screen */
+.svg-kv{
+  display: grid;
+
+  /* Left label column scales with viewport:
+     - never smaller than 84px
+     - usually around 28vw on tiny phones
+     - caps at 160px on big screens
+  */
+  grid-template-columns: clamp(84px, 28vw, 160px) 1fr;
+
+  column-gap: clamp(8px, 2.5vw, 16px);
+  row-gap: .45em;
+  align-items: baseline;   /* align baselines of label/value */
+  margin: 0;
+}
+
+.svg-kv dt{
+  margin: 0;
+  font-weight: 700;
+  white-space: nowrap;     /* keep label on one line */
+}
+
+.svg-kv dd{
+  margin: 0;
+  /* make long words wrap nicely on small widths */
+  overflow-wrap: anywhere;
+}
+
+/* Optional: slightly smaller type on very small screens */
+@media (max-width: 420px){
+  .svg-content { font-size: 12px; } /* or whatever fits your screen */
+}
+.typing-line{
+  display:inline-block;
+  white-space:pre-wrap;    /* respect the <br> we reveal */
+  line-height:1.45;
+  max-width:65ch;
+  color:#e8f0f8;           /* or your site color */
+}
+
+/* Keep "I'm Mohamed" on the same line (even on mobile) */
+.nowrap{ white-space:nowrap; }
+
+/* Optional: gradient name style */
+.name-gradient{
+  background: linear-gradient(90deg, #00fff2, #6bd0ff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+.name-gradient::before,
+.name-gradient::after{ content:none !important; } /* prevent auto text via CSS */
+
+/* Blinking caret */
+.caret{
+  display:inline-block;
+  width:0.65em;
+  height:1em;
+  background: currentColor;
+  margin-left: 2px;
+  animation: caret-blink 1s steps(1,end) infinite;
+}
+@keyframes caret-blink { 50% { opacity:0; } }
+
+@media (prefers-reduced-motion: reduce){
+  .caret{ animation:none; }
+}
+
+.terminal-font {
+  font-family: 'VT323', monospace;
+  font-size: clamp(18px, 2.5vw, 28px);
+  color: #ffffff;          /* green phosphor */
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
 
