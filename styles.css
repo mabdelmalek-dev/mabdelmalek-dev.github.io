@@ -811,3 +811,49 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
 
 /* page scroll lock only while open */
 body.modal-open { overflow: hidden; }
+
+/* ===== Modal: final safety overrides ===== */
+
+/* Closed by default */
+.modal,
+.modal[hidden],
+.modal:not(.is-open){
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* Only when open */
+.modal.is-open{
+  display: grid !important;
+  place-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  pointer-events: auto;
+}
+
+/* Backdrop: dim, NO BLUR */
+.modal__backdrop{
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,.55) !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+
+/* Dialog block (works with either .modal__dialog or .modal__panel) */
+.modal__dialog, .modal__panel{
+  position: relative;
+  width: min(720px, 92vw);
+  max-height: 88vh;
+  overflow: auto;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--panel,#1a1f27), var(--panel-2,#222a35));
+  border: 1px solid var(--border, rgba(255,255,255,.08));
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  color: var(--text,#f5f7fa);
+}
+
+/* Only lock scroll while modal is open */
+html, body{ overflow-y: auto; }          /* reset any global locks */
+body.modal-open{ overflow: hidden; }     /* lock only when open */
+
