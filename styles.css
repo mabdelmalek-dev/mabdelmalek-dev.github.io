@@ -2793,3 +2793,22 @@ html, body { overflow-x: hidden; }
 }
 .btn:hover{ background: #1d2a3d; }
 
+/* Hard stop: no horizontal scroll on phones */
+html, body { overflow-x: hidden !important; }
+
+/* Canonical full-bleed for the About hero */
+.about-hero-svg{
+  margin-left: calc(50% - 50svw) !important;
+  margin-right: calc(50% - 50svw) !important;
+  width: 100svw !important;
+}
+
+/* Kill old mobile nudge that caused overflow */
+@media (max-width:768px){
+  .bg-img{
+    width: 100% !important;
+    transform: none !important;
+  }
+}
+
+
