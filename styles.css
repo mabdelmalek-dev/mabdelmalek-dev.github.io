@@ -759,45 +759,55 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
 .proj-video{ position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; box-shadow: 0 8px 24px rgba(0,0,0,0.35); }
 .proj-video iframe{ position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 12px; }
 
-/* Modal (single, consolidated) */
-.modal[hidden]{ display:none !important; }
-.modal{ position: fixed; inset: 0; z-index: 5000; display: grid; place-items: center; }
-.modal__backdrop{ position:absolute; inset:0; background: rgba(0,0,0,.6); backdrop-filter: blur(3px); }
-.modal__dialog{
-  position: relative; width: min(720px, 92vw); max-height: 88vh; overflow: auto;
-  border-radius: 14px; background: linear-gradient(180deg, var(--panel), var(--panel-2));
-  border: 1px solid var(--border); box-shadow: 0 24px 60px rgba(0,0,0,.45); color: var(--text);
-  animation: modalIn .18s ease;
-}
-@keyframes modalIn { from { transform: translateY(6px); opacity: 0; } }
-.modal__accent{ position:absolute; inset: 0 0 auto 0; height: 3px; background: linear-gradient(90deg, #00fff2, #6bd0ff); }
-.modal__header, .modal__footer{ padding: 14px 18px; }
-.modal__body{ padding: 2px 18px 16px; }
-.modal__header{
-  display: flex; align-items: center; gap: 10px; justify-content: space-between;
-  border-bottom: 1px solid var(--border);
-}
-.modal__header h3{ margin: 0; font-size: 20px; letter-spacing: .2px; font-family: 'Plus Jakarta Sans','Poppins',system-ui,sans-serif; }
-.modal__close{
-  background: transparent; border: 0; color: #eafcff; font-size: 28px; line-height: 1;
-  cursor: pointer; border-radius: 8px; padding: 2px 8px;
-}
-.modal__close:hover{ background: rgba(0,255,242,.10); }
-.modal__footer{ display: flex; gap: 10px; justify-content: flex-end; border-top: 1px solid var(--border); }
-.modal .btn-ghost, .modal .btn-cta{
-  display: inline-flex; align-items:center; justify-content:center;
-  padding: 10px 14px; border-radius: 10px; font-size: 13px; text-decoration: none;
-  border: 1px solid var(--border);
-}
-.modal .btn-ghost{ color:#e7fbff; background: rgba(0,0,0,.15); }
-.modal .btn-ghost:hover{ background: rgba(0,255,242,.10); }
-.modal .btn-cta{
-  color:#051314; background: linear-gradient(90deg, #00fff2, #6bd0ff); border-color: transparent;
-  box-shadow: 0 8px 22px rgba(0,255,242,.20);
-}
-.modal .btn-cta:hover{ box-shadow: 0 10px 28px rgba(0,255,242,.28); }
-@media (max-width: 520px){
-  .modal__dialog{ width: 94vw; }
-  .modal__header h3{ font-size: 18px; }
+/* ===== Modal (single source of truth) ===== */
+
+/* closed by default, non-blocking */
+.modal {
+  display: none;
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 5000;        /* above navbar */
 }
 
+/* open state */
+.modal.is-open {
+  display: grid;        /* centers the dialog */
+  place-items: center;
+  pointer-events: auto;
+}
+
+/* backdrop: dim only (no heavy blur) */
+.modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.55);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* dialog/panel (kept from your theme) */
+.modal__dialog, .modal__panel {
+  position: relative;
+  width: min(720px, 92vw);
+  max-height: 88vh;
+  overflow: auto;
+  border-radius: 14px;
+  background: linear-gradient(180deg, var(--panel, #1a1f27), var(--panel-2, #222a35));
+  border: 1px solid var(--border, rgba(255,255,255,.08));
+  box-shadow: 0 24px 60px rgba(0,0,0,.45);
+  color: var(--text, #f5f7fa);
+  animation: modalIn .18s ease;
+  pointer-events: auto; /* keep interactive */
+}
+
+.modal__accent{ position:absolute; inset: 0 0 auto 0; height: 3px;
+  background: linear-gradient(90deg, #00fff2, #6bd0ff); }
+
+@keyframes modalIn { from { transform: translateY(6px); opacity: 0; } }
+
+/* optional attribute support */
+.modal[hidden] { display: none !important; pointer-events: none !important; }
+
+/* page scroll lock only while open */
+body.modal-open { overflow: hidden; }
