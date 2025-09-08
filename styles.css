@@ -1709,16 +1709,7 @@ a:focus-visible, button:focus-visible, .proj-card a:focus-visible{
 }
 
 /* Center the clock using a 3-column grid on desktop */
-@media (min-width: 769px){
-  .site-nav{
-    display: grid;
-    grid-template-columns: 1fr auto 1fr; /* left | center | right */
-    align-items: center;
-  }
-  .site-nav .logo{ margin:0 !important; justify-self: start; }
-  #sidemenu{ margin:0 !important; justify-self: end; }
-  .nav-extras.nav-clock{ grid-column: 2; justify-self: center; }
-}
+
 
 /* Hide clock on narrow screens if you prefer (optional) */
 @media (max-width: 768px){
