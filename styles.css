@@ -70,155 +70,96 @@ section, header, footer { background: transparent; }
 /* ============================ */
 /* Fixed Top Navigation         */
 /* ============================ */
-.site-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2000;
-
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  height: var(--nav-height);
-
-  /* background bar */
-  background: linear-gradient(to bottom,
-              rgba(11,13,16,0.85),
-              rgba(11,13,16,0.45));
-  border-bottom: 1px solid var(--border);
+/* ============ NAV BAR BASE ============ */
+.site-nav{
+  position: fixed; inset: 0 0 auto 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  height: var(--nav-height, 72px);
+  background: linear-gradient(to bottom, rgba(11,13,16,.85), rgba(11,13,16,.45));
+  border-bottom: 1px solid var(--border, rgba(255,255,255,.08));
   box-shadow: 0 2px 14px rgba(0,0,0,.35);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-}
-.site-nav .logo {
-  height: 56px;
-  width: auto;
-  display: block;
-  margin-left: 20px;   /* ✅ leave 20px from left edge */
-  margin-right: auto;  /* ✅ push everything else to the right */
-}
-#sidemenu {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  list-style: none;
-}
-#sidemenu a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  transition: color .2s ease;
-}
-#sidemenu a:hover {
-  color: #00aaff;
-}
-#sidemenu .menu-close {
-  display: none;
-}
-.site-nav .menu-toggle {
-  display: none;
-  background: none;
-  border: 0;
-  color: #fff;
-  font-size: 1.5rem;
-  cursor: pointer;
-  margin-left: 16px;
-}
-#hover-trigger {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 22px;
-  height: 100vh;
-  z-index: 10000;
-}
-@media (max-width: 768px) {
-  .site-nav .menu-toggle {
-    display: block;
-  }
-
-  #sidemenu {
-    position: fixed;
-    top: 0;
-    right: -180px; /* hidden off-screen */
-    width: 180px;
-    height: 100vh;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    background: rgba(11,13,16,0.95);
-    border-left: 1px solid var(--ring);
-    transition: right .28s ease;
-    z-index: 9999;
-    padding: 0 10px;
-  }
-  #sidemenu.open {
-    right: 0;
-  }
-
-  #sidemenu .menu-close {
-    display: block;
-    position: absolute;
-    top: 16px;
-    left: 16px;
-  }
-
-  /* Hover trigger unnecessary on mobile */
-  #hover-trigger {
-    display: none;
-  }
-}
-@media (min-width: 769px){
-  #hover-trigger:hover + #sidemenu,
-  #sidemenu:hover{ right: 0; }
+  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
 }
 
-/* keep right menu truly on the right on desktop */
+.site-nav .logo{
+  height: 56px; width: auto; display: block; margin-left: 20px;
+}
+
+/* Right menu list (desktop baseline) */
 #sidemenu{
-  margin-left: auto;
-  margin-right: -140px;   /* your existing offset; tweak if needed */
   display: flex; align-items: center; gap: 28px;
-  list-style: none;
+  list-style: none; margin: 0; padding: 0;
 }
 
-/* colon shouldn't be flex (it widens and nudges things) */
-#pill-time .colon{
-  display: inline-block; width: .7ch; text-align: center;
-  animation: colonBlink 1s steps(1, end) infinite;
+#sidemenu li{ display:block; }
+#sidemenu a{
+  display:inline-block; padding:.4rem .6rem; line-height:1;
+  color:#fff; text-decoration:none; font-weight:500;
+  border-bottom:2px solid transparent;            /* reserve space to avoid hover jump */
+  transition: color .18s ease;
+}
+#sidemenu a:hover{
+  color:#00aaff; border-bottom-color:#00aaff;     /* underline without shifting */
 }
 
-/* remove extra padding from the timezone */
-#pill-time #time-tz{ margin-left: 8px; font-size: .85em; opacity: .95; text-transform: uppercase; }
+/* Clock & desktop avatar on the right */
+.nav-extras{ margin-left:.75rem; }
+.avatar-link{ display:inline-flex; align-items:center; text-decoration:none; }
+.nav-avatar{
+  width:36px; height:36px; border-radius:50%;
+  object-fit:cover; object-position:center;
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 2px 10px rgba(0,0,0,.35);
+}
 
-/* mobile slide-out */
-@media (max-width: 768px){
-  .site-nav .menu-toggle{ display:block; }
+/* Visibility helpers */
+.desktop-only{ display:inline-flex; }
+.mobile-only{ display:none; }
+.avatar-name{ color:#e6edf3; font-weight:600; }
+
+/* Hide the desktop hover-trigger by default (we’ll only use mobile slide-out) */
+#hover-trigger{ display:none; }
+
+/* Hide mobile controls on desktop */
+.menu-toggle, #sidemenu .menu-close{ display:none; }
+
+/* ============ MOBILE (≤768px) ============ */
+@media (max-width:768px){
+  .desktop-only{ display:none !important; }
+  .mobile-only{ display:list-item !important; }
+
+  .menu-toggle{
+    display:block;
+    background:none; border:0; color:#fff;
+    font-size:1.5rem; cursor:pointer; margin-left:16px;
+  }
+
+  /* Slide-out panel */
   #sidemenu{
-    position: fixed; top:0; right:-180px;
-    width:180px; height:100vh;
+    position: fixed; top:0; right:-220px; width:220px; height:100vh;
     flex-direction:column; justify-content:center; align-items:center; gap:20px;
-    background: rgba(11,13,16,0.95);
-    border-left:1px solid var(--ring);
+    background: rgba(11,13,16,.95);
+    border-left:1px solid var(--ring, rgba(107,208,255,.3));
     transition:right .28s ease;
-    z-index:9999;
-    padding: 0 10px; margin:0;  /* reset desktop margins */
+    z-index:9999; padding:0 10px;
   }
   #sidemenu.open{ right:0; }
-  #sidemenu .menu-close{ display:block; position:absolute; top:16px; left:16px; }
-  #hover-trigger{ display:none; }
+
+  #sidemenu .menu-close{
+    display:block; position:absolute; top:16px; left:16px;
+  }
+
+  /* Larger tap target for avatar */
+  .nav-avatar{ width:42px; height:42px; }
 }
 
-/* If you use the desktop hover-to-open trick, #sidemenu must be the NEXT sibling of #hover-trigger.
-   In your previous markup the button sat between them, which breaks `#hover-trigger:hover + #sidemenu`.
-   Either keep the order as shown above or delete this hover rule: */
-@media (min-width: 769px){
-  /* optional: remove if not using */
-  /* #hover-trigger:hover + #sidemenu,
-     #sidemenu:hover{ right: 0; } */
+/* ============ OPTIONAL: clock colon blink ============ */
+#pill-time .colon{
+  display:inline-block; width:.7ch; text-align:center;
+  animation: colonBlink 1s steps(1,end) infinite;
 }
+@keyframes colonBlink{ 50% { opacity:0; } }
+
 
 
 /* ============================ */
