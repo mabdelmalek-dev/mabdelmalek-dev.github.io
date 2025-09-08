@@ -2476,4 +2476,28 @@ body { margin: 0; overflow-x: hidden; }
   line-height: 1.4;
 }
 
+/* Put desktop avatar between logo and menu; keep menu + clock on the right */
+@media (min-width: 769px){
+  .site-nav{ justify-content: flex-start; }              /* stop space-between gap */
+
+  .site-nav .logo{ margin-right: 12px; }                 /* small space after logo */
+
+  /* 1) Avatar comes right after the logo (left side) */
+  .site-nav > a.avatar-link.desktop-only{
+    order: 1;
+    margin-left: 12px;
+  }
+
+  /* 2) Menu sits on the far right (pushes itself + following items) */
+  .site-nav > #sidemenu{
+    order: 2;
+    margin-left: auto;
+  }
+
+  /* 3) Clock stays to the right of the menu */
+  .site-nav > .nav-extras.nav-clock{
+    order: 3;
+    margin-left: 12px;
+  }
+}
 
