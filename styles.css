@@ -2511,3 +2511,15 @@ body { margin: 0; overflow-x: hidden; }
   margin-left: auto; /* push nav links to the right */
 }
 
+/* Force the right thing to show per breakpoint */
+@media (min-width: 769px){
+  .mobile-only{ display: none !important; }      /* hide mobile avatar on desktop */
+  .desktop-only{ display: inline-flex !important; }
+  .menu-toggle,
+  #sidemenu .menu-close{ display: none !important; } /* no hamburger/close on desktop */
+}
+
+@media (max-width: 768px){
+  .desktop-only{ display: none !important; }     /* hide desktop avatar on mobile */
+  .mobile-only{ display: list-item !important; } /* show mobile avatar inside menu */
+}
