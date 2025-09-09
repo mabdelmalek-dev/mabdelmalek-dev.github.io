@@ -85,6 +85,13 @@ section, header, footer { background: transparent; }
   height: 56px; width: auto; display: block; margin-left: 20px;
 }
 
+#avatar-slogan{
+  margin-left: 20px;
+  color: #fff;
+  font-weight:500;
+  display:inline-block;
+}
+
 /* Right menu list (desktop baseline) */
 #sidemenu{
   display: flex; align-items: center; gap: 28px;
