@@ -137,7 +137,7 @@ section, header, footer { background: transparent; }
   /* Slide-out panel */
   #sidemenu{
     position: fixed; top:0; right:-220px; width:220px; height:100vh;
-    flex-direction:column; justify-content:center; align-items:center; gap:20px;
+    flex-direction:column; justify-content:center; align-items: top; gap:20px;
     background: rgba(11,13,16,.95);
     border-left:1px solid var(--ring, rgba(107,208,255,.3));
     transition:right .28s ease;
